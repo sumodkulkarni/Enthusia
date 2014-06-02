@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Do Not Edit -->
+    <string name="app_name">VJTI</string>
+
+
+    <!-- Enthusia Placeholder -->
+    <string name="enthusia_fest_name">Enthusia</string>
+
+    <!-- Put All Pratibimb Strings in this section -->
+    <string name="pratibimb_fest_name">Pratibimb</string>
+
+    <!-- Put All Technovanza Strings in this section -->
+    <string name="technovanza_fest_name">Technovanza</string>
+
+</resources>

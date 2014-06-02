@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+
+    <com.vjti.fests.HighlightButton
+        android:id="@+id/splash_enthusia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".33"
+        android:background="@drawable/enthusia_logo"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginRight="10sp" />
+
+    <com.vjti.fests.HighlightButton
+        android:id="@+id/splash_pratibimb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".33"
+        android:background="@drawable/pratibimb_logo"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginRight="10sp" />
+
+    <com.vjti.fests.HighlightButton
+        android:id="@+id/splash_technovanza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".33"
+        android:background="@drawable/technovanza_logo"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginRight="10sp" />
+</LinearLayout>
