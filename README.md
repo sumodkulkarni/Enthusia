@@ -31,7 +31,7 @@ Resources
 
 All IDs in the layout file must start with the name of the layout file as prefix
 
-e.g: splash_textview (Splash Activity)
+e.g: splash_textview (Splash Activity), enthusia_start_textview_welcome (Id for a TextView in Start Activity)
 
 All the resources must also contain the festival name as the prefix
 
