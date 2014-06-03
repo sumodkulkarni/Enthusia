@@ -13,12 +13,16 @@ import android.view.animation.OvershootInterpolator;
 import com.vjti.fests.enthusia.EnthusiaStartActivity;
 import com.vjti.fests.pratibimb.PratibimbStartActivity;
 import com.vjti.fests.technovanza.TechnovanzaStartActivity;
+import com.vjti.fests.ui.ActivitySplitAnimationUtil;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 
 public class SplashActivity extends Activity implements View.OnClickListener {
 
     private Handler animationHandler;
     private SplashAnimation animation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +39,20 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onResume() {
-        if (animationHandler == null) {
+
+        if (!getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getBoolean(Utils.PREF_REGISTRATION_DONE, false)) {
+            startActivity(new Intent(this, RegisterActivity.class));
+        }
+        else if (animationHandler == null) {
             animationHandler = new Handler();
             animation = new SplashAnimation();
             animationHandler.postDelayed(animation, 1500);
         }
+
+        if (getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, null) != null) {
+            Utils.showInfo(this, getString(R.string.welcome) + ", " + getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, ""));
+        }
+
         super.onResume();
     }
 
@@ -60,6 +73,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
         animationHandler = null;
         animation = null;
+
+        Crouton.cancelAllCroutons();
         super.onDestroy();
     }
 

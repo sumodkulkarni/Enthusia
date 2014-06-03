@@ -1,4 +1,4 @@
-package com.vjti.fests;
+package com.vjti.fests.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
