@@ -29,6 +29,10 @@ e.g: EnthusiaStartActivity.java
 Resources
 =========
 
+All IDs in the layout file must start with the name of the layout file as prefix
+
+e.g: splash_textview (Splash Activity)
+
 All the resources must also contain the festival name as the prefix
 
 e.g: enthusia_fest_name is a string resource
