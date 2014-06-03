@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 
 import com.vjti.fests.enthusia.EnthusiaStartActivity;
@@ -22,7 +23,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     private Handler animationHandler;
     private SplashAnimation animation;
-
+    private static boolean welcomeOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,9 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             animationHandler.postDelayed(animation, 1500);
         }
 
-        if (getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, null) != null) {
+        if (getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, null) != null && !welcomeOnce) {
             Utils.showInfo(this, getString(R.string.welcome) + ", " + getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, ""));
+            welcomeOnce = true;
         }
 
         super.onResume();
@@ -58,21 +60,14 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onStop() {
-        if (animation != null && animationHandler != null)
-            animationHandler.removeCallbacks(animation);
-
-        animationHandler = null;
-        animation = null;
+        cancelAnim();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        if (animation != null && animationHandler != null)
-            animationHandler.removeCallbacks(animation);
 
-        animationHandler = null;
-        animation = null;
+        cancelAnim();
 
         Crouton.cancelAllCroutons();
         super.onDestroy();
@@ -80,6 +75,10 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+
+        Crouton.cancelAllCroutons();
+        cancelAnim();
+
         switch (view.getId()) {
             case R.id.splash_enthusia:
                 startActivityWithAnim(EnthusiaStartActivity.class, (int) findViewById(R.id.splash_enthusia).getY());
@@ -93,7 +92,14 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             default:
                 return;
         }
-        finish();
+    }
+
+    private void cancelAnim() {
+        if (animationHandler != null && animation != null)
+            animationHandler.removeCallbacks(animation);
+
+        animation = null;
+        animationHandler = null;
     }
 
     private void startActivityWithAnim(Class<?> activity, int splitY) {

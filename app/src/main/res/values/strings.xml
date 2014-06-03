@@ -3,6 +3,16 @@
 
     <!-- Do Not Edit -->
     <string name="app_name">VJTI</string>
+    <string name="register_user">User Registration</string>
+    <string name="username">Full Name</string>
+    <string name="email">Email</string>
+    <string name="register_info">Please enter your Name and Email-Id to register for push notifications</string>
+    <string name="register">Register</string>
+    <string name="welcome">Welcome</string>
+    <string name="alert_register_enter_username">Please enter your Name</string>
+    <string name="alert_register_enter_email">Please enter your E-Mail Id</string>
+    <string name="alert_register_first">Press Register to Continue</string>
+    <string name="alert_register_enter_valid_email">Please enter valid Email-Id</string>
 
 
     <!-- Enthusia Placeholder -->

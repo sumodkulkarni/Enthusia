@@ -2,28 +2,47 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vjti.fests" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".SplashActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/register_user"
+            android:screenOrientation="portrait" />
+
         <!-- Enthusia Activities -->
-        <activity android:name=".enthusia.EnthusiaStartActivity" />
+        <activity
+            android:label="@string/enthusia_fest_name"
+            android:name=".enthusia.EnthusiaStartActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Pratibimb Activities -->
-        <activity android:name=".pratibimb.PratibimbStartActivity" />
+        <activity
+            android:label="@string/pratibimb_fest_name"
+            android:name=".pratibimb.PratibimbStartActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Technovanza Activities -->
-        <activity android:name=".technovanza.TechnovanzaStartActivity" />
+        <activity
+            android:label="@string/technovanza_fest_name"
+            android:name=".technovanza.TechnovanzaStartActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 
