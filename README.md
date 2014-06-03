@@ -20,7 +20,7 @@ Activities
 
 All the activites layout files must start with the prefix 'activity_' and must conatin name of the festival as an identifier.
 
-e.g: activity_enthusia_start.xml
+e.g: activity_enthusia_start.xml, enthusia_listitem_row.xml
 
 All the java files must contain the festival name as the prefix
 
