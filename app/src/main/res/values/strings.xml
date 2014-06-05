@@ -17,6 +17,58 @@
 
     <!-- Enthusia Placeholder -->
     <string name="enthusia_fest_name">Enthusia</string>
+    <string name="enthusia_points_table">Points Table</string>
+    <string name="enthusia_department_heads">Department Heads</string>
+    <string name="enthusia_events">Events</string>
+    <string name="enthusia_rules">Rules</string>
+    <string name="enthusia_committee">Committee</string>
+    <string name="enthusia_sponsors">Sponsors</string>
+    <string name="enthusia_intra">Intra</string>
+    <string-array name="enthusia_nav_drawer_items">
+        <item>Recent News</item>
+        <item>Sports</item>
+        <item>@string/enthusia_intra</item>
+        <item>@string/enthusia_sponsors</item>
+        <item>@string/enthusia_committee</item>
+    </string-array>
+    
+    <array name="enthusia_nav_drawer_icons">
+        <item>@drawable/enthusia_news</item>
+        <item>@drawable/enthusia_inter</item>
+        <item>@drawable/enthusia_intra</item>
+        <item>@drawable/enthusia_spons</item>
+        <item>@drawable/enthusia_committe</item>
+    </array>
+
+    <string-array name="enthusia_committe_posts">
+        <item>General Secretary</item>
+        <item>Jt. General Secretary</item>
+        <item>Treasurers</item>
+        <item>Sponsorship Chief Coordinator</item>
+        <item>Publicity Chief Coordinator</item>
+        <item>Events Chief Coordinator</item>
+        <item>Public Relations Head</item>
+        <item>Infrastructure Chief Coordinator</item>
+        <item>Design Head</item>
+        <item>Security Head</item>
+        <item>Half Time Coordinator</item>
+        <item>Website Development Team</item>
+        <item>Diploma Representative</item>
+    </string-array>
+
+    <string-array name="enthusia_departments">
+        <item>CHEMSA</item>
+        <item>CIVIL</item>
+        <item>COMPUTERS</item>
+        <item>ELECTRICAL</item>
+        <item>ELECTRONICS</item>
+        <item>EXTC</item>
+        <item>I.T</item>
+        <item>MASTERS</item>
+        <item>MECHANICAL</item>
+        <item>PRODUCTION</item>
+        <item>TEXTILE</item>
+    </string-array>
 
     <!-- Put All Pratibimb Strings in this section -->
     <string name="pratibimb_fest_name">Pratibimb</string>

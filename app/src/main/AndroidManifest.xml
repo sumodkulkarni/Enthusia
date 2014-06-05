@@ -32,6 +32,11 @@
             android:name=".enthusia.EnthusiaStartActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:label="@string/enthusia_events"
+            android:name=".enthusia.EnthusiaEventsActivity"
+            android:screenOrientation="portrait" />
+
         <!-- Pratibimb Activities -->
         <activity
             android:label="@string/pratibimb_fest_name"

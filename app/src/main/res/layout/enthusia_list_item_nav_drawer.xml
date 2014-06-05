@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10sp"
+    android:paddingTop="10sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp">
+
+    <ImageView
+        android:id="@+id/enthusia_list_item_nav_drawer_icon"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="12sp" />
+
+    <TextView
+        android:id="@+id/enthusia_list_item_nav_drawer_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
+        android:layout_centerVertical="true"
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/enthusia_fest_name" />
+
+</RelativeLayout>

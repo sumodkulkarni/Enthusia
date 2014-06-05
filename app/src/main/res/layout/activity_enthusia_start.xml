@@ -1,8 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/enthusia_start_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_background">
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/enthusia_start_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top" />
+
+        <com.vjti.fests.enthusia.ui.android.view.ext.SatelliteMenu
+            android:id="@+id/enthusia_start_social_media"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="8dp"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="280sp"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_gravity="start">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25sp">
+
+            <com.vjti.fests.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/enthusia_start_icon"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:background="@drawable/ic_contact"
+                app:corner_radius="30dip"
+                app:border_width="2dip"
+                app:border_color="#333333"
+                app:round_background="true" />
+
+            <TextView
+                android:id="@+id/enthusia_start_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/app_name"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/enthusia_start_slider"
+            android:layout_marginTop="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:dividerHeight="1sp" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
