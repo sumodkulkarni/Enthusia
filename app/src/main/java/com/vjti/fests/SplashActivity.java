@@ -47,7 +47,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         else if (animationHandler == null) {
             animationHandler = new Handler();
             animation = new SplashAnimation();
-            animationHandler.postDelayed(animation, 1500);
+            animationHandler.postDelayed(animation, 3000);
         }
 
         if (getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, null) != null && !welcomeOnce) {
@@ -177,7 +177,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 public void onAnimationEnd(Animator animator) {
                     setListener(true);
                     if (animationHandler != null)
-                        animationHandler.postDelayed(animation, 1500);
+                        animationHandler.postDelayed(animation, 3000);
                 }
 
                 @Override
