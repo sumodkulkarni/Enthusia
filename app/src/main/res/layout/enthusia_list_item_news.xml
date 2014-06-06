@@ -18,6 +18,11 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/enthusia_news_background_unread"
+        android:paddingBottom="10dp"
         android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 

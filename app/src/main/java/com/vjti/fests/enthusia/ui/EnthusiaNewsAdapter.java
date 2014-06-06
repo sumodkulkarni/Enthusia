@@ -37,22 +37,22 @@ public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = LayoutInflater.from(context).inflate(R.layout.enthusia_lsit_item_news, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.enthusia_list_item_news, viewGroup, false);
             holder.textView = (TextView) view.findViewById(R.id.enthusia_list_item_news_message);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.textView.setText(getItem(i).getMessage());
-
         if (getItem(i).isRead()) {
-            view.setBackgroundColor(context.getResources().getColor(R.color.read));
+            holder.textView.setBackgroundResource(R.drawable.enthusia_news_background_read);
             holder.textView.setTypeface(null, Typeface.NORMAL);
         } else {
-            view.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+            holder.textView.setBackgroundResource(R.drawable.enthusia_news_background_unread);
             holder.textView.setTypeface(null, Typeface.BOLD);
         }
+        holder.textView.setPadding(10,10,10,10);
+        holder.textView.setText(getItem(i).getMessage());
 
         return view;
     }
