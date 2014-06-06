@@ -164,6 +164,8 @@ public class Utils {
      */
 
     public static final void editPushMessages(Context context, String file, ArrayList<PushMessage> messages) throws  IOException {
+        if (messages == null || messages.size() == 0)
+            return;
         editPushMessages(new File(context.getCacheDir(), file), messages);
     }
 
