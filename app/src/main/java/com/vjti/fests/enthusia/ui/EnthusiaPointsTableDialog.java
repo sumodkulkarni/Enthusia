@@ -75,12 +75,20 @@ public class EnthusiaPointsTableDialog extends Dialog {
     private TextView getDepartmentView(int i, int j) {
         TextView textView = getView(j);
         textView.setText(getContext().getResources().getStringArray(R.array.enthusia_departments)[i]);
+        textView.setPadding(10,0,0,10);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.leftMargin = 10;
+        textView.setLayoutParams(params);
         return textView;
     }
 
     private TextView getView(int i) {
         TextView textView = new TextView(activity);
         textView.setTextSize(30.0f);
+        textView.setPadding(10,0,0,10);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.rightMargin = 10;
+        textView.setLayoutParams(params);
         return textView;
     }
 
