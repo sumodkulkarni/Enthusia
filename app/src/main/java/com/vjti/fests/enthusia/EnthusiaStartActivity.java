@@ -10,7 +10,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,8 +25,7 @@ import com.vjti.fests.enthusia.fragments.EnthusiaCommitteeFragment;
 import com.vjti.fests.enthusia.fragments.EnthusiaIntraFragment;
 import com.vjti.fests.enthusia.fragments.EnthusiaNewsFragment;
 import com.vjti.fests.enthusia.fragments.EnthusiaSponsorsFragment;
-import com.vjti.fests.enthusia.model.EnthusiaEvents;
-import com.vjti.fests.enthusia.ui.EnthusiaNavDrawerAdapter;
+import com.vjti.fests.enthusia.adapters.EnthusiaNavDrawerAdapter;
 import com.vjti.fests.enthusia.model.EnthusiaNavDrawerItem;
 import com.vjti.fests.enthusia.ui.android.view.ext.SatelliteMenu;
 import com.vjti.fests.enthusia.ui.android.view.ext.SatelliteMenuItem;
@@ -45,7 +47,9 @@ public class EnthusiaStartActivity extends Activity {
         try {
             ActivitySplitAnimationUtil.prepareAnimation(this);
             ActivitySplitAnimationUtil.animate(this, 1000);
-        } catch (NullPointerException ex) {}
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
 
         enthusiaSlider = (DrawerLayout) findViewById(R.id.enthusia_start_drawer);
         ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<EnthusiaNavDrawerItem>();
@@ -67,7 +71,7 @@ public class EnthusiaStartActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        enthusiaToggle = new ActionBarDrawerToggle(this, enthusiaSlider, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+        enthusiaToggle = new ActionBarDrawerToggle(this, enthusiaSlider, R.drawable.ic_drawer, R.string.enthusia_fest_name, R.string.enthusia_fest_name) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 invalidateOptionsMenu();
@@ -108,6 +112,21 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+            enthusiaSlider.openDrawer(Gravity.LEFT);
+        } else {
+            enthusiaSlider.closeDrawers();
+        }
+        return true;
+    }
+
+    @Override
     protected void onStop() {
         ActivitySplitAnimationUtil.cancel();
         super.onStop();
@@ -126,7 +145,6 @@ public class EnthusiaStartActivity extends Activity {
         items.add(new SatelliteMenuItem(1, getScaledDrawable(R.drawable.twitter)));
         items.add(new SatelliteMenuItem(0, getScaledDrawable(R.drawable.facebook)));
         ((SatelliteMenu) findViewById(R.id.enthusia_start_social_media)).addItems(items);
-        items = null;
         ((SatelliteMenu) findViewById(R.id.enthusia_start_social_media)).setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             @Override
             public void eventOccured(int id) {
@@ -162,8 +180,6 @@ public class EnthusiaStartActivity extends Activity {
                 if (intent != null) {
                     startActivity(intent);
                 }
-
-                intent = null;
             }
         });
     }
@@ -205,7 +221,6 @@ public class EnthusiaStartActivity extends Activity {
             getFragmentManager().beginTransaction().replace(R.id.enthusia_start_fragment_container, fragment).commit();
         }
 
-        fragment = null;
         ((ListView) findViewById(R.id.enthusia_start_slider)).setSelection(position);
         ((ListView) findViewById(R.id.enthusia_start_slider)).setItemChecked(position, true);
         enthusiaSlider.closeDrawers();

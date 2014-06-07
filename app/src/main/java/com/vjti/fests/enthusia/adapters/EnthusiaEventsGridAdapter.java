@@ -1,4 +1,4 @@
-package com.vjti.fests.enthusia.ui;
+package com.vjti.fests.enthusia.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.vjti.fests.R;
 import com.vjti.fests.enthusia.model.EnthusiaEvents;

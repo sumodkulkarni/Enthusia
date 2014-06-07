@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.vjti.fests.R;
+import com.vjti.fests.enthusia.adapters.EnthusiaStickyHeaderAdapter;
 import com.vjti.fests.enthusia.model.EnthusiaCommittee;
 
 import java.util.ArrayList;
@@ -37,6 +38,5 @@ public class EnthusiaDepartmentHeadsDialog extends Dialog {
         mItems.add(new EnthusiaCommittee("D: +91", 1));
 
         ((StickyListHeadersListView) findViewById(R.id.enthusia_dialog_department_heads_list)).setAdapter(new EnthusiaStickyHeaderAdapter(activity, mItems, getContext().getResources().getStringArray(R.array.enthusia_departments)));
-        mItems = null;
     }
 }

@@ -51,10 +51,11 @@
 
         <ListView
             android:id="@+id/enthusia_events_details_event_list_event_heads"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".15"
-            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
             android:layout_marginBottom="10sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"

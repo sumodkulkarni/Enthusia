@@ -7,8 +7,6 @@ public class EnthusiaNavDrawerItem implements Serializable {
     private String title;
     private int icon;
 
-    protected EnthusiaNavDrawerItem() {}
-
     public EnthusiaNavDrawerItem (String title, int icon) {
         this.title = title;
         this.icon = icon;

@@ -73,6 +73,7 @@ public final class EnthusiaEvents {
             R.string.enthusia_handball
     };
 
+    // TODO Add Event Heads
     public final static String[] getEventHead (int position) {
         switch (position) {
             case 0:

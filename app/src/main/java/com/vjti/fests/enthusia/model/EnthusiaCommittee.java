@@ -7,8 +7,6 @@ public class EnthusiaCommittee implements Serializable {
     private String name, post;
     private int position;
 
-    protected EnthusiaCommittee() {}
-
     public EnthusiaCommittee (String name, int position) {
         this(name, "", position);
     }

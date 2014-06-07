@@ -2,8 +2,6 @@ package com.vjti.fests.enthusia;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
@@ -11,15 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.vjti.fests.R;
 import com.vjti.fests.enthusia.model.EnthusiaEvents;
-import com.vjti.fests.enthusia.ui.EnthusiaEventsEventHeadAdapter;
-import com.vjti.fests.enthusia.ui.EnthusiaEventsGridAdapter;
-
-import org.w3c.dom.Text;
+import com.vjti.fests.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
+import com.vjti.fests.enthusia.adapters.EnthusiaEventsGridAdapter;
 
 public class EnthusiaEventsActivity extends Activity {
 

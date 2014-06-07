@@ -1,7 +1,6 @@
 package com.vjti.fests.enthusia.fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,11 +14,10 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismis
 import com.nhaarman.listviewanimations.widget.DynamicListView;
 import com.vjti.fests.R;
 import com.vjti.fests.Utils;
-import com.vjti.fests.enthusia.ui.EnthusiaNewsAdapter;
+import com.vjti.fests.enthusia.adapters.EnthusiaNewsAdapter;
 import com.vjti.fests.model.PushMessage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -89,7 +87,9 @@ public class EnthusiaNewsFragment extends Fragment {
         try {
             if (!customAdded)
                 Utils.editPushMessages(getActivity(), Utils.ENTHUSIA, messages);
-        } catch (IOException ex) {}
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         super.onStop();
     }
 }

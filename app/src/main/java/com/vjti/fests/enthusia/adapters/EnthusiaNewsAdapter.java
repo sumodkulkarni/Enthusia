@@ -1,18 +1,17 @@
-package com.vjti.fests.enthusia.ui;
+package com.vjti.fests.enthusia.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.neopixl.pixlui.components.textview.TextView;
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.vjti.fests.R;
 import com.vjti.fests.model.PushMessage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
 
@@ -45,19 +44,15 @@ public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
         }
 
         if (getItem(i).isRead()) {
+            holder.textView.setTextColor(Color.parseColor("#6f6f6f"));
             holder.textView.setBackgroundResource(R.drawable.enthusia_news_background_read);
-            holder.textView.setTypeface(null, Typeface.NORMAL);
         } else {
+            holder.textView.setTextColor(context.getResources().getColor(android.R.color.black));
             holder.textView.setBackgroundResource(R.drawable.enthusia_news_background_unread);
-            holder.textView.setTypeface(null, Typeface.BOLD);
         }
         holder.textView.setPadding(10,10,10,10);
         holder.textView.setText(getItem(i).getMessage());
 
         return view;
-    }
-
-    public List<PushMessage> getItems() {
-        return super.mItems;
     }
 }

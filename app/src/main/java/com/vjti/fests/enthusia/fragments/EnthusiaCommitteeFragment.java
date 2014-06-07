@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.vjti.fests.R;
 import com.vjti.fests.enthusia.model.EnthusiaCommittee;
-import com.vjti.fests.enthusia.ui.EnthusiaStickyHeaderAdapter;
+import com.vjti.fests.enthusia.adapters.EnthusiaStickyHeaderAdapter;
 
 import java.util.ArrayList;
 
@@ -46,11 +46,11 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 11));
         mCommittee.add(new EnthusiaCommittee("Eashan Kadam: +919920875281", 11));
         mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
+        // TODO Add Diploma Representative
         mCommittee.add(new EnthusiaCommittee("Adithya Swami: ", 12));
 
         ((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)).setAdapter(new EnthusiaStickyHeaderAdapter(
                 getActivity(), mCommittee, getResources().getStringArray(R.array.enthusia_committe_posts)));
 
-        mCommittee = null;
     }
 }

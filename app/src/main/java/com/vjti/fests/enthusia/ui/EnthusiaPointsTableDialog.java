@@ -12,19 +12,24 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.vjti.fests.R;
+import com.vjti.fests.enthusia.model.EnthusiaPointsTable;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class EnthusiaPointsTableDialog extends Dialog {
 
     private Activity activity;
-    private TableLayout pointsTable;
+    private ArrayList<EnthusiaPointsTable> tableData;
 
-    private final static String PREF_POINT_TABLE = "com.vjti.fets.enthusia.points";
+    private final static String PREF_POINT_TABLE = "com.vjti.fests.enthusia.points";
     private final static String PREF_POINTS = "pref_points_";
 
 
     public EnthusiaPointsTableDialog(Activity activity) {
         super(activity);
         this.activity = activity;
+        this.tableData = new ArrayList<EnthusiaPointsTable>();
     }
 
     @Override
@@ -32,15 +37,23 @@ public class EnthusiaPointsTableDialog extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.enthusia_dialog_points_table);
-        pointsTable = (TableLayout) findViewById(R.id.enthusia_dialog_points_table_table);
         for (int i=0; i < getContext().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
+            this.tableData.add(new EnthusiaPointsTable(
+                    getContext().getResources().getStringArray(R.array.enthusia_departments)[i],
+                    getPoints(getContext().getResources().getStringArray(R.array.enthusia_departments)[i])
+            ));
+        }
+        Collections.sort(this.tableData);
+
+        setContentView(R.layout.enthusia_dialog_points_table);
+        TableLayout pointsTable = (TableLayout) findViewById(R.id.enthusia_dialog_points_table_table);
+        for (int i=0; i < this.tableData.size(); i++) {
             pointsTable.addView(getHorizontalDivider());
 
             TableRow row = new TableRow(activity);
             row.addView(getVerticalDivider());
             for (int j=0; j < 2; j++) {
-                row.addView( (j % 2 == 0 ? getDepartmentView(i, j) : getPointView(i, j)));
+                row.addView( (j % 2 == 0 ? getDepartmentView(i) : getPointView(i)));
                 row.addView(getVerticalDivider());
             }
 
@@ -65,16 +78,16 @@ public class EnthusiaPointsTableDialog extends Dialog {
         return v;
     }
 
-    private TextView getPointView(int i, int j) {
-        TextView textView = getView(j);
-        textView.setText(getPoints(getContext().getResources().getStringArray(R.array.enthusia_departments)[i]) + "");
+    private TextView getPointView(int i) {
+        TextView textView = getView();
+        textView.setText(this.tableData.get(i).getPoints() + "");
         textView.setGravity(Gravity.RIGHT);
         return textView;
     }
 
-    private TextView getDepartmentView(int i, int j) {
-        TextView textView = getView(j);
-        textView.setText(getContext().getResources().getStringArray(R.array.enthusia_departments)[i]);
+    private TextView getDepartmentView(int i) {
+        TextView textView = getView();
+        textView.setText(this.tableData.get(i).getDepartment());
         textView.setPadding(10,0,0,10);
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.leftMargin = 10;
@@ -82,7 +95,7 @@ public class EnthusiaPointsTableDialog extends Dialog {
         return textView;
     }
 
-    private TextView getView(int i) {
+    private TextView getView() {
         TextView textView = new TextView(activity);
         textView.setTextSize(30.0f);
         textView.setPadding(10,0,0,10);
@@ -93,9 +106,9 @@ public class EnthusiaPointsTableDialog extends Dialog {
     }
 
     @SuppressWarnings("defaultlocale")
-    private float getPoints(String department) {
-        department = department.toLowerCase();
-        return getContext().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getFloat(PREF_POINTS + department, 0.0f);
+    private int getPoints(String department) {
+        System.out.println(PREF_POINTS + department.toLowerCase());
+        return getContext().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0);
     }
 
 }
