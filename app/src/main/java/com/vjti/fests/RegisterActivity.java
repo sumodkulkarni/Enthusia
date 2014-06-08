@@ -29,10 +29,8 @@ public class RegisterActivity extends Activity {
                 } else {
                     getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putString(Utils.PREF_USER_NAME, ((EditText) findViewById(R.id.register_et_username)).getText().toString()).commit();
                     getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putString(Utils.PREF_EMAIL, ((EditText) findViewById(R.id.register_et_email)).getText().toString()).commit();
-                    getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putBoolean(Utils.PREF_REGISTRATION_DONE, true).commit();
 
                     new RegisterUser().execute(null,null,null);
-                    finish();
                 }
             }
         });
@@ -57,18 +55,28 @@ public class RegisterActivity extends Activity {
 //                                               ""};
 
         @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(getApplicationContext());
+            protected void onPreExecute() {
+            progressDialog = new ProgressDialog(RegisterActivity.this);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progressDialog.setMax(100);
             progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             progressDialog.setMessage("Please Wait");
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             // TODO Register for push notification
+            for (int i=0; i < 3; i++) {
+                publishProgress( (i+1) * 30);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
             return null;
         }
 
@@ -79,10 +87,10 @@ public class RegisterActivity extends Activity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (progressDialog != null)
+            if (progressDialog != null && progressDialog.isShowing())
                 progressDialog.dismiss();
-            progressDialog = null;
-            finish();
+            getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putBoolean(Utils.PREF_REGISTRATION_DONE, true).commit();
+            RegisterActivity.this.finish();
         }
     }
 }
