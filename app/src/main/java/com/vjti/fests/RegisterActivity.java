@@ -1,8 +1,11 @@
 package com.vjti.fests;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -28,8 +31,7 @@ public class RegisterActivity extends Activity {
                     getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putString(Utils.PREF_EMAIL, ((EditText) findViewById(R.id.register_et_email)).getText().toString()).commit();
                     getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).edit().putBoolean(Utils.PREF_REGISTRATION_DONE, true).commit();
 
-                    // TODO Register for push notification
-
+                    new RegisterUser().execute(null,null,null);
                     finish();
                 }
             }
@@ -45,5 +47,42 @@ public class RegisterActivity extends Activity {
     @Override
     public void onBackPressed() {
         Utils.showAlert(this, R.string.alert_register_first);
+    }
+
+    private class RegisterUser extends AsyncTask<Void, Integer, Void> {
+
+        private ProgressDialog progressDialog;
+//        private final String REGISTER_URLS[] = {""
+//                                               "",
+//                                               ""};
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(getApplicationContext());
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setMax(100);
+            progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            progressDialog.setMessage("Please Wait");
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // TODO Register for push notification
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            progressDialog.setProgress(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (progressDialog != null)
+                progressDialog.dismiss();
+            progressDialog = null;
+            finish();
+        }
     }
 }
