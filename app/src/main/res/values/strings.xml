@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Do Not Edit -->
-    <string name="app_name">VJTI</string>
+    <string name="app_name">Enthusia</string>
     <string name="register_user">User Registration</string>
     <string name="username">Full Name</string>
     <string name="email">Email</string>
@@ -17,6 +17,7 @@
 
     <!-- Enthusia Placeholder -->
     <string name="enthusia_fest_name">Enthusia</string>
+    <string name="enthusia_tagline"><![CDATA[Unleash<br />The Fire<br/>Within]]></string>
     <string name="enthusia_points_table">Points Table</string>
     <string name="enthusia_department_heads">Department Heads</string>
     <string name="enthusia_events">Events</string>
@@ -74,11 +75,4 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>PRODUCTION</item>
         <item>TEXTILE</item>
     </string-array>
-
-    <!-- Put All Pratibimb Strings in this section -->
-    <string name="pratibimb_fest_name">Pratibimb</string>
-
-    <!-- Put All Technovanza Strings in this section -->
-    <string name="technovanza_fest_name">Technovanza</string>
-
 </resources>

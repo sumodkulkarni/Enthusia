@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top" />
 
-        <com.vjti.fests.enthusia.ui.android.view.ext.SatelliteMenu
+        <org.enthusia.app.enthusia.ui.android.view.ext.SatelliteMenu
             android:id="@+id/enthusia_start_social_media"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="25sp">
 
-            <com.vjti.fests.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/enthusia_start_icon"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
