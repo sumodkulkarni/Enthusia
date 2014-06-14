@@ -64,7 +64,7 @@ public class EnthusiaPointsTableDialog extends Dialog {
 
     private View getHorizontalDivider() {
         View v = new View(activity);
-        v.setBackgroundColor(getContext().getResources().getColor(android.R.color.black));
+        v.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
         TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, 1);
         v.setLayoutParams(params);
         return v;
@@ -74,7 +74,7 @@ public class EnthusiaPointsTableDialog extends Dialog {
         View v = new View(activity);
         TableRow.LayoutParams params = new TableRow.LayoutParams(1, TableRow.LayoutParams.MATCH_PARENT);
         v.setLayoutParams(params);
-        v.setBackgroundColor(getContext().getResources().getColor(android.R.color.black));
+        v.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
         return v;
     }
 

@@ -221,8 +221,14 @@ public class EnthusiaStartActivity extends Activity {
             getFragmentManager().beginTransaction().replace(R.id.enthusia_start_fragment_container, fragment).commit();
         }
 
-        ((ListView) findViewById(R.id.enthusia_start_slider)).setSelection(position);
-        ((ListView) findViewById(R.id.enthusia_start_slider)).setItemChecked(position, true);
+        setSelected(position);
         enthusiaSlider.closeDrawers();
+    }
+
+    private void setSelected(int id) {
+        for (int i=0; i < ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getCount(); i++) {
+            ( (EnthusiaNavDrawerItem) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getItem(i)).setSelected(id == i ? true : false);
+        }
+        ( (EnthusiaNavDrawerAdapter) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter()).notifyDataSetChanged();
     }
 }

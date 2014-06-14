@@ -89,8 +89,8 @@ public class SplashActivity extends Activity {
 
         private Animator tagline() {
             AnimatorSet set = new AnimatorSet();
-            set.play(getAnimation(R.id.splash_enthusia_tagline, View.ROTATION_X.getName(), new AccelerateDecelerateInterpolator(), new float[] { 0.0f, 360.0f }, 1500, 1000, 2))
-               .with(getAnimation(R.id.splash_enthusia_tagline, View.ALPHA.getName(), null, new float[] { 0.0f, 1.0f }, 1000, 0, 0));
+            set.play(getAnimation(R.id.splash_enthusia_tagline, View.ROTATION_X.getName(), new AccelerateDecelerateInterpolator(), new float[] { 0.0f, 360.0f }, 1000, 500, 2))
+               .with(getAnimation(R.id.splash_enthusia_tagline, View.ALPHA.getName(), null, new float[] { 0.0f, 1.0f }, 500, 0, 0));
             return set;
         }
 

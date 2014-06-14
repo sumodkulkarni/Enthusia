@@ -60,6 +60,12 @@ public class EnthusiaNavDrawerAdapter extends BaseAdapter {
         holder.textView.setText(mItems.get(i).getTitle());
         holder.imageView.setImageResource(mItems.get(i).getIcon());
 
+        if (!getItem(i).isSelected()) {
+            view.setBackground(viewGroup.getResources().getDrawable(R.drawable.enthusia_listitem_selector));
+        } else {
+            view.setBackgroundColor(viewGroup.getResources().getColor(R.color.gray_background));
+        }
+
         return view;
     }
 }

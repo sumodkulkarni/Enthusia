@@ -6,7 +6,8 @@
     android:paddingBottom="10sp"
     android:paddingTop="10sp"
     android:paddingLeft="10sp"
-    android:paddingRight="10sp">
+    android:paddingRight="10sp"
+    android:background="@drawable/enthusia_listitem_selector">
 
     <ImageView
         android:id="@+id/enthusia_list_item_nav_drawer_icon"
@@ -24,6 +25,7 @@
         android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
         android:layout_centerVertical="true"
         android:gravity="left"
+        android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/enthusia_fest_name" />
 
