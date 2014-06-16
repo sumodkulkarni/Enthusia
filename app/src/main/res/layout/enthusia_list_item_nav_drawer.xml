@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="10sp"
@@ -18,7 +19,7 @@
         android:layout_marginLeft="12sp"
         android:layout_marginRight="12sp" />
 
-    <TextView
+    <com.neopixl.pixlui.components.textview.TextView
         android:id="@+id/enthusia_list_item_nav_drawer_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
         android:gravity="left"
         android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/enthusia_fest_name" />
+        android:text="@string/enthusia_fest_name"
+        pixlui:typeface="Lato-Regular.ttf"/>
 
 </RelativeLayout>

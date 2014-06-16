@@ -61,7 +61,7 @@
             android:layout_marginRight="10sp"
             android:layout_marginTop="10sp" />
 
-        <com.vjti.fests.ui.HighlightButton
+        <org.enthusia.app.ui.HighlightButton
             android:id="@+id/enthusia_events_details_event_button_rules"
             android:background="@drawable/enthusia_button_default"
             android:layout_width="match_parent"

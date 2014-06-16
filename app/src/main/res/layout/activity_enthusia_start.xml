@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="25sp">
 
-            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/com.neopixl.pixlui"
                 android:id="@+id/enthusia_start_icon"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
@@ -50,7 +50,7 @@
                 app:border_color="#333333"
                 app:round_background="true" />
 
-            <TextView
+            <com.neopixl.pixlui.components.textview.TextView xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
                 android:id="@+id/enthusia_start_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,8 @@
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black"
-                android:text="@string/app_name"/>
+                android:text="@string/app_name"
+                pixlui:typeface="Lato-Regular.ttf" />
 
         </LinearLayout>
 

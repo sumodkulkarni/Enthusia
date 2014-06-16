@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
@@ -24,10 +25,16 @@ public class HighlightButton extends Button {
 
     public HighlightButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        setCustomFont(context);
     }
 
     public HighlightButton(Context context, AttributeSet attributeSet, int defStyle) {
         super(context, attributeSet, defStyle);
+        setCustomFont(context);
+    }
+
+    public void setCustomFont (Context context) {
+        setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Lato-Regular.ttf"));
     }
 
     @Override
