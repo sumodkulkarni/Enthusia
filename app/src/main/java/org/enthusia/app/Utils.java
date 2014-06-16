@@ -2,6 +2,7 @@ package org.enthusia.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
 
 import org.enthusia.app.model.PushMessage;
 import org.w3c.dom.Document;
@@ -42,7 +43,48 @@ public class Utils {
     public static final String PREF_USER_NAME = "pref_username";
     public static final String PREF_EMAIL = "pref_email";
     public static final String PREF_REGISTRATION_DONE = "pref_registration_done";
+    public static final String PREF_FIRST_RUN = "pref_first_run";
 
+    /**
+     * This function returns the Shared_Prefs for particular key
+     * @param context Context of the android application running (getApplicationContext()) will help
+     * @param key The key for the desired preference
+     * @param object The class of the desired preference value (e.g: String.class)
+     * @return Object of the type of preference
+     */
+
+    public static final Object getPrefs(Context context, String key, Class object) {
+        if (object.equals(String.class)) {
+            return context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).getString(key, null);
+        } else if (object.equals(Integer.class)) {
+            return context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).getInt(key, 0);
+        } else if (object.equals(Boolean.class)) {
+            return context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).getBoolean(key, false);
+        } else if (object.equals(Float.class)) {
+            return context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).getFloat(key, 0.0f);
+        }
+        return null;
+    }
+
+    /**
+     * Use this function to store the preference's value
+     * @param context Context of the android application running (getApplicationContext()) will help
+     * @param key The key for the desired preference
+     * @param value The value of the desired preference
+     */
+
+    public static final void putPrefs(Context context, String key, Object value) {
+        if (value.getClass().equals(String.class)) {
+            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putString(key, (String) value).commit();
+        } else if (value.getClass().equals(Boolean.class)) {
+            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putBoolean(key, ((Boolean) value).booleanValue()).commit();
+        } else if (value.getClass().equals(Integer.class)) {
+            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putInt(key, (Integer) value).commit();
+        } else if (value.getClass().equals(Float.class)) {
+            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putFloat(key, (Float) value).commit();
+        }
+
+    }
 
     /**
      * Make Toast Message in BLUE color shown at top of screen
@@ -108,13 +150,19 @@ public class Utils {
         Crouton.makeText(activity, message, style).show();
     }
 
+    public static final void makeToast (Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static final void makeToast (Context context, int message) {
+        makeToast(context, context.getString(message));
+    }
+
     /**
      * Xml parsing
      */
 
     public final static String ENTHUSIA = "enthusia.xml";
-    public final static String PRATIBIMB = "pratibimb.xml";
-    public final static String TECHNOVANZA = "technovanza.xml";
 
     /**
      * Use this method to get all the push notifications received so far

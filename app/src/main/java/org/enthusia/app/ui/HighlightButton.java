@@ -1,4 +1,4 @@
-package com.vjti.fests.ui;
+package org.enthusia.app.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

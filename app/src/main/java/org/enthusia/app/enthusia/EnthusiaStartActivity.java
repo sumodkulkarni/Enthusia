@@ -2,6 +2,7 @@ package org.enthusia.app.enthusia;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.enthusia.app.R;
+import org.enthusia.app.ui.RegisterDialog;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
 import org.enthusia.app.enthusia.fragments.EnthusiaCommitteeFragment;
@@ -66,7 +69,7 @@ public class EnthusiaStartActivity extends Activity {
             }
         });
 
-        ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + getSharedPreferences(Utils.SHARED_PREFS, MODE_PRIVATE).getString(Utils.PREF_USER_NAME, ""));
+        ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + (String) Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -103,6 +106,24 @@ public class EnthusiaStartActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
+
+        if (!((Boolean) Utils.getPrefs(this, Utils.PREF_REGISTRATION_DONE, Boolean.class)).booleanValue()) {
+            RegisterDialog dialog = new RegisterDialog(this);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + (String) Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
+                    help();
+                }
+            });
+            dialog.show();
+        } else {
+            Utils.showInfo(EnthusiaStartActivity.this, (String) Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
+            if (!((Boolean) Utils.getPrefs(this, Utils.PREF_FIRST_RUN, Boolean.class)).booleanValue()) {
+                help();
+            }
+        }
+
     }
 
     @Override
@@ -230,5 +251,23 @@ public class EnthusiaStartActivity extends Activity {
             ( (EnthusiaNavDrawerItem) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getItem(i)).setSelected(id == i ? true : false);
         }
         ( (EnthusiaNavDrawerAdapter) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter()).notifyDataSetChanged();
+    }
+
+
+    private void help() {
+        ((SatelliteMenu) findViewById(R.id.enthusia_start_social_media)).expand();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((SatelliteMenu) findViewById(R.id.enthusia_start_social_media)).close();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        enthusiaSlider.openDrawer(Gravity.LEFT);
+                        Utils.putPrefs(getApplicationContext(), Utils.PREF_FIRST_RUN, true);
+                    }
+                }, 600);
+            }
+        }, 2000);
     }
 }

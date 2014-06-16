@@ -21,11 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/register_user"
-            android:screenOrientation="portrait" />
-
         <!-- Enthusia Activities -->
         <activity
             android:label="@string/enthusia_fest_name"

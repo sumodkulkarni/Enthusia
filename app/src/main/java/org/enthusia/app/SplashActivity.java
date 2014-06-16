@@ -27,6 +27,7 @@ public class SplashActivity extends Activity {
     private Handler animationHandler;
     private Runnable newActivity;
     private SplashAnimation animation;
+    private boolean animationCancelled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class SplashActivity extends Activity {
         if (animationHandler == null) {
             animationHandler = new Handler();
             animation = new SplashAnimation();
-            animationHandler.postDelayed(animation, 500);
+            animationHandler.postDelayed(animation, 1000);
         }
         super.onPostCreate(savedInstanceState);
     }
@@ -52,6 +53,21 @@ public class SplashActivity extends Activity {
     protected void onDestroy() {
         cancelAnim();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        cancelAnim();
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        if (animationCancelled) {
+            ActivitySplitAnimationUtil.startActivity(SplashActivity.this, new Intent(SplashActivity.this, EnthusiaStartActivity.class));
+            finish();
+        }
+        super.onResume();
     }
 
     private void cancelAnim() {
@@ -66,6 +82,7 @@ public class SplashActivity extends Activity {
         animation = null;
         animationHandler = null;
         newActivity = null;
+        animationCancelled = true;
     }
 
     private class SplashAnimation implements Runnable {
@@ -80,8 +97,8 @@ public class SplashActivity extends Activity {
 
         private Animator title() {
             AnimatorSet set = new AnimatorSet();
-            set.play(getAnimation(R.id.splash_enthusia_title, View.SCALE_X.getName(), new BounceInterpolator(), new float[] { 3.0f, 1.0f }, 1250, 0, 0))
-               .with(getAnimation(R.id.splash_enthusia_title, View.SCALE_Y.getName(), new BounceInterpolator(), new float[] { 3.0f, 1.0f }, 1250, 0, 0))
+            set.play(getAnimation(R.id.splash_enthusia_title, View.SCALE_X.getName(), new BounceInterpolator(), new float[] { 0.0f, 1.0f }, 1250, 0, 0))
+               .with(getAnimation(R.id.splash_enthusia_title, View.SCALE_Y.getName(), new BounceInterpolator(), new float[] { 0.0f, 1.0f }, 1250, 0, 0))
                .with(getAnimation(R.id.splash_enthusia_title, View.ALPHA.getName(), null, new float[] { 0.0f, 1.0f }, 1000, 0, 0))
                .before(getAnimation(R.id.splash_enthusia_title, View.TRANSLATION_Y.getName(), new AccelerateDecelerateInterpolator(), new float[] { -findViewById(R.id.splash_enthusia_title).getHeight() - 100.0f }, 1500, 250, 0));
             return set;
@@ -89,8 +106,10 @@ public class SplashActivity extends Activity {
 
         private Animator tagline() {
             AnimatorSet set = new AnimatorSet();
-            set.play(getAnimation(R.id.splash_enthusia_tagline, View.ROTATION_X.getName(), new AccelerateDecelerateInterpolator(), new float[] { 0.0f, 360.0f }, 1000, 500, 2))
-               .with(getAnimation(R.id.splash_enthusia_tagline, View.ALPHA.getName(), null, new float[] { 0.0f, 1.0f }, 500, 0, 0));
+            set.play(getAnimation(R.id.splash_enthusia_tagline, View.ALPHA.getName(), new OvershootInterpolator(2.0f), new float[] { 0.0f, 1.0f }, 1000, 0, 0))
+               .with(getAnimation(R.id.splash_enthusia_tagline, View.SCALE_Y.getName(), new OvershootInterpolator(2.0f), new float[] { 0.0f, 1.0f }, 1000, 0, 0))
+               .with(getAnimation(R.id.splash_enthusia_tagline, View.SCALE_X.getName(), new OvershootInterpolator(2.0f), new float[]{0.0f, 1.0f}, 1000, 0, 0))
+               .before(getAnimation(R.id.splash_enthusia_tagline, View.ROTATION_Y.getName(), new OvershootInterpolator(2.0f), new float[] { 0.0f, 360.0f }, 1000, 0, 1));
             return set;
         }
 
