@@ -2,6 +2,7 @@ package org.enthusia.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.enthusia.app.model.PushMessage;
@@ -44,6 +45,8 @@ public class Utils {
     public static final String PREF_EMAIL = "pref_email";
     public static final String PREF_REGISTRATION_DONE = "pref_registration_done";
     public static final String PREF_FIRST_RUN = "pref_first_run";
+    public static final String PREF_REGISTRATION_ID = "pref_reg_id";
+    public static final String PREF_APP_VERSION = "pref_app_version";
 
     /**
      * This function returns the Shared_Prefs for particular key
@@ -252,6 +255,10 @@ public class Utils {
         }
 
 
+    }
+
+    public static void log (Object log) {
+        Log.v(SHARED_PREFS, log.toString());
     }
 
 }

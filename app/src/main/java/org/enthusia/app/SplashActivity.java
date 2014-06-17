@@ -142,7 +142,8 @@ public class SplashActivity extends Activity {
                             finish();
                         }
                     };
-                    animationHandler.postDelayed(newActivity, 2700);
+                    if (animationHandler != null)
+                        animationHandler.postDelayed(newActivity, 2700);
                 }
 
                 @Override

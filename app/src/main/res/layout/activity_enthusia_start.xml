@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="25sp">
 
-            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/com.neopixl.pixlui"
+            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/enthusia_start_icon"
                 android:layout_width="32sp"
                 android:layout_height="32sp"

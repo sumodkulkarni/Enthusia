@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.enthusia.app.R;
-import org.enthusia.app.ui.RegisterDialog;
+import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
 import org.enthusia.app.enthusia.fragments.EnthusiaCommitteeFragment;
@@ -108,15 +108,7 @@ public class EnthusiaStartActivity extends Activity {
         enthusiaToggle.syncState();
 
         if (!((Boolean) Utils.getPrefs(this, Utils.PREF_REGISTRATION_DONE, Boolean.class)).booleanValue()) {
-            RegisterDialog dialog = new RegisterDialog(this);
-            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + (String) Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
-                    help();
-                }
-            });
-            dialog.show();
+            startActivityForResult(new Intent(this, RegisterActivity.class), 47);
         } else {
             Utils.showInfo(EnthusiaStartActivity.this, (String) Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
             if (!((Boolean) Utils.getPrefs(this, Utils.PREF_FIRST_RUN, Boolean.class)).booleanValue()) {
@@ -124,6 +116,15 @@ public class EnthusiaStartActivity extends Activity {
             }
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 47) {
+            if (resultCode == RESULT_OK) {
+                help();
+            }
+        }
     }
 
     @Override

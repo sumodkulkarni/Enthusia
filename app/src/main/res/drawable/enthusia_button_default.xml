@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
-    android:shape="rectangle">
-    <gradient android:angle="270"
-              android:endColor="#1E90FF"
-              android:startColor="#007FFF" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="false" android:state_enabled="true" android:drawable="@drawable/enthusia_button_enabled" />
+    <item android:state_pressed="true" android:state_enabled="true" android:drawable="@drawable/enthusia_button_disabled" />
+    <item android:state_pressed="false" android:state_enabled="false" android:drawable="@drawable/enthusia_button_disabled" />
+    <item android:state_pressed="true" android:state_enabled="false" android:drawable="@drawable/enthusia_button_disabled" />
+
+</selector>

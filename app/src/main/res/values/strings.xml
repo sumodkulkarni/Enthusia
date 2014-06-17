@@ -8,11 +8,12 @@
     <string name="email">Email</string>
     <string name="register">Register</string>
     <string name="welcome">Welcome</string>
+    <string name="register_detail">Register with Enthusia</string>
     <string name="alert_register_enter_username">Please enter your Name</string>
     <string name="alert_register_enter_email">Please enter your E-Mail Id</string>
     <string name="alert_register_first">Press Register to Continue</string>
     <string name="alert_register_enter_valid_email">Please enter valid Email-Id</string>
-
+    <string name="alert_register_no_network"><![CDATA[No Network Available.<br /> Please Connect to the Internet to Register]]></string>
 
     <!-- Enthusia Placeholder -->
     <string name="enthusia_fest_name">Enthusia</string>

@@ -19,10 +19,6 @@ import android.widget.Button;
 
 public class HighlightButton extends Button {
 
-    public HighlightButton(Context context) {
-        super(context);
-    }
-
     public HighlightButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         setCustomFont(context);
