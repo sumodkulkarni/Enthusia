@@ -3,7 +3,6 @@ package org.enthusia.app.enthusia;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.NotificationManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -43,7 +42,6 @@ public class EnthusiaStartActivity extends Activity {
 
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
-    private int currentFragment = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +56,7 @@ public class EnthusiaStartActivity extends Activity {
         }
 
         enthusiaSlider = (DrawerLayout) findViewById(R.id.enthusia_start_drawer);
+        enthusiaSlider.setFocusableInTouchMode(false);
         ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<EnthusiaNavDrawerItem>();
 
         for (int i=0; i < getResources().getStringArray(R.array.enthusia_nav_drawer_items).length; i++) {
@@ -146,15 +145,17 @@ public class EnthusiaStartActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-
-        if (currentFragment == 0)
-            super.onBackPressed();
-        else if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
-            enthusiaSlider.openDrawer(Gravity.LEFT);
+        if (enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+            finish();
         } else {
-            enthusiaSlider.closeDrawers();
+            enthusiaSlider.openDrawer(Gravity.LEFT);
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        enthusiaSlider.closeDrawers();
+        super.onDestroy();
     }
 
     @Override
@@ -231,7 +232,6 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void displayView (int position) {
-        currentFragment = position;
         Intent intent = null;
         Fragment fragment = null;
         switch (position) {

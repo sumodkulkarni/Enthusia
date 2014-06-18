@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:layout_width="150dp"
-    android:layout_height="150dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background">
 
-    <ImageView
+    <org.enthusia.app.ui.SquareImageView
         android:id="@+id/enthusia_events_list_item_event_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:background="@drawable/ic_launcher" />
+
+    <com.neopixl.pixlui.components.textview.TextView xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+        android:id="@+id/enthusia_events_list_item_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:padding="10dp"
+        android:background="#55000000"
+        pixlui:typeface="Lato-Regular.ttf"/>
 
 </FrameLayout>

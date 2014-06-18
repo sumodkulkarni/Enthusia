@@ -55,7 +55,7 @@ public class EnthusiaEventsActivity extends Activity {
             }
         });
 
-        ((GridView)findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter(this));
+        ((GridView)findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter());
         ((GridView)findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {

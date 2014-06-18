@@ -6,17 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
 
 public class EnthusiaEventsGridAdapter extends BaseAdapter {
 
-    private Context context;
-
-    public EnthusiaEventsGridAdapter(Context context) {
-        this.context = context;
-    }
+    public EnthusiaEventsGridAdapter() {}
 
     @Override
     public int getCount() {
@@ -35,6 +32,7 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         ImageView imageView;
+        TextView textView;
     }
 
     @Override
@@ -42,14 +40,16 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = LayoutInflater.from(context).inflate(R.layout.enthusia_list_item_events, viewGroup, false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.enthusia_list_item_events, viewGroup, false);
             holder.imageView = (ImageView) view.findViewById(R.id.enthusia_events_list_item_event_image);
+            holder.textView = (TextView) view.findViewById(R.id.enthusia_events_list_item_event_name);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
 
         holder.imageView.setImageResource(EnthusiaEvents.drawables[i]);
+        holder.textView.setText(EnthusiaEvents.events[i]);
         return view;
     }
 }
