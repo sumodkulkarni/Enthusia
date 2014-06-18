@@ -2,6 +2,7 @@ package org.enthusia.app.enthusia;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -42,11 +43,13 @@ public class EnthusiaStartActivity extends Activity {
 
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
+    private int currentFragment = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enthusia_start);
+
         try {
             ActivitySplitAnimationUtil.prepareAnimation(this);
             ActivitySplitAnimationUtil.animate(this, 1000);
@@ -92,6 +95,7 @@ public class EnthusiaStartActivity extends Activity {
             displayView(0);
 
         setupSocialMedia();
+
     }
 
     @Override
@@ -107,21 +111,28 @@ public class EnthusiaStartActivity extends Activity {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
 
-        if (!((Boolean) Utils.getPrefs(this, Utils.PREF_REGISTRATION_DONE, Boolean.class)).booleanValue()) {
-            startActivityForResult(new Intent(this, RegisterActivity.class), 47);
+        if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class)).booleanValue()) {
+            startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
         } else {
-            Utils.showInfo(EnthusiaStartActivity.this, (String) Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
-            if (!((Boolean) Utils.getPrefs(this, Utils.PREF_FIRST_RUN, Boolean.class)).booleanValue()) {
+            Utils.showInfo(EnthusiaStartActivity.this, "Welcome, " + (String) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_USER_NAME, String.class));
+            if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_FIRST_RUN, Boolean.class)).booleanValue()) {
                 help();
             }
         }
+     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
+        super.onNewIntent(intent);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 47) {
             if (resultCode == RESULT_OK) {
+                ( (TextView) findViewById(R.id.enthusia_start_user)).setText("Welcome, " + (String) Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
                 help();
             }
         }
@@ -135,7 +146,15 @@ public class EnthusiaStartActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        if (currentFragment == 0)
+            super.onBackPressed();
+        else if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+            enthusiaSlider.openDrawer(Gravity.LEFT);
+        } else {
+            enthusiaSlider.closeDrawers();
+        }
+
     }
 
     @Override
@@ -212,7 +231,7 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void displayView (int position) {
-
+        currentFragment = position;
         Intent intent = null;
         Fragment fragment = null;
         switch (position) {

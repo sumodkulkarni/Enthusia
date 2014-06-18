@@ -30,6 +30,8 @@
 Swipe the card to mark it as read.<br />
 Once you receive updates this card will be automatically hidden]]></string>
 
+    <string name="enthusia_unread_count" formatted="false"><![CDATA[You have <font color=\'#000000\'><b>%d</b></font> message%s unread]]></string>
+    <string name="enthusia_all_messages_read"><![CDATA[All messages <b><font color=\'#000000\'>Read</font></b>]]></string>
     <string-array name="enthusia_nav_drawer_items">
         <item>Recent News</item>
         <item>Sports</item>
