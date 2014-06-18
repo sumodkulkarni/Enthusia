@@ -7,12 +7,17 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.text.Html;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.enthusia.app.R;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
+import org.enthusia.app.model.PushMessage;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GCMIntentService extends IntentService {
 
@@ -28,7 +33,24 @@ public class GCMIntentService extends IntentService {
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 
         String messageType = gcm.getMessageType(intent);
-        Utils.log(messageType);
+
+        ArrayList<PushMessage> messages = null;
+        try {
+            messages = Utils.getPushMessages(getApplicationContext(), Utils.ENTHUSIA);
+        } catch (IOException ioe) {
+            messages = null;
+        }
+
+        if (messages == null)
+            messages = new ArrayList<PushMessage>();
+
+        messages.add(0, new PushMessage(Html.fromHtml(extras.getString("price")).toString()));
+
+        try {
+            Utils.editPushMessages(this, Utils.ENTHUSIA, messages);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         if (!extras.isEmpty()) {
             if (messageType.equals(GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE)) {
@@ -36,6 +58,8 @@ public class GCMIntentService extends IntentService {
                 sendNotification(extras.getString("price"));
             }
         }
+
+
 
         PushNotificationReciever.completeWakefulIntent(intent);
     }

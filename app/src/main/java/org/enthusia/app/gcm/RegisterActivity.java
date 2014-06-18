@@ -82,7 +82,7 @@ public class RegisterActivity extends Activity {
         private ProgressDialog progressDialog;
         private boolean registered = false;
         private final static String GCM_SENDER_ID = "623894493052";
-        private final static String SERVER_URL = "http://192.168.1.9/register.php";
+        private final static String SERVER_URL = "http://enthusia.zapto.org:8080/register.php";
 
 
         @Override
