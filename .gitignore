@@ -34,3 +34,7 @@ proguard-project.txt
 # Other
 .DS_Store
 tmp
+
+# Release
+release.sh
+app/release.keystore
