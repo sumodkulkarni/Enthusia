@@ -1,10 +1,13 @@
 package org.enthusia.app.model;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+
 import java.io.Serializable;
 
 public class PushMessage implements Serializable, Comparable<PushMessage> {
 
-    private String message;
+    private SpannableString message;
     private boolean read;
 
     protected PushMessage() {}
@@ -13,15 +16,27 @@ public class PushMessage implements Serializable, Comparable<PushMessage> {
         this (message, false);
     }
 
+    public PushMessage(Spanned message) {
+        this(message.toString(), false);
+    }
+
+    public PushMessage(SpannableString message) {
+        this (message.toString(), false);
+    }
+
+    public PushMessage(SpannableString message, boolean read) {
+        this (message.toString(), read);
+    }
+
     public PushMessage(String message, boolean read) {
-        this.message = message;
+        this.message = new SpannableString(message);
         this.read = read;
     }
 
-    public void setMessage(String message) { this.message = message; }
+    public void setMessage(String message) { this.message = new SpannableString(message); }
     public void setRead(boolean read) { this.read = read; }
 
-    public String getMessage() { return this.message; }
+    public SpannableString getMessage() { return this.message; }
     public boolean isRead() { return this.read; }
 
 

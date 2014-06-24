@@ -58,9 +58,9 @@ public class EnthusiaNewsFragment extends Fragment {
             customAdded = false;
         } else {
             customAdded = true;
-            ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received").toString());
+            ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
             messages = new ArrayList<PushMessage>();
-            messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)).toString()));
+            messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news))));
         }
 
         enthusiaNewsAdapter = new EnthusiaNewsAdapter(getActivity(), messages);
@@ -121,7 +121,7 @@ public class EnthusiaNewsFragment extends Fragment {
 
     private void clearAll() {
         customAdded = true;
-        ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received").toString());
+        ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
         messages.clear();
         messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)).toString()));
         enthusiaNewsAdapter.notifyDataSetChanged();

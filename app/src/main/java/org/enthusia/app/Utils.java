@@ -235,7 +235,7 @@ public class Utils {
                 content = document.createElement("message");
                 read = document.createElement("read");
 
-                content.appendChild(document.createTextNode(message.getMessage()));
+                content.appendChild(document.createTextNode(message.getMessage().toString()));
                 read.appendChild(document.createTextNode(String.valueOf(message.isRead()).toLowerCase()));
 
                 data.appendChild(content);

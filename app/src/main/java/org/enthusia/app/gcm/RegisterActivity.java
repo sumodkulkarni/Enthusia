@@ -77,10 +77,9 @@ public class RegisterActivity extends Activity {
     }
 
 
-    private class RegisterUser extends AsyncTask<Void, Integer, Void> {
+    private class RegisterUser extends AsyncTask<Void, Integer, Boolean> {
 
         private ProgressDialog progressDialog;
-        private boolean registered = false;
         private final static String GCM_SENDER_ID = "623894493052";
         private final static String SERVER_URL = "http://enthusia.zapto.org:8080/register.php";
 
@@ -107,7 +106,7 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Boolean doInBackground(Void... params) {
             // TODO Register for push notification
 
             String regId = getRegistrationId();
@@ -115,68 +114,68 @@ public class RegisterActivity extends Activity {
             if (regId == null) {
 
                 try {
-                    GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(RegisterActivity.this);
-                    regId = gcm.register(GCM_SENDER_ID);
+                        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(RegisterActivity.this);
+                        regId = gcm.register(GCM_SENDER_ID);
 
-                    // Register With Enthusia Server
+                        // Register With Enthusia Server
 
-                    HttpURLConnection register = null;
+                        HttpURLConnection register = null;
 
-                    try {
-                        register = (HttpURLConnection) new URL(SERVER_URL).openConnection();
+                        try {
+                            register = (HttpURLConnection) new URL(SERVER_URL).openConnection();
 
-                        HashMap<String, String> data = new HashMap<String, String>();
-                        data.put("regId", regId);
-                        data.put("name", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_USER_NAME, String.class));
-                        data.put("email", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_EMAIL, String.class));
+                            HashMap<String, String> data = new HashMap<String, String>();
+                            data.put("regId", regId);
+                            data.put("name", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_USER_NAME, String.class));
+                            data.put("email", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_EMAIL, String.class));
 
-                        StringBuilder body = new StringBuilder();
-                        Iterator<Map.Entry<String, String>> iterator = data.entrySet().iterator();
-                        while (iterator.hasNext()) {
-                            Map.Entry<String, String> current = iterator.next();
-                            body.append( current.getKey() )
-                                .append( '=' )
-                                .append( current.getValue() );
+                            StringBuilder body = new StringBuilder();
+                            Iterator<Map.Entry<String, String>> iterator = data.entrySet().iterator();
+                            while (iterator.hasNext()) {
+                                Map.Entry<String, String> current = iterator.next();
+                                body.append( current.getKey() )
+                                    .append( '=' )
+                                    .append( current.getValue() );
 
-                            if (iterator.hasNext())
-                                body.append('&');
+                                if (iterator.hasNext())
+                                    body.append('&');
+                            }
+
+                            register.setDoOutput(true);
+                            register.setUseCaches(false);
+                            register.setFixedLengthStreamingMode(body.toString().getBytes().length);
+                            register.setRequestMethod(HttpPost.METHOD_NAME);
+                            register.getOutputStream().write(body.toString().getBytes());
+                            register.getOutputStream().close();
+                            int status = register.getResponseCode();
+
+                            if (status != 200) {
+                                throw new IOException("Post Failed With Error Code: " + status);
+                            }
+
+                        } catch (IOException ex) {
+                            Utils.showAlert(RegisterActivity.this, "Registration Failed");
+                            return false;
+                        } finally {
+                            if (register != null) {
+                                register.disconnect();
+                            }
                         }
 
-                        register.setDoOutput(true);
-                        register.setUseCaches(false);
-                        register.setFixedLengthStreamingMode(body.toString().getBytes().length);
-                        register.setRequestMethod(HttpPost.METHOD_NAME);
-                        register.getOutputStream().write(body.toString().getBytes());
-                        register.getOutputStream().close();
-                        int status = register.getResponseCode();
 
-                        if (status != 200) {
-                            throw new IOException("Post Failed With Error Code: " + status);
-                        }
+                        // Store Registration Values
 
-                    } catch (IOException ex) {
-                        Utils.showAlert(RegisterActivity.this, "Registration Failed");
-                    } finally {
-                        if (register != null) {
-                            register.disconnect();
-                        }
-                    }
-
-
-                    // Store Registration Values
-
-                    Utils.putPrefs(RegisterActivity.this, Utils.PREF_REGISTRATION_ID, regId);
-                    Utils.putPrefs(RegisterActivity.this, Utils.PREF_APP_VERSION, getAppVersion());
-
-                    registered = true;
+                        Utils.putPrefs(RegisterActivity.this, Utils.PREF_REGISTRATION_ID, regId);
+                        Utils.putPrefs(RegisterActivity.this, Utils.PREF_APP_VERSION, getAppVersion());
 
                 } catch (IOException ex) {
                     Utils.showAlert(RegisterActivity.this, "Unable to Register");
+                    return false;
                 }
 
 
             }
-            return null;
+            return true;
         }
 
         private String getRegistrationId() {
@@ -201,11 +200,11 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(Boolean result) {
             if (progressDialog != null && progressDialog.isShowing())
                 progressDialog.dismiss();
             progressDialog = null;
-            if (registered) {
+            if (result) {
                 Utils.putPrefs(RegisterActivity.this, Utils.PREF_REGISTRATION_DONE, true);
                 setResult(RESULT_OK);
                 finish();

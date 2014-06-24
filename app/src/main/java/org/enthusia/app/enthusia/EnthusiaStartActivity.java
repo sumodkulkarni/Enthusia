@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.enthusia.app.R;
+import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
 import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
@@ -254,6 +255,10 @@ public class EnthusiaStartActivity extends Activity {
                 getActionBar().setTitle(getString(R.string.enthusia_committee));
                 fragment = new EnthusiaCommitteeFragment();
                 break;
+            case 5:
+                getActionBar().setTitle(getString(R.string.enthusia_about));
+                fragment = new EnthusiaAboutFragment();
+                break;
         }
 
         if (intent != null) {
@@ -267,6 +272,8 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void setSelected(int id) {
+        if (id == 1)
+            return;
         for (int i=0; i < ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getCount(); i++) {
             ( (EnthusiaNavDrawerItem) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getItem(i)).setSelected(id == i ? true : false);
         }

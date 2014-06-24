@@ -50,7 +50,7 @@ public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
             holder.textView.setTextColor(context.getResources().getColor(android.R.color.black));
             holder.textView.setBackgroundResource(R.drawable.enthusia_news_background_unread);
         }
-        holder.textView.setPadding(10,10,10,10);
+        holder.textView.setPadding(20,20,20,20);
         holder.textView.setText(getItem(i).getMessage());
 
         return view;

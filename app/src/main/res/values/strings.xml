@@ -25,6 +25,7 @@
     <string name="enthusia_committee">Committee</string>
     <string name="enthusia_sponsors">Sponsors</string>
     <string name="enthusia_intra">Intra</string>
+    <string name="enthusia_about">About Us</string>
     <string name="enthusia_all_read">You are up-to-date with our Fest!!</string>
     <string name="enthusia_sample_news"><![CDATA[Welcome to Enthusia!!<br />You will receive all the updates here.<br />
 Swipe the card to mark it as read.<br />
@@ -38,6 +39,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@string/enthusia_intra</item>
         <item>@string/enthusia_sponsors</item>
         <item>@string/enthusia_committee</item>
+        <item>@string/enthusia_about</item>
     </string-array>
     
     <array name="enthusia_nav_drawer_icons">
@@ -46,6 +48,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@drawable/enthusia_intra</item>
         <item>@drawable/enthusia_spons</item>
         <item>@drawable/enthusia_committe</item>
+        <item>@drawable/ic_launcher</item>
     </array>
 
     <string-array name="enthusia_committe_posts">
