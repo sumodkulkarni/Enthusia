@@ -107,7 +107,6 @@ public class EnthusiaPointsTableDialog extends Dialog {
 
     @SuppressWarnings("defaultlocale")
     private int getPoints(String department) {
-        System.out.println(PREF_POINTS + department.toLowerCase());
         return getContext().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0);
     }
 

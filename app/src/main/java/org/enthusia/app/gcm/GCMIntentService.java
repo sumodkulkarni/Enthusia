@@ -43,8 +43,13 @@ public class GCMIntentService extends IntentService {
 
         if (messages == null)
             messages = new ArrayList<PushMessage>();
-
-        messages.add(0, new PushMessage(Html.fromHtml(extras.getString("price")).toString()));
+        if (extras != null) {
+            try {
+                messages.add(0, new PushMessage(Html.fromHtml(extras.getString("price")).toString()));
+            } catch (NullPointerException ex) {
+                return;
+            }
+        }
 
         try {
             Utils.editPushMessages(this, Utils.ENTHUSIA, messages);

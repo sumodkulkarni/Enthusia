@@ -1,24 +1,37 @@
 package org.enthusia.app.enthusia;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
+import com.neopixl.pixlui.components.textview.TextView;
+
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
 
-public class EnthusiaEventsActivity extends Activity {
+public class EnthusiaEventsActivity extends Activity implements View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener {
 
     private UnfoldableView mUnfoldableView;
+    private boolean isExpanded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +86,10 @@ public class EnthusiaEventsActivity extends Activity {
     @Override
     public void onBackPressed() {
         if (mUnfoldableView != null && (mUnfoldableView.isUnfolded() || mUnfoldableView.isUnfolding())) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+                findViewById(R.id.enthusia_events_details_layout).getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            else
+                findViewById(R.id.enthusia_events_details_layout).getViewTreeObserver().removeOnGlobalLayoutListener(this);
             mUnfoldableView.foldBack();
         } else {
             super.onBackPressed();
@@ -103,32 +120,107 @@ public class EnthusiaEventsActivity extends Activity {
     private void setupEvent (View view, final int event) {
         getActionBar().setTitle(EnthusiaEvents.events[event]);
 
+        // Set ScrollView
+
+        findViewById(R.id.enthusia_events_details_layout).getViewTreeObserver().addOnGlobalLayoutListener(this);
+
         findViewById(R.id.enthusia_events_details_event_image).setBackgroundResource(EnthusiaEvents.drawables[event]);
 
         // Event Heads
         ((ListView) findViewById(R.id.enthusia_events_details_event_list_event_heads)).setAdapter(new EnthusiaEventsEventHeadAdapter(this, EnthusiaEvents.getEventHead(event)));
+        setListViewHeightBasedOnChildren((ListView) findViewById(R.id.enthusia_events_details_event_list_event_heads));
 
         // Rules
-        findViewById(R.id.enthusia_events_details_event_button_rules).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog dialog = new AlertDialog.Builder(EnthusiaEventsActivity.this)
-                                                    .setCancelable(true)
-                                                    .setTitle(getString(R.string.enthusia_rules))
-                                                    .setMessage(Html.fromHtml(getString(EnthusiaEvents.rules[event])).toString())
-                                                    .setPositiveButton(getString(android.R.string.yes), null)
-                                                    .create();
-                dialog.setCanceledOnTouchOutside(false);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.show();
-                    }
-                });
-            }
-        });
+        ((TextView) findViewById(R.id.enthusia_event_rules)).setText(Html.fromHtml(getString(EnthusiaEvents.rules[event])));
+
+        // Expand Listener
+        findViewById(R.id.enthusia_event_showmore).setOnClickListener(this);
+        findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(this);
 
         mUnfoldableView.unfold(view, findViewById(R.id.enthusia_events_details_layout));
     }
 
+    @Override
+    public void onGlobalLayout() {
+        findViewById(R.id.enthusia_events_details_layout).post(new Runnable() {
+            @Override
+            public void run() {
+                ((ScrollView) findViewById(R.id.enthusia_events_details_layout)).fullScroll(View.FOCUS_DOWN);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        AnimatorSet set = new AnimatorSet();
+        set.setDuration(1000);
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.play(getTextViewAnimation()).with(getImageViewAnimation());
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                findViewById(R.id.enthusia_event_showmore).setOnClickListener(null);
+                findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(null);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                isExpanded = !isExpanded;
+                ((Button) findViewById(R.id.enthusia_event_showmore)).setText(isExpanded == true ? R.string.less : R.string.more);
+                findViewById(R.id.enthusia_event_showmore).setOnClickListener(EnthusiaEventsActivity.this);
+                findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(EnthusiaEventsActivity.this);
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+        set.start();
+    }
+
+    private ObjectAnimator getTextViewAnimation() {
+        ObjectAnimator animator =  ObjectAnimator.ofFloat(findViewById(R.id.enthusia_event_rules),
+                "maxLines",
+                3, 30);
+
+        if (isExpanded) {
+            animator.setFloatValues(30, 3);
+        }
+
+        return animator;
+    }
+
+    private ObjectAnimator getImageViewAnimation() {
+        return ObjectAnimator.ofFloat(findViewById(R.id.enthusia_event_showmore_image),
+                View.ROTATION,
+                findViewById(R.id.enthusia_event_showmore_image).getRotation(),
+                findViewById(R.id.enthusia_event_showmore_image).getRotation() + 180);
+    }
+
+    private void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 }

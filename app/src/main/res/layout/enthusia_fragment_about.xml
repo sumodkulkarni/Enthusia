@@ -1,8 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/enthusia_about_view"
     android:layout_height="match_parent"
-    android:background="@color/gray_background">
+    android:layout_width="match_parent"
+    android:background="@color/gray_background"
+    tools:ignore="HardcodedText">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:orientation="vertical">
+
+        <com.neopixl.pixlui.components.textview.TextView
+            xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="3dp"
+            android:text="@string/enthusia_about"
+            android:textSize="25sp"
+            android:textAllCaps="true"
+            android:textColor="@color/matt_black"
+            pixlui:typeface="Lato-Thin.ttf"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/enthusia_news_background_unread"
+            android:padding="12dp"
+            android:orientation="vertical">
+
+            <org.enthusia.app.ui.ExpandableTextView
+                xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+                android:id="@+id/enthusia_fragment_about_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/matt_black"
+                android:text="@string/about_us"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="left"
+                android:maxLines="3"
+                android:ellipsize="end"
+                pixlui:typeface="Lato-Regular.ttf" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <org.enthusia.app.ui.HighlightButton
+                    android:id="@+id/enthusia_fragment_about_showmore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/matt_black"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:text="@string/more" />
+
+                <ImageView
+                    android:id="@+id/enthusia_fragment_about_showmore_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
+                    android:rotation="0"
+                    android:contentDescription="@null"
+                    android:gravity="right"
+                    android:src="@drawable/expand"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.neopixl.pixlui.components.textview.TextView
+            xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="6dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="3dp"
+            android:text="@string/enthusia_developed_by"
+            android:textSize="25sp"
+            android:textAllCaps="true"
+            android:textColor="@color/matt_black"
+            pixlui:typeface="Lato-Thin.ttf"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@drawable/enthusia_news_background_unread">
+
+
+            <com.neopixl.pixlui.components.textview.TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:text="Rahul Iyer"
+                android:textSize="18sp"
+                android:textColor="@color/matt_black"/>
+
+            <org.enthusia.app.ui.HighlightButton
+                android:id="@+id/r_fb"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:scaleType="fitXY"
+                android:contentDescription="@null"
+                android:background="@drawable/facebook"/>
+
+            <org.enthusia.app.ui.HighlightButton
+                android:id="@+id/r_twit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:background="@drawable/twitter"/>
+
+            <org.enthusia.app.ui.HighlightButton
+                android:id="@+id/r_plus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:background="@drawable/plus"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

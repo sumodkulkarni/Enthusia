@@ -14,9 +14,18 @@
     <string name="alert_register_first">Press Register to Continue</string>
     <string name="alert_register_enter_valid_email">Please enter valid Email-Id</string>
     <string name="alert_register_no_network"><![CDATA[No Network Available.<br /> Please Connect to the Internet to Register]]></string>
+    <string name="about_us">
+        <![CDATA[When we say Enthusia is one of the biggest sports festivals in India, it\'s no exaggeration! <br />
+ Graced with some of the best sports facilities one could ask for, this annual festival is sure to set your heartbeat racing, and give you that adrenaline rush once again. Some of the most skilled and talented sportsmen will lock horns in front of hoards of fans spurring the players on to bring the best out of them.<br />
+ V.J.T.I. can boast of having a cricket ground, a football ground, basketball court, tennis clay courts (one of the few in India!), carrom and table tennis facilities, a badminton court, and lots more. Enthusia provides ample opportunities to develop your creativity, leadership qualities, team building and managerial skills. <br />
+ Our vision is to nurture sports talent to make players realize their full potential.]]>
+    </string>
+    <string name="more">More</string>
+    <string name="less">Less</string>
 
     <!-- Enthusia Placeholder -->
     <string name="enthusia_fest_name">Enthusia</string>
+    <string name="enthusia_developed_by">Developed By</string>
     <string name="enthusia_tagline"><![CDATA[Unleash<br />The Fire<br/>Within]]></string>
     <string name="enthusia_points_table">Points Table</string>
     <string name="enthusia_department_heads">Department Heads</string>

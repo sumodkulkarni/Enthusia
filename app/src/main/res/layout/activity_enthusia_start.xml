@@ -40,15 +40,12 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="25sp">
 
-            <org.enthusia.app.ui.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <ImageView
                 android:id="@+id/enthusia_start_icon"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
-                android:background="@drawable/ic_contact"
-                app:corner_radius="30dip"
-                app:border_width="2dip"
-                app:border_color="#333333"
-                app:round_background="true" />
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_contact" />
 
             <com.neopixl.pixlui.components.textview.TextView xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
                 android:id="@+id/enthusia_start_user"
@@ -68,7 +65,7 @@
             android:layout_marginTop="40sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:dividerHeight="1dp" />
+            android:divider="@android:color/transparent"/>
 
     </LinearLayout>
 
