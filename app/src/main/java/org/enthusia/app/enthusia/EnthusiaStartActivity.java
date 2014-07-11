@@ -91,10 +91,17 @@ public class EnthusiaStartActivity extends Activity {
 
         enthusiaSlider.setDrawerListener(enthusiaToggle);
 
-        if (savedInstanceState == null)
-            displayView(0);
-
         setupSocialMedia();
+
+        if (getIntent().getExtras() != null && getIntent().hasExtra("points")) {
+            if (getIntent().getExtras().getBoolean("points"))
+                displayView(2);
+            else
+                displayView(0);
+        } else if (savedInstanceState == null) {
+            displayView(0);
+        }
+
 
     }
 
@@ -264,7 +271,9 @@ public class EnthusiaStartActivity extends Activity {
         if (intent != null) {
             startActivity(intent);
         } else if (fragment != null) {
-            getFragmentManager().beginTransaction().replace(R.id.enthusia_start_fragment_container, fragment).commit();
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.enthusia_start_fragment_container, fragment)
+                    .commit();
         }
 
         setSelected(position);

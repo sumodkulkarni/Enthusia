@@ -5,26 +5,10 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/splash_enthusia_title"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/splash_animation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/enthusia"
-        android:alpha="0"/>
-
-    <com.romainpiel.shimmer.ShimmerTextView
-        android:id="@+id/splash_enthusia_tagline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/enthusia_tagline"
-        android:textColor="@color/matt_black"
-        android:textSize="35dp"
-        android:gravity="center"
-        android:alpha="0"
-        app:reflectionColor="#f00" />
+        android:layout_height="match_parent"
+        android:src="@drawable/enthusia_loading" />
 
 </RelativeLayout>

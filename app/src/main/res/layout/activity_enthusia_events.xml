@@ -7,19 +7,18 @@
     android:background="@color/gray_background"
     tools:ignore="HardcodedText">
 
-    <GridView
+    <com.etsy.android.grid.StaggeredGridView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/enthusia_events_grid"
-        android:numColumns="2"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:column_count="2"
+        app:item_margin="8dp" />
 
     <View
         android:id="@+id/enthusia_events_touch_interceptor_view"
@@ -41,16 +40,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <org.enthusia.app.ui.SquareImageView
+            <com.etsy.android.grid.util.DynamicHeightImageView
                 android:id="@+id/enthusia_events_details_event_image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="320dp"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/ic_launcher"
-                android:layout_marginLeft="10sp"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:layout_marginBottom="10sp"
+                android:layout_margin="10dp"
                 android:contentDescription="@null"
                 android:scaleType="fitXY" />
 
@@ -131,25 +127,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
                         android:gravity="center">
 
-                        <org.enthusia.app.ui.HighlightButton
-                            android:id="@+id/enthusia_event_showmore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/matt_black"
-                            android:background="@android:color/white"
-                            android:gravity="center"
-                            android:text="@string/more" />
-
-                        <ImageView
+                        <ImageButton
                             android:id="@+id/enthusia_event_showmore_image"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:scaleType="fitXY"
                             android:contentDescription="@null"
                             android:gravity="right"
+                            android:background="?android:attr/selectableItemBackground"
                             android:src="@drawable/expand"/>
+
                     </LinearLayout>
 
                 </LinearLayout>

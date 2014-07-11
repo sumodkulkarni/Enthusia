@@ -34,7 +34,6 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         super.onViewCreated(view, savedInstanceState);
         ((ExpandableTextView) getActivity().findViewById(R.id.enthusia_fragment_about_content)).setText(Html.fromHtml(getString(R.string.about_us)));
 
-        getActivity().findViewById(R.id.enthusia_fragment_about_showmore).setOnClickListener(this);
         getActivity().findViewById(R.id.enthusia_fragment_about_showmore_image).setOnClickListener(this);
 
         getActivity().findViewById(R.id.r_fb).setOnClickListener(developerURLS);
@@ -80,15 +79,12 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         set.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                getActivity().findViewById(R.id.enthusia_fragment_about_showmore).setOnClickListener(null);
                 getActivity().findViewById(R.id.enthusia_fragment_about_showmore_image).setOnClickListener(null);
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 isExpanded = !isExpanded;
-                ((Button) getActivity().findViewById(R.id.enthusia_fragment_about_showmore)).setText(isExpanded ? R.string.less : R.string.more);
-                getActivity().findViewById(R.id.enthusia_fragment_about_showmore).setOnClickListener(EnthusiaAboutFragment.this);
                 getActivity().findViewById(R.id.enthusia_fragment_about_showmore_image).setOnClickListener(EnthusiaAboutFragment.this);
             }
 

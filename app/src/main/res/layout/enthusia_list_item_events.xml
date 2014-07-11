@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background">
 
-    <org.enthusia.app.ui.SquareImageView
+    <com.etsy.android.grid.util.DynamicHeightImageView
         android:id="@+id/enthusia_events_list_item_event_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -22,8 +22,8 @@ public class EnthusiaPointsTableDialog extends Dialog {
     private Activity activity;
     private ArrayList<EnthusiaPointsTable> tableData;
 
-    private final static String PREF_POINT_TABLE = "org.enthusia.appw.enthusia.points";
-    private final static String PREF_POINTS = "pref_points_";
+    public final static String PREF_POINT_TABLE = "org.enthusia.app.enthusia.points";
+    public final static String PREF_POINTS = "pref_points_";
 
 
     public EnthusiaPointsTableDialog(Activity activity) {

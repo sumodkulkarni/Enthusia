@@ -1,11 +1,18 @@
 package org.enthusia.app.enthusia.adapters;
 
+//import android.graphics.Bitmap;
+//import android.graphics.BitmapFactory;
+//import android.graphics.Canvas;
+//import android.graphics.ColorMatrix;
+//import android.graphics.ColorMatrixColorFilter;
+//import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
@@ -30,7 +37,7 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder {
-        ImageView imageView;
+        DynamicHeightImageView imageView;
         TextView textView;
     }
 
@@ -40,7 +47,7 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.enthusia_list_item_events, viewGroup, false);
-            holder.imageView = (ImageView) view.findViewById(R.id.enthusia_events_list_item_event_image);
+            holder.imageView = (DynamicHeightImageView) view.findViewById(R.id.enthusia_events_list_item_event_image);
             holder.textView = (TextView) view.findViewById(R.id.enthusia_events_list_item_event_name);
             view.setTag(holder);
         } else {
@@ -48,7 +55,24 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
         }
 
         holder.imageView.setImageResource(EnthusiaEvents.drawables[i]);
+//        holder.imageView.setImageBitmap(toGrayscale(BitmapFactory.decodeResource(viewGroup.getResources(), EnthusiaEvents.drawables[i])));
         holder.textView.setText(EnthusiaEvents.events[i]);
         return view;
     }
+
+//    public Bitmap toGrayscale(Bitmap bmpOriginal) {
+//        int width, height;
+//        height = bmpOriginal.getHeight();
+//        width = bmpOriginal.getWidth();
+//
+//        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+//        Canvas c = new Canvas(bmpGrayscale);
+//        Paint paint = new Paint();
+//        ColorMatrix cm = new ColorMatrix();
+//        cm.setSaturation(0);
+//        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+//        paint.setColorFilter(f);
+//        c.drawBitmap(bmpOriginal, 0, 0, paint);
+//        return bmpGrayscale;
+//    }
 }

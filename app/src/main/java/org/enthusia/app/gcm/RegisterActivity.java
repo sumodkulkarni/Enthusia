@@ -15,6 +15,8 @@ import android.widget.EditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.apache.http.client.methods.HttpPost;
 import org.enthusia.app.R;
@@ -33,6 +35,13 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
+
+        if ((Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)) != null && (Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)).equals("") == false) {
+            ((EditText) findViewById(R.id.register_et_username)).setText(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class).toString());
+            ((EditText) findViewById(R.id.register_et_email)).setText(Utils.getPrefs(this, Utils.PREF_EMAIL, String.class).toString());
+        }
+
+
         findViewById(R.id.register_btn_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,10 +50,19 @@ public class RegisterActivity extends Activity {
                     Utils.showAlert(RegisterActivity.this, Html.fromHtml(getString(R.string.alert_register_no_network)).toString());
                 } else if ( ((EditText) findViewById(R.id.register_et_username)).getText().toString().equals("") ) {
                     Utils.showAlert(RegisterActivity.this, R.string.alert_register_enter_username);
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(findViewById(R.id.register_et_username));
                 } else if ( ((EditText) findViewById(R.id.register_et_email)).getText().toString().equals("")) {
                     Utils.showAlert(RegisterActivity.this, R.string.alert_register_enter_email);
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(findViewById(R.id.register_et_email));
                 } else if ( !((EditText) findViewById(R.id.register_et_email)).getText().toString().contains("@")) {
                     Utils.showAlert(RegisterActivity.this, R.string.alert_register_enter_valid_email);
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(findViewById(R.id.register_et_email));
                 } else {
                     Utils.putPrefs(RegisterActivity.this, Utils.PREF_USER_NAME, ((EditText) findViewById(R.id.register_et_username)).getText().toString().trim());
                     Utils.putPrefs(RegisterActivity.this, Utils.PREF_EMAIL, ((EditText) findViewById(R.id.register_et_email)).getText().toString().trim());
@@ -81,7 +99,7 @@ public class RegisterActivity extends Activity {
 
         private ProgressDialog progressDialog;
         private final static String GCM_SENDER_ID = "623894493052";
-        private final static String SERVER_URL = "http://enthusia.zapto.org:8080/register.php";
+        private final static String SERVER_URL = "http://enthusia.zapto.org:8080/admin/register.php";
 
 
         @Override

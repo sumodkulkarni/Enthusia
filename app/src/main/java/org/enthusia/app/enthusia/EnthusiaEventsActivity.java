@@ -14,13 +14,12 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
+import com.etsy.android.grid.StaggeredGridView;
 import com.neopixl.pixlui.components.textview.TextView;
 
 import org.enthusia.app.R;
@@ -68,8 +67,8 @@ public class EnthusiaEventsActivity extends Activity implements View.OnClickList
             }
         });
 
-        ((GridView)findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter());
-        ((GridView)findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ((StaggeredGridView)findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter());
+        ((StaggeredGridView)findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 setupEvent(view.findViewById(R.id.enthusia_events_list_item_event_image),
@@ -134,7 +133,6 @@ public class EnthusiaEventsActivity extends Activity implements View.OnClickList
         ((TextView) findViewById(R.id.enthusia_event_rules)).setText(Html.fromHtml(getString(EnthusiaEvents.rules[event])));
 
         // Expand Listener
-        findViewById(R.id.enthusia_event_showmore).setOnClickListener(this);
         findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(this);
 
         mUnfoldableView.unfold(view, findViewById(R.id.enthusia_events_details_layout));
@@ -159,17 +157,13 @@ public class EnthusiaEventsActivity extends Activity implements View.OnClickList
         set.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                findViewById(R.id.enthusia_event_showmore).setOnClickListener(null);
                 findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(null);
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 isExpanded = !isExpanded;
-                ((Button) findViewById(R.id.enthusia_event_showmore)).setText(isExpanded == true ? R.string.less : R.string.more);
-                findViewById(R.id.enthusia_event_showmore).setOnClickListener(EnthusiaEventsActivity.this);
                 findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(EnthusiaEventsActivity.this);
-
             }
 
             @Override

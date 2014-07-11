@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.nhaarman.listviewanimations.widget.DynamicListView;
 import org.enthusia.app.R;
 import org.enthusia.app.Utils;
@@ -78,8 +79,10 @@ public class EnthusiaNewsFragment extends Fragment {
                 }
             }
         });
+        SwingBottomInAnimationAdapter animation = new SwingBottomInAnimationAdapter(enthusiaNewsAdapter);
+        animation.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
         adapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(enthusiaNewsAdapter);
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(animation);
         ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {

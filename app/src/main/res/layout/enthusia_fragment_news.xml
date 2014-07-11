@@ -4,7 +4,7 @@
     xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background" >
+    android:background="@color/gray_background">
 
     <RelativeLayout
         android:id="@+id/enthusia_fragment_news_details"
@@ -27,12 +27,14 @@
             pixlui:typeface="Lato-Regular.ttf" />
 
 
-        <org.enthusia.app.ui.HighlightButton
+        <ImageButton
             android:id="@+id/enthusia_fragment_news_details_clear"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/ic_clearall"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_clearall"
+            android:background="?android:attr/selectableItemBackground"/>
 
     </RelativeLayout>
 

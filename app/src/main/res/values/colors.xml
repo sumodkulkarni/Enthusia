@@ -2,4 +2,7 @@
 <resources>
     <color name="gray_background">#D0D0D0</color>
     <color name="matt_black">#383838</color>
+    <color name="app_color">#4C74A6</color>
+    <color name="app_color_highlight">#A5BBD6</color>
+
 </resources>

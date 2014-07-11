@@ -51,18 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="5dp"
                 android:gravity="center">
 
-                <org.enthusia.app.ui.HighlightButton
-                    android:id="@+id/enthusia_fragment_about_showmore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/matt_black"
-                    android:background="@android:color/white"
-                    android:gravity="center"
-                    android:text="@string/more" />
-
-                <ImageView
+                <ImageButton
                     android:id="@+id/enthusia_fragment_about_showmore_image"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -70,7 +62,9 @@
                     android:rotation="0"
                     android:contentDescription="@null"
                     android:gravity="right"
+                    android:background="?android:attr/selectableItemBackground"
                     android:src="@drawable/expand"/>
+
             </LinearLayout>
 
         </LinearLayout>

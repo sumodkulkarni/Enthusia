@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <integer name="card_flip_time_full">1000</integer>
+    <integer name="card_flip_time_half">500</integer>
+
     <!-- Do Not Edit -->
     <string name="app_name">Enthusia</string>
     <string name="register_user">User Registration</string>
@@ -22,6 +25,7 @@
     </string>
     <string name="more">More</string>
     <string name="less">Less</string>
+    <string name="points_table_updated">Points Table Updated</string>
 
     <!-- Enthusia Placeholder -->
     <string name="enthusia_fest_name">Enthusia</string>
@@ -44,7 +48,7 @@ Once you receive updates this card will be automatically hidden]]></string>
     <string name="enthusia_all_messages_read"><![CDATA[All messages <strong><font color=\'#000000\'>Read</font></strong>]]></string>
     <string-array name="enthusia_nav_drawer_items">
         <item>Recent News</item>
-        <item>Sports</item>
+        <item>@string/enthusia_events</item>
         <item>@string/enthusia_intra</item>
         <item>@string/enthusia_sponsors</item>
         <item>@string/enthusia_committee</item>
