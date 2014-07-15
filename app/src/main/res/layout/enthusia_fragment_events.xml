@@ -11,12 +11,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/enthusia_events_grid"
         android:gravity="center_horizontal"
-        android:layout_margin="10dp"
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:column_count="2"
-        app:item_margin="5dp" />
+        app:item_margin="10dp" />
 
     <View
         android:id="@+id/enthusia_events_touch_interceptor_view"
