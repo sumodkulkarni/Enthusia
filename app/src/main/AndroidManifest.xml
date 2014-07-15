@@ -24,20 +24,9 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".SplashActivity"
-            android:label="@string/enthusia_fest_name"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".gcm.RegisterActivity"
             android:label="@string/register_user"
             android:screenOrientation="portrait" />
-
 
         <receiver
             android:name=".gcm.PushNotificationReciever"
@@ -53,18 +42,16 @@
         <service
             android:name=".gcm.GCMIntentService" />
 
-        <!-- Enthusia Activities -->
         <activity
             android:label="@string/enthusia_fest_name"
             android:name=".enthusia.EnthusiaStartActivity"
             android:screenOrientation="portrait"
-            android:alwaysRetainTaskState="true"/>
-
-        <activity
-            android:label="@string/enthusia_events"
-            android:name=".enthusia.EnthusiaEventsActivity"
-            android:screenOrientation="portrait"
-            android:alwaysRetainTaskState="true"/>
+            android:alwaysRetainTaskState="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -2,8 +2,7 @@ package org.enthusia.app.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
-import com.neopixl.pixlui.components.textview.TextView;
+import android.widget.TextView;
 
 public class ExpandableTextView extends TextView {
 

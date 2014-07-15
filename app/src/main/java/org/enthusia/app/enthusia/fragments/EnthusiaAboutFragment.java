@@ -6,21 +6,17 @@ import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.ScrollView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.ui.ExpandableTextView;
 
-public class EnthusiaAboutFragment extends Fragment implements View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener {
+public class EnthusiaAboutFragment extends Fragment implements View.OnClickListener {
 
     private boolean isExpanded = false;
 
@@ -39,35 +35,6 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         getActivity().findViewById(R.id.r_fb).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.r_twit).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.r_plus).setOnClickListener(developerURLS);
-
-        getActivity().findViewById(R.id.enthusia_about_view).getViewTreeObserver().addOnGlobalLayoutListener(this);
-    }
-
-    @Override
-    public void onGlobalLayout() {
-        try {
-            (getActivity().findViewById(R.id.enthusia_about_view)).post(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        ((ScrollView) getActivity().findViewById(R.id.enthusia_about_view)).fullScroll(View.FOCUS_DOWN);
-                    } catch (NullPointerException ex) {
-                        return;
-                    }
-                }
-            });
-        } catch (NullPointerException ex) {
-            return;
-        }
-    }
-
-    @Override
-    public void onStop() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-            getActivity().findViewById(R.id.enthusia_about_view).getViewTreeObserver().removeGlobalOnLayoutListener(this);
-        else
-            getActivity().findViewById(R.id.enthusia_about_view).getViewTreeObserver().removeOnGlobalLayoutListener(this);
-        super.onDestroyView();
     }
 
     @Override

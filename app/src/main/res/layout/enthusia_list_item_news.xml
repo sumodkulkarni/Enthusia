@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.neopixl.pixlui.components.textview.TextView xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    <View
+        android:id="@+id/enthusia_list_item_news_stripe"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:background="@color/app_color"
+        android:paddingLeft="5dp" />
+
+    <TextView
         android:id="@+id/enthusia_list_item_news_message"
         android:background="@drawable/enthusia_news_background_unread"
         android:layout_width="match_parent"
@@ -13,8 +20,6 @@
         android:padding="10dp"
         android:textColor="@android:color/black"
         android:text="@string/app_name"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        pixlui:typeface="Lato-Regular.ttf" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

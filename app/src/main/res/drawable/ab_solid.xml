@@ -4,6 +4,6 @@
     android:shape="rectangle"
     android:padding="16dp" >
 
-    <solid android:color="#4c74a6" />
+    <solid android:color="@color/app_color" />
 
 </shape>

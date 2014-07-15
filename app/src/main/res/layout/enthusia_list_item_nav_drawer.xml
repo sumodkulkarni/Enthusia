@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="10sp"
     android:paddingTop="10sp"
     android:paddingLeft="10sp"
     android:paddingRight="10sp"
-    android:background="@drawable/enthusia_listitem_selector">
+    android:background="@android:color/transparent" >
 
     <ImageView
         android:id="@+id/enthusia_list_item_nav_drawer_icon"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_launcher"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12sp"
-        android:layout_marginRight="12sp" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp" />
 
-    <com.neopixl.pixlui.components.textview.TextView
+    <TextView
         android:id="@+id/enthusia_list_item_nav_drawer_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
         android:layout_centerVertical="true"
         android:gravity="left"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/enthusia_fest_name"
-        pixlui:typeface="Lato-Regular.ttf"/>
+        android:text="@string/enthusia_fest_name" />
 
 </RelativeLayout>

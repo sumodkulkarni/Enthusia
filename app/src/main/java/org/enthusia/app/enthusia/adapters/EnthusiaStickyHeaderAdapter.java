@@ -45,7 +45,11 @@ public class EnthusiaStickyHeaderAdapter extends ArrayAdapter<EnthusiaCommittee>
         }
 
         holder.name.setText(getItem(position).getName().split(":")[0]);
-        holder.number.setText(getItem(position).getName().split(":")[1].replace(" ", ""));
+        try {
+            holder.number.setText(getItem(position).getName().split(":")[1].replace(" ", ""));
+        } catch (ArrayIndexOutOfBoundsException ignore) {
+            holder.number.setText("");
+        }
         return convertView;
     }
 

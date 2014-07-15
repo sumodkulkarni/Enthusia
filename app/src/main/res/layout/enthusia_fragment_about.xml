@@ -14,8 +14,7 @@
         android:padding="12dp"
         android:orientation="vertical">
 
-        <com.neopixl.pixlui.components.textview.TextView
-            xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="6dp"
@@ -24,8 +23,7 @@
             android:text="@string/enthusia_about"
             android:textSize="25sp"
             android:textAllCaps="true"
-            android:textColor="@color/matt_black"
-            pixlui:typeface="Lato-Thin.ttf"/>
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,17 +33,14 @@
             android:orientation="vertical">
 
             <org.enthusia.app.ui.ExpandableTextView
-                xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
                 android:id="@+id/enthusia_fragment_about_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/matt_black"
+                android:textColor="@color/black"
                 android:text="@string/about_us"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="left"
-                android:maxLines="3"
-                android:ellipsize="end"
-                pixlui:typeface="Lato-Regular.ttf" />
+                android:maxLines="3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,8 +64,7 @@
 
         </LinearLayout>
 
-        <com.neopixl.pixlui.components.textview.TextView
-            xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -80,8 +74,7 @@
             android:text="@string/enthusia_developed_by"
             android:textSize="25sp"
             android:textAllCaps="true"
-            android:textColor="@color/matt_black"
-            pixlui:typeface="Lato-Thin.ttf"/>
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,13 +85,13 @@
             android:background="@drawable/enthusia_news_background_unread">
 
 
-            <com.neopixl.pixlui.components.textview.TextView
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".25"
                 android:text="Rahul Iyer"
                 android:textSize="18sp"
-                android:textColor="@color/matt_black"/>
+                android:textColor="@color/black"/>
 
             <org.enthusia.app.ui.HighlightButton
                 android:id="@+id/r_fb"

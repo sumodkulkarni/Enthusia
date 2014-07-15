@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,23 +8,22 @@
     android:paddingBottom="10sp"
     android:background="@drawable/enthusia_news_background_unread">
 
-    <com.neopixl.pixlui.components.textview.TextView
+    <TextView
         android:id="@+id/enthusia_list_item_event_head_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="left"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        pixlui:typeface="Lato-Regular.ttf" />
+        android:paddingBottom="10dp" />
 
-    <com.neopixl.pixlui.components.textview.TextView
+    <TextView
         android:id="@+id/enthusia_list_item_event_head_number"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -37,7 +35,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        pixlui:typeface="Lato-Regular.ttf"/>
+        android:paddingBottom="10dp" />
 
 </RelativeLayout>

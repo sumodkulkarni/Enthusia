@@ -98,7 +98,7 @@ public class EnthusiaNewsFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
+    public void onDestroy() {
         Crouton.cancelAllCroutons();
         try {
             if (!customAdded)
@@ -106,7 +106,7 @@ public class EnthusiaNewsFragment extends Fragment {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        super.onStop();
+        super.onDestroy();
     }
 
     private void updateUnread() {

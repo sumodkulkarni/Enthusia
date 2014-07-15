@@ -45,5 +45,4 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.easing:library:1.0.0@aar'
     compile 'com.daimajia.androidanimations:library:1.0.6@aar'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.0.+'
 }

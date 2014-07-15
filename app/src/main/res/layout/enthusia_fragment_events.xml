@@ -5,20 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_background"
-    tools:ignore="HardcodedText">
+    tools:ignore="All">
 
     <com.etsy.android.grid.StaggeredGridView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/enthusia_events_grid"
-        android:horizontalSpacing="5dp"
-        android:verticalSpacing="5dp"
         android:gravity="center_horizontal"
         android:layout_margin="10dp"
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:column_count="2"
-        app:item_margin="8dp" />
+        app:item_margin="5dp" />
 
     <View
         android:id="@+id/enthusia_events_touch_interceptor_view"
@@ -59,8 +57,7 @@
                 android:layout_below="@+id/enthusia_events_details_event_image"
                 android:orientation="vertical">
 
-                <com.neopixl.pixlui.components.textview.TextView
-                    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
@@ -69,8 +66,7 @@
                     android:text="Event Heads"
                     android:textSize="25sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/matt_black"
-                    pixlui:typeface="Lato-Thin.ttf"/>
+                    android:textColor="@color/black" />
 
                 <ListView
                     android:id="@+id/enthusia_events_details_event_list_event_heads"
@@ -89,8 +85,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/enthusia_events_layout_event_heads">
 
-                <com.neopixl.pixlui.components.textview.TextView
-                    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="6dp"
@@ -99,8 +94,7 @@
                     android:text="@string/enthusia_rules"
                     android:textSize="25sp"
                     android:textAllCaps="true"
-                    android:textColor="@color/matt_black"
-                    pixlui:typeface="Lato-Thin.ttf"/>
+                    android:textColor="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -111,17 +105,14 @@
                     android:orientation="vertical">
 
                     <org.enthusia.app.ui.ExpandableTextView
-                        xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
                         android:id="@+id/enthusia_event_rules"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/matt_black"
+                        android:textColor="@color/black"
                         android:text="@null"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:gravity="left"
-                        android:maxLines="3"
-                        android:ellipsize="end"
-                        pixlui:typeface="Lato-Regular.ttf" />
+                        android:maxLines="3" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

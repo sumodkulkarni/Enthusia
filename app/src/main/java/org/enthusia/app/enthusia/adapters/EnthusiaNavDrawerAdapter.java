@@ -1,6 +1,7 @@
 package org.enthusia.app.enthusia.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,9 +62,9 @@ public class EnthusiaNavDrawerAdapter extends BaseAdapter {
         holder.imageView.setImageResource(mItems.get(i).getIcon());
 
         if (!getItem(i).isSelected()) {
-            view.setBackground(viewGroup.getResources().getDrawable(R.drawable.enthusia_listitem_selector));
+            holder.textView.setTypeface(null, Typeface.NORMAL);
         } else {
-            view.setBackgroundColor(viewGroup.getResources().getColor(R.color.gray_background));
+            holder.textView.setTypeface(null, Typeface.BOLD);
         }
 
         return view;

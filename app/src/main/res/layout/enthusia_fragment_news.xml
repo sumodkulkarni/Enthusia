@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_background">
@@ -15,7 +14,7 @@
         android:layout_marginLeft="10dp"
         android:padding="10dp">
 
-        <com.neopixl.pixlui.components.textview.TextView
+        <TextView
             android:id="@+id/enthusia_fragments_news_details_unread_count"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
@@ -23,8 +22,7 @@
             android:text="@null"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#696969"
-            pixlui:typeface="Lato-Regular.ttf" />
+            android:textColor="#696969" />
 
 
         <ImageButton
@@ -33,6 +31,7 @@
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:scaleType="fitXY"
+            android:contentDescription="@null"
             android:src="@drawable/ic_clearall"
             android:background="?android:attr/selectableItemBackground"/>
 

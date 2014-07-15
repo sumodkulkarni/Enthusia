@@ -13,17 +13,15 @@
         android:background="?android:selectableItemBackground"
         android:src="@drawable/ic_launcher" />
 
-    <com.neopixl.pixlui.components.textview.TextView xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+    <TextView
         android:id="@+id/enthusia_events_list_item_event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:padding="10dp"
-        android:background="#55000000"
-        pixlui:typeface="Lato-Regular.ttf"/>
+        android:background="#55000000" />
 
 </FrameLayout>

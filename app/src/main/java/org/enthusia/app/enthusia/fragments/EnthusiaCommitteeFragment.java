@@ -44,10 +44,10 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Pankaj Palwe: +919637081559", 9));
         mCommittee.add(new EnthusiaCommittee("Karan Nair: +919004656479", 10));
         mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 11));
-        mCommittee.add(new EnthusiaCommittee("Eashan Kadam: +919920875281", 11));
         mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
         // TODO Add Diploma Representative
         mCommittee.add(new EnthusiaCommittee("Adithya Swami: ", 12));
+        mCommittee.add(new EnthusiaCommittee("", 12));
 
         ((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)).setAdapter(new EnthusiaStickyHeaderAdapter(
                 getActivity(), mCommittee, getResources().getStringArray(R.array.enthusia_committe_posts)));

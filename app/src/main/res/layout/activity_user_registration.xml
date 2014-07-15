@@ -1,95 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background" >
+    android:background="@color/gray_background">
 
-    <ImageView
-        android:id="@+id/register_ic_contact"
-        android:layout_centerHorizontal="true"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="40dp"
-        android:scaleType="fitXY"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_contact" />
-
-    <com.neopixl.pixlui.components.textview.TextView
-        android:id="@+id/register_textview_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/register_ic_contact"
-        android:text="@string/register_detail"
-        android:textColor="@color/matt_black"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        pixlui:typeface="Lato-Regular.ttf"/>
-
-    <LinearLayout
-        android:background="@drawable/enthusia_news_background_unread"
-        android:layout_below="@+id/register_textview_detail"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/register_ic_contact"
+            android:layout_centerHorizontal="true"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitXY"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_contact" />
 
-        <com.neopixl.pixlui.components.edittext.EditText
-            android:id="@+id/register_et_username"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/matt_black"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:singleLine="true"
+        <TextView
+            android:id="@+id/register_textview_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@+id/register_ic_contact"
+            android:text="@string/register_detail"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
             android:gravity="center"
-            android:hint="@string/username"
-            android:background="#ededed"
-            pixlui:typeface="Lato-Regular.ttf" />
+            android:layout_centerHorizontal="true" />
 
-        <com.neopixl.pixlui.components.edittext.EditText
-            android:id="@+id/register_et_email"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/matt_black"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center"
-            android:hint="@string/email"
-            android:background="#ededed"
-            pixlui:typeface="Lato-Regular.ttf" />
-
-
-        <org.enthusia.app.ui.HighlightButton
-            android:id="@+id/register_btn_register"
+        <LinearLayout
+            android:background="@drawable/enthusia_news_background_unread"
+            android:layout_below="@+id/register_textview_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/enthusia_button_default"
-            android:text="@string/register" />
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
 
-    </LinearLayout>
 
-</RelativeLayout>
+            <com.neopixl.pixlui.components.edittext.EditText
+                android:id="@+id/register_et_username"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:singleLine="true"
+                android:gravity="center"
+                android:hint="@string/username"
+                android:background="#ededed" />
+
+            <com.neopixl.pixlui.components.edittext.EditText
+                android:id="@+id/register_et_email"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:hint="@string/email"
+                android:background="#ededed" />
+
+
+            <org.enthusia.app.ui.HighlightButton
+                android:id="@+id/register_btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="@drawable/enthusia_button_default"
+                android:text="@string/register" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

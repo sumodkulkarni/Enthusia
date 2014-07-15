@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
+import org.enthusia.app.enthusia.fragments.EnthusiaEventsFragment;
 import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
@@ -39,10 +40,12 @@ import org.enthusia.app.ui.RoundedDrawable;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ConstantConditions")
 public class EnthusiaStartActivity extends Activity {
 
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class EnthusiaStartActivity extends Activity {
             }
         });
 
-        ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + (String) Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
+        ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -105,12 +108,22 @@ public class EnthusiaStartActivity extends Activity {
 
     }
 
+    @SuppressWarnings("NullableProblems")
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                enthusiaToggle.onOptionsItemSelected(item);
+                break;
+        }
+
+        return false;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (enthusiaToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return false;
+        return enthusiaToggle.onOptionsItemSelected(item);
     }
 
     @Override
@@ -118,11 +131,11 @@ public class EnthusiaStartActivity extends Activity {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
 
-        if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class)).booleanValue()) {
+        if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class))) {
             startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
         } else {
-            Utils.showInfo(EnthusiaStartActivity.this, "Welcome, " + (String) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_USER_NAME, String.class));
-            if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_FIRST_RUN, Boolean.class)).booleanValue()) {
+            Utils.showInfo(EnthusiaStartActivity.this, "Welcome, " + Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_USER_NAME, String.class));
+            if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_FIRST_RUN, Boolean.class))) {
                 help();
             }
         }
@@ -139,7 +152,7 @@ public class EnthusiaStartActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 47) {
             if (resultCode == RESULT_OK) {
-                ( (TextView) findViewById(R.id.enthusia_start_user)).setText("Welcome, " + (String) Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
+                ( (TextView) findViewById(R.id.enthusia_start_user)).setText("Welcome, " + Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
                 help();
             }
         }
@@ -153,8 +166,16 @@ public class EnthusiaStartActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+
         if (enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
             finish();
+        } else if (currentFragment != null && currentFragment instanceof EnthusiaEventsFragment) {
+            EnthusiaEventsFragment fragment = (EnthusiaEventsFragment) currentFragment;
+            if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding())) {
+                fragment.mUnfoldableView.foldBack();
+            } else {
+                enthusiaSlider.openDrawer(Gravity.LEFT);
+            }
         } else {
             enthusiaSlider.openDrawer(Gravity.LEFT);
         }
@@ -240,39 +261,37 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void displayView (int position) {
-        Intent intent = null;
-        Fragment fragment = null;
+        currentFragment = null;
         switch (position) {
             case 0:
                 getActionBar().setTitle(getString(R.string.enthusia_fest_name));
-                fragment = new EnthusiaNewsFragment();
+                currentFragment = new EnthusiaNewsFragment();
                 break;
             case 1:
-                intent = new Intent(this, EnthusiaEventsActivity.class);
+                getActionBar().setTitle(R.string.enthusia_events);
+                currentFragment = new EnthusiaEventsFragment();
                 break;
             case 2:
                 getActionBar().setTitle(getString(R.string.enthusia_intra));
-                fragment = new EnthusiaIntraFragment();
+                currentFragment = new EnthusiaIntraFragment();
                 break;
             case 3:
                 getActionBar().setTitle(getString(R.string.enthusia_sponsors));
-                fragment = new EnthusiaSponsorsFragment();
+                currentFragment = new EnthusiaSponsorsFragment();
                 break;
             case 4:
                 getActionBar().setTitle(getString(R.string.enthusia_committee));
-                fragment = new EnthusiaCommitteeFragment();
+                currentFragment = new EnthusiaCommitteeFragment();
                 break;
             case 5:
                 getActionBar().setTitle(getString(R.string.enthusia_about));
-                fragment = new EnthusiaAboutFragment();
+                currentFragment = new EnthusiaAboutFragment();
                 break;
         }
 
-        if (intent != null) {
-            startActivity(intent);
-        } else if (fragment != null) {
+        if (currentFragment != null) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.enthusia_start_fragment_container, fragment)
+                    .replace(R.id.enthusia_start_fragment_container, currentFragment)
                     .commit();
         }
 
@@ -281,10 +300,8 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void setSelected(int id) {
-        if (id == 1)
-            return;
         for (int i=0; i < ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getCount(); i++) {
-            ( (EnthusiaNavDrawerItem) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getItem(i)).setSelected(id == i ? true : false);
+            ( (EnthusiaNavDrawerItem) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter().getItem(i)).setSelected(id == i);
         }
         ( (EnthusiaNavDrawerAdapter) ((ListView) findViewById(R.id.enthusia_start_slider)).getAdapter()).notifyDataSetChanged();
     }
