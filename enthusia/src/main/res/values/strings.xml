@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="card_flip_time_full">1000</integer>
+    <integer name="card_flip_time_half">500</integer>
+
+    <!-- Do Not Edit -->
+    <string name="app_name">Enthusia</string>
+    <string name="register_user">User Registration</string>
+    <string name="username">Full Name</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="welcome">Welcome</string>
+    <string name="register_detail">Register with Enthusia</string>
+    <string name="alert_register_enter_username">Please enter your Name</string>
+    <string name="alert_register_enter_email">Please enter your E-Mail Id</string>
+    <string name="alert_register_first">Press Register to Continue</string>
+    <string name="alert_register_enter_valid_email">Please enter valid Email-Id</string>
+    <string name="alert_register_no_network"><![CDATA[No Network Available.<br /> Please Connect to the Internet to Register]]></string>
+    <string name="about_us">
+        <![CDATA[When we say Enthusia is one of the biggest sports festivals in India, it\'s no exaggeration! <br />
+ Graced with some of the best sports facilities one could ask for, this annual festival is sure to set your heartbeat racing, and give you that adrenaline rush once again. Some of the most skilled and talented sportsmen will lock horns in front of hoards of fans spurring the players on to bring the best out of them.<br />
+ V.J.T.I. can boast of having a cricket ground, a football ground, basketball court, tennis clay courts (one of the few in India!), carrom and table tennis facilities, a badminton court, and lots more. Enthusia provides ample opportunities to develop your creativity, leadership qualities, team building and managerial skills. <br />
+ Our vision is to nurture sports talent to make players realize their full potential.]]>
+    </string>
+    <string name="more">More</string>
+    <string name="less">Less</string>
+    <string name="points_table_updated">Points Table Updated</string>
+
+    <!-- Enthusia Placeholder -->
+    <string name="enthusia_fest_name">Enthusia</string>
+    <string name="enthusia_developed_by">Developed By</string>
+    <string name="enthusia_tagline"><![CDATA[Unleash<br />The Fire<br/>Within]]></string>
+    <string name="enthusia_points_table">Points Table</string>
+    <string name="enthusia_department_heads">Department Heads</string>
+    <string name="enthusia_events">Events</string>
+    <string name="enthusia_rules">Rules</string>
+    <string name="enthusia_committee">Committee</string>
+    <string name="enthusia_sponsors">Sponsors</string>
+    <string name="enthusia_intra">Intra</string>
+    <string name="enthusia_about">About Us</string>
+    <string name="enthusia_all_read">You are up-to-date with our Fest!!</string>
+    <string name="enthusia_sample_news"><![CDATA[Welcome to Enthusia!!<br />You will receive all the updates here.<br />
+Swipe the card to mark it as read.<br />
+Once you receive updates this card will be automatically hidden]]></string>
+
+    <string name="enthusia_unread_count" formatted="false"><![CDATA[You have <font color=\'#000000\'><strong>%d</strong></font> message%s unread]]></string>
+    <string name="enthusia_all_messages_read"><![CDATA[All messages <strong><font color=\'#000000\'>Read</font></strong>]]></string>
+    <string-array name="enthusia_nav_drawer_items">
+        <item>Recent News</item>
+        <item>@string/enthusia_events</item>
+        <item>@string/enthusia_intra</item>
+        <item>@string/enthusia_sponsors</item>
+        <item>@string/enthusia_committee</item>
+        <item>@string/enthusia_about</item>
+    </string-array>
+    
+    <array name="enthusia_nav_drawer_icons">
+        <item>@drawable/ic_enthusia_news</item>
+        <item>@drawable/ic_enthusia_inter</item>
+        <item>@drawable/ic_enthusia_intra</item>
+        <item>@drawable/ic_enthusia_spons</item>
+        <item>@drawable/ic_enthusia_committe</item>
+        <item>@drawable/ic_enthusia_about</item>
+    </array>
+
+    <string-array name="enthusia_committe_posts">
+        <item>General Secretary</item>
+        <item>Jt. General Secretary</item>
+        <item>Treasurers</item>
+        <item>Sponsorship Chief Coordinator</item>
+        <item>Publicity Chief Coordinator</item>
+        <item>Events Chief Coordinator</item>
+        <item>Public Relations Head</item>
+        <item>Infrastructure Chief Coordinator</item>
+        <item>Design Head</item>
+        <item>Security Head</item>
+        <item>Half Time Coordinator</item>
+        <item>Website Development Team</item>
+        <item>Diploma Representative</item>
+    </string-array>
+
+    <string-array name="enthusia_departments">
+        <item>CHEMSA</item>
+        <item>CIVIL</item>
+        <item>COMPUTERS</item>
+        <item>ELECTRICAL</item>
+        <item>ELECTRONICS</item>
+        <item>EXTC</item>
+        <item>I.T</item>
+        <item>MASTERS</item>
+        <item>MECHANICAL</item>
+        <item>PRODUCTION</item>
+        <item>TEXTILE</item>
+    </string-array>
+
+    <array name="enthusia_spons">
+        <item>@drawable/img_enthusia_spons_5star</item>
+        <item>@drawable/img_enthusia_spons_adidas</item>
+        <item>@drawable/img_enthusia_spons_appy</item>
+        <item>@drawable/img_enthusia_spons_besttv</item>
+        <item>@drawable/img_enthusia_spons_bhashan</item>
+        <item>@drawable/img_enthusia_spons_bigfm</item>
+        <item>@drawable/img_enthusia_spons_boi</item>
+        <item>@drawable/img_enthusia_spons_buckaroo</item>
+        <item>@drawable/img_enthusia_spons_castrol</item>
+        <item>@drawable/img_enthusia_spons_cinemax</item>
+        <item>@drawable/img_enthusia_spons_cloud9</item>
+        <item>@drawable/img_enthusia_spons_credila</item>
+        <item>@drawable/img_enthusia_spons_dtdc</item>
+        <item>@drawable/img_enthusia_spons_ellora</item>
+        <item>@drawable/img_enthusia_spons_everyday</item>
+        <item>@drawable/img_enthusia_spons_fadoo</item>
+        <item>@drawable/img_enthusia_spons_fame</item>
+        <item>@drawable/img_enthusia_spons_fever</item>
+        <item>@drawable/img_enthusia_spons_fpj</item>
+        <item>@drawable/img_enthusia_spons_freecharge</item>
+        <item>@drawable/img_enthusia_spons_hook2</item>
+        <item>@drawable/img_enthusia_spons_jam</item>
+        <item>@drawable/img_enthusia_spons_knowafest</item>
+        <item>@drawable/img_enthusia_spons_lm</item>
+        <item>@drawable/img_enthusia_spons_loksatta</item>
+        <item>@drawable/img_enthusia_spons_lovely</item>
+        <item>@drawable/img_enthusia_spons_lucozade_sport</item>
+        <item>@drawable/img_enthusia_spons_maharashtra_times</item>
+        <item>@drawable/img_enthusia_spons_mapro</item>
+        <item>@drawable/img_enthusia_spons_mgl</item>
+        <item>@drawable/img_enthusia_spons_mmf</item>
+        <item>@drawable/img_enthusia_spons_mtb</item>
+        <item>@drawable/img_enthusia_spons_nature_valley</item>
+        <item>@drawable/img_enthusia_spons_nescafe</item>
+        <item>@drawable/img_enthusia_spons_nk</item>
+        <item>@drawable/img_enthusia_spons_nutrifit</item>
+        <item>@drawable/img_enthusia_spons_papajohns</item>
+        <item>@drawable/img_enthusia_spons_prahar</item>
+        <item>@drawable/img_enthusia_spons_rotaract</item>
+        <item>@drawable/img_enthusia_spons_sboi</item>
+        <item>@drawable/img_enthusia_spons_smash</item>
+        <item>@drawable/img_enthusia_spons_smc</item>
+        <item>@drawable/img_enthusia_spons_sparsha</item>
+        <item>@drawable/img_enthusia_spons_sportskeeda</item>
+        <item>@drawable/img_enthusia_spons_sportssquare</item>
+        <item>@drawable/img_enthusia_spons_spykar</item>
+        <item>@drawable/img_enthusia_spons_the_loot</item>
+        <item>@drawable/img_enthusia_spons_thwack</item>
+        <item>@drawable/img_enthusia_spons_twenty19</item>
+        <item>@drawable/img_enthusia_spons_vodafone</item>
+        <item>@drawable/img_enthusia_spons_yuvanxt</item>
+    </array>
+</resources>

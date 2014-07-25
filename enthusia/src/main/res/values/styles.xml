@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <item name="android:actionBarStyle">@style/Enthusia.ActionBar</item>
+        <item name="android:actionBarItemBackground">@drawable/selector_actionbar</item>
+    </style>
+
+    <style name="Enthusia.ActionBar" parent="android:Widget.Holo.ActionBar.Solid">
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="android:background">@color/app_color</item>
+        <item name="android:height">56dp</item>
+    </style>
+
+    <style name="CardTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
