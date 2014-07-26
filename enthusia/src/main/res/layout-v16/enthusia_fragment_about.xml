@@ -14,7 +14,8 @@
         android:padding="12dp"
         android:orientation="vertical">
 
-        <org.enthusia.app.ui.SquareImageView
+        <com.etsy.android.grid.util.DynamicHeightImageView
+            android:id="@+id/enthusia_about_tagline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.ui.ExpandableTextView;
@@ -40,6 +43,9 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.a_plus).setOnClickListener(developerURLS);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            ((DynamicHeightImageView) getActivity().findViewById(R.id.enthusia_about_tagline)).setHeightRatio(1.25f);
 
     }
 
