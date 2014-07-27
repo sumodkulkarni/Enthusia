@@ -16,10 +16,11 @@
             android:id="@+id/actionbar_icon"
             android:background="@drawable/selector_button_default"
             android:contentDescription="@null"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerVertical="true"
-            android:paddingTop="2dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
             android:src="@drawable/ic_cab_drawer" />
 
         <TextView

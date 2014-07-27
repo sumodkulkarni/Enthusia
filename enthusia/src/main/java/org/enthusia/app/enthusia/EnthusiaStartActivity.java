@@ -476,14 +476,21 @@ public class EnthusiaStartActivity extends Activity {
                 break;
         }
 
-        if (currentFragment != null) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.enthusia_start_fragment_container, currentFragment)
-                    .commit();
-        }
-
         setSelected(position);
         enthusiaSlider.closeDrawers();
+
+        if (currentFragment != null) {
+            try {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.enthusia_start_fragment_container, currentFragment)
+                                .commit();
+                    }
+                }, 240);
+            } catch (Exception ignore) {}
+        }
     }
 
     private void setSelected(int id) {
