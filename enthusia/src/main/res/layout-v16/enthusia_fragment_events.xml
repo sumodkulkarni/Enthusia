@@ -142,7 +142,7 @@
 
     </ScrollView>
 
-    <com.alexvasilkov.foldablelayout.UnfoldableView
+    <org.enthusia.app.ui.UnfoldableNoSwipe
         android:id="@+id/enthusia_events_unfoldable_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

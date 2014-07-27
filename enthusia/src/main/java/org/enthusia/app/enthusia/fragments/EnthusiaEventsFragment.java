@@ -60,12 +60,12 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
-                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
+//                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
             }
 
             @Override
             public void onFoldingBack(UnfoldableView unfoldableView) {
-                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
+//                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
             }
 
             @SuppressWarnings("ConstantConditions")
@@ -84,6 +84,8 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
                         position);
             }
         });
+
+        getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
     }
 
     /**
@@ -91,7 +93,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
      */
 
     private void showDetailsView (boolean show) {
-        getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(show);
+//        getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(show);
         getActivity().findViewById(R.id.enthusia_events_details_layout).setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
