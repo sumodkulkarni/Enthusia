@@ -45,7 +45,7 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Karan Nair: +919004656479", 10));
         mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 11));
         mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 11));
-//        mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
+        mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
         // TODO Add Diploma Representative
         mCommittee.add(new EnthusiaCommittee("Adithya Swami: ", 12));
         mCommittee.add(new EnthusiaCommittee("", 12));
