@@ -28,6 +28,10 @@
         android:textColor="@color/white"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:shadowColor="@android:color/black"
+        android:shadowRadius="10"
+        android:shadowDy="0"
+        android:shadowDx="0"
         android:padding="10dp" />
 
 </FrameLayout>

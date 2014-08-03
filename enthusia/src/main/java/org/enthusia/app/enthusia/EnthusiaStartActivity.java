@@ -5,13 +5,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -100,26 +97,6 @@ public class EnthusiaStartActivity extends Activity {
                 }
             }
         });
-        /*getActionBar().getCustomView().findViewById(R.id.actionbar_title_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
-                    enthusiaSlider.openDrawer(Gravity.LEFT);
-                } else {
-                    enthusiaSlider.closeDrawers();
-                }
-            }
-        });
-        getActionBar().getCustomView().findViewById(R.id.actionbar_content).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
-                    enthusiaSlider.openDrawer(Gravity.LEFT);
-                } else {
-                    enthusiaSlider.closeDrawers();
-                }
-            }
-        });*/
 
         enthusiaToggle = new ActionBarDrawerToggle(this, enthusiaSlider, android.R.color.transparent, R.string.enthusia_fest_name, R.string.enthusia_events) {
             @Override
@@ -485,6 +462,7 @@ public class EnthusiaStartActivity extends Activity {
                     @Override
                     public void run() {
                         getFragmentManager().beginTransaction()
+                                .setCustomAnimations(R.animator.fragment_enter, R.animator.fragment_exit)
                                 .replace(R.id.enthusia_start_fragment_container, currentFragment)
                                 .commit();
                     }
