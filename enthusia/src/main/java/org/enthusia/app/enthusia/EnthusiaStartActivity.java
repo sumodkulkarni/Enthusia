@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -56,6 +55,7 @@ public class EnthusiaStartActivity extends Activity {
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
     private Fragment currentFragment;
+    private String title;
 
     private ArrayList<FloatingActionButton> socialMediaIcons;
     private boolean socialMediaShown = false;
@@ -90,7 +90,10 @@ public class EnthusiaStartActivity extends Activity {
         getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+
+                if (currentFragment instanceof EnthusiaEventsFragment && ((EnthusiaEventsFragment) currentFragment).mUnfoldableView.isUnfolded()) {
+                    onBackPressed();
+                } else if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
                     enthusiaSlider.openDrawer(Gravity.LEFT);
                 } else {
                     enthusiaSlider.closeDrawers();
@@ -102,11 +105,13 @@ public class EnthusiaStartActivity extends Activity {
             @Override
             public void onDrawerClosed(View drawerView) {
                 invalidateOptionsMenu();
+                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 invalidateOptionsMenu();
+                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_fest_name)));
             }
         };
 
@@ -452,7 +457,7 @@ public class EnthusiaStartActivity extends Activity {
                 currentFragment = new EnthusiaAboutFragment();
                 break;
         }
-
+        title = ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).getText().toString();
         setSelected(position);
         enthusiaSlider.closeDrawers();
 

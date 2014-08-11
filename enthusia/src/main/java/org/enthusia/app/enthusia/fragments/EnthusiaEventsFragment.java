@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -58,21 +59,21 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
                 showDetailsView(true);
             }
 
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
-//                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
+                ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_home_as_up));
             }
 
             @Override
-            public void onFoldingBack(UnfoldableView unfoldableView) {
-//                getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
-            }
+            public void onFoldingBack(UnfoldableView unfoldableView) {}
 
             @SuppressWarnings("ConstantConditions")
             @Override
             public void onFoldedBack(UnfoldableView unfoldableView) {
                 showDetailsView(false);
-                getActivity().getActionBar().setTitle(getString(R.string.enthusia_events));
+                ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(getString(R.string.enthusia_events));
+                ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageDrawable(getResources().getDrawable(R.drawable.ic_cab_drawer));
             }
         });
 
