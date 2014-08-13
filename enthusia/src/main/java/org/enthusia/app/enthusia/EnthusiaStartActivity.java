@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,11 +23,12 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.faizmalkani.floatingactionbutton.FloatingActionButton;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
@@ -226,8 +228,11 @@ public class EnthusiaStartActivity extends Activity {
     private void setupSocialMedia() {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.enthusia_start_fab);
-        fab.setColor(getResources().getColor(R.color.white));
-        fab.setDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
+        fab.setColorNormal(Color.WHITE);
+        fab.setColorPressed(darkenColor(Color.WHITE));
+        fab.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
+        fab.setType(FloatingActionButton.TYPE_MINI);
         fab.setOnClickListener(fabClick);
 
         socialMediaIcons = new ArrayList<FloatingActionButton>();
@@ -238,9 +243,12 @@ public class EnthusiaStartActivity extends Activity {
 
         for (int i=0; i < SOCIAL_MEDIA_DRAWABLES.length; i++) {
             FloatingActionButton button = new FloatingActionButton(EnthusiaStartActivity.this);
-            button.setDrawable(getResources().getDrawable(SOCIAL_MEDIA_DRAWABLES[i]));
-            button.setColor(getResources().getColor(R.color.white));
+            button.setImageDrawable(getResources().getDrawable(SOCIAL_MEDIA_DRAWABLES[i]));
+            button.setType(FloatingActionButton.TYPE_MINI);
+            button.setScaleType(ImageView.ScaleType.FIT_CENTER);
             button.setVisibility(View.GONE);
+            button.setColorNormal(Color.WHITE);
+            button.setColorPressed(darkenColor(Color.WHITE));
             button.setId(i);
             button.setLayoutParams(params);
             button.setOnClickListener(fabItemClick);
@@ -249,6 +257,13 @@ public class EnthusiaStartActivity extends Activity {
             socialMediaIcons.add(button);
         }
 
+    }
+
+    private int darkenColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 0.8f;
+        return Color.HSVToColor(hsv);
     }
 
     private View.OnClickListener fabClick = new View.OnClickListener() {
@@ -287,9 +302,9 @@ public class EnthusiaStartActivity extends Activity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (socialMediaShown)
-                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
+                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
                 else
-                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setDrawable(getResources().getDrawable(R.drawable.ic_close));
+                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             }
 
             @Override
