@@ -10,5 +10,5 @@
     <color name="app_color_actionbar_highlight">#0288d1</color>
     <color name="app_color_dark">#01579b</color>
     <color name="app_color_light">#4fc3f7</color>
-
+    <color name="selectable_item_background">#e1f5fe</color>
 </resources>

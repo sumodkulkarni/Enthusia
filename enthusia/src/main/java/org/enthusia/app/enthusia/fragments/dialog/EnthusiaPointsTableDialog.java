@@ -1,11 +1,12 @@
-package org.enthusia.app.enthusia.ui;
+package org.enthusia.app.enthusia.fragments.dialog;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,40 +18,47 @@ import org.enthusia.app.enthusia.model.EnthusiaPointsTable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EnthusiaPointsTableDialog extends Dialog {
+public class EnthusiaPointsTableDialog extends DialogFragment {
 
-    private Activity activity;
     private ArrayList<EnthusiaPointsTable> tableData;
+    private TableLayout pointsTable;
 
     public final static String PREF_POINT_TABLE = "org.enthusia.app.enthusia.points";
     public final static String PREF_POINTS = "pref_points_";
 
 
-    public EnthusiaPointsTableDialog(Activity activity) {
-        super(activity);
-        this.activity = activity;
-        this.tableData = new ArrayList<EnthusiaPointsTable>();
+    @SuppressWarnings("unchecked")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().setCanceledOnTouchOutside(false);
+        getDialog().setCancelable(false);
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.AppTheme_Dialog;
+        View v = inflater.inflate(R.layout.enthusia_dialog_points_table, container, false);
+        pointsTable = (TableLayout) v.findViewById(R.id.enthusia_dialog_points_table_table);
+        if (savedInstanceState == null)
+            tableData = new ArrayList<EnthusiaPointsTable>();
+        else
+            tableData = (ArrayList<EnthusiaPointsTable>) savedInstanceState.getSerializable("points");
+        return v;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        for (int i=0; i < getContext().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
+        for (int i=0; i < getActivity().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
             this.tableData.add(new EnthusiaPointsTable(
-                    getContext().getResources().getStringArray(R.array.enthusia_departments)[i],
-                    getPoints(getContext().getResources().getStringArray(R.array.enthusia_departments)[i])
+                    getActivity().getResources().getStringArray(R.array.enthusia_departments)[i],
+                    getPoints(getActivity().getResources().getStringArray(R.array.enthusia_departments)[i])
             ));
         }
         Collections.sort(this.tableData);
 
-        setContentView(R.layout.enthusia_dialog_points_table);
-        TableLayout pointsTable = (TableLayout) findViewById(R.id.enthusia_dialog_points_table_table);
         for (int i=0; i < this.tableData.size(); i++) {
             pointsTable.addView(getHorizontalDivider());
 
-            TableRow row = new TableRow(activity);
+            TableRow row = new TableRow(getActivity());
             row.addView(getVerticalDivider());
             for (int j=0; j < 2; j++) {
                 row.addView( (j % 2 == 0 ? getDepartmentView(i) : getPointView(i)));
@@ -62,31 +70,37 @@ public class EnthusiaPointsTableDialog extends Dialog {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("points", tableData);
+    }
+
     private View getHorizontalDivider() {
-        View v = new View(activity);
-        v.setBackgroundColor(getContext().getResources().getColor(R.color.black));
+        View v = new View(getActivity());
+        v.setBackgroundColor(getActivity().getResources().getColor(R.color.black));
         TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, 1);
         v.setLayoutParams(params);
         return v;
     }
 
     private View getVerticalDivider() {
-        View v = new View(activity);
+        View v = new View(getActivity());
         TableRow.LayoutParams params = new TableRow.LayoutParams(1, TableRow.LayoutParams.MATCH_PARENT);
         v.setLayoutParams(params);
-        v.setBackgroundColor(getContext().getResources().getColor(R.color.black));
+        v.setBackgroundColor(getActivity().getResources().getColor(R.color.black));
         return v;
     }
 
     private TextView getPointView(int i) {
-        TextView textView = getView();
+        TextView textView = getBasicTextView();
         textView.setText(this.tableData.get(i).getPoints() + "");
         textView.setGravity(Gravity.RIGHT);
         return textView;
     }
 
     private TextView getDepartmentView(int i) {
-        TextView textView = getView();
+        TextView textView = getBasicTextView();
         textView.setText(this.tableData.get(i).getDepartment());
         textView.setPadding(10,0,0,10);
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
@@ -95,11 +109,11 @@ public class EnthusiaPointsTableDialog extends Dialog {
         return textView;
     }
 
-    private TextView getView() {
-        TextView textView = new TextView(activity);
+    private TextView getBasicTextView() {
+        TextView textView = new TextView(getActivity());
         textView.setTextSize(30.0f);
         textView.setPadding(10,0,0,10);
-        textView.setTextColor(activity.getResources().getColor(R.color.black));
+        textView.setTextColor(getActivity().getResources().getColor(R.color.black));
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.rightMargin = 10;
         textView.setLayoutParams(params);
@@ -108,7 +122,7 @@ public class EnthusiaPointsTableDialog extends Dialog {
 
     @SuppressWarnings("defaultlocale")
     private int getPoints(String department) {
-        return getContext().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0);
+        return getActivity().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0);
     }
 
 }

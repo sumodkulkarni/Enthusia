@@ -16,8 +16,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import org.enthusia.app.R;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
-import org.enthusia.app.enthusia.model.EnthusiaPointsTable;
-import org.enthusia.app.enthusia.ui.EnthusiaPointsTableDialog;
+import org.enthusia.app.enthusia.fragments.dialog.EnthusiaPointsTableDialog;
 import org.enthusia.app.model.PushMessage;
 
 import java.text.SimpleDateFormat;

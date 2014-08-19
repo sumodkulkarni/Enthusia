@@ -2,14 +2,20 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo">
-        <item name="android:actionBarStyle">@style/Enthusia.ActionBar</item>
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
         <item name="android:actionBarItemBackground">@drawable/selector_actionbar</item>
+        <item name="android:selectableItemBackground">@drawable/selectable_item_background</item>
     </style>
 
-    <style name="Enthusia.ActionBar" parent="android:Widget.Holo.ActionBar.Solid">
+    <style name="AppTheme.ActionBar" parent="android:Widget.Holo.ActionBar.Solid">
         <item name="android:icon">@android:color/transparent</item>
         <item name="android:background">@color/app_color</item>
         <item name="android:height">56dp</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="android:Holo.Light.ButtonBar.AlertDialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
 
     <style name="CardTitle">

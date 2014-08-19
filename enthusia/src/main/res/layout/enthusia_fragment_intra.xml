@@ -16,7 +16,7 @@
         android:layout_marginTop="10sp"
         android:layout_marginBottom="10sp" />
 
-    <org.enthusia.app.ui.HighlightButton
+    <Button
         android:id="@+id/enthusia_fragment_intra_button_points_table"
         android:background="@drawable/selector_button_default"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:layout_marginTop="10sp"
         android:layout_marginBottom="10sp" />
 
-    <org.enthusia.app.ui.HighlightButton
+    <Button
         android:id="@+id/enthusia_fragment_intra_button_department_heads"
         android:background="@drawable/selector_button_default"
         android:layout_width="match_parent"

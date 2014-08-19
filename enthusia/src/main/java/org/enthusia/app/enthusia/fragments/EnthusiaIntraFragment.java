@@ -1,14 +1,14 @@
 package org.enthusia.app.enthusia.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.enthusia.app.R;
-import org.enthusia.app.enthusia.ui.EnthusiaDepartmentHeadsDialog;
-import org.enthusia.app.enthusia.ui.EnthusiaPointsTableDialog;
+import org.enthusia.app.enthusia.fragments.dialog.EnthusiaDepartmentHeadsDialog;
+import org.enthusia.app.enthusia.fragments.dialog.EnthusiaPointsTableDialog;
 
 public class EnthusiaIntraFragment extends Fragment {
 
@@ -37,7 +37,7 @@ public class EnthusiaIntraFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new EnthusiaPointsTableDialog(getActivity()).show();
+                new EnthusiaPointsTableDialog().show(getActivity().getSupportFragmentManager(), "pointstable");
             }
         });
     }
@@ -46,7 +46,7 @@ public class EnthusiaIntraFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new EnthusiaDepartmentHeadsDialog(getActivity()).show();
+                new EnthusiaDepartmentHeadsDialog().show(getActivity().getSupportFragmentManager(), "departmentheads");
             }
         });
     }

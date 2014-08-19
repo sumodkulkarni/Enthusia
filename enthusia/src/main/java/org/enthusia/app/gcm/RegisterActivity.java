@@ -36,7 +36,7 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
 
-        if ((Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)) != null && (Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)).equals("") == false) {
+        if ((Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)) != null && !(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)).equals("")) {
             ((EditText) findViewById(R.id.register_et_username)).setText(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class).toString());
             ((EditText) findViewById(R.id.register_et_email)).setText(Utils.getPrefs(this, Utils.PREF_EMAIL, String.class).toString());
         }
@@ -125,8 +125,6 @@ public class RegisterActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO Register for push notification
-
             String regId = getRegistrationId();
 
             if (regId == null) {
@@ -212,7 +210,7 @@ public class RegisterActivity extends Activity {
             if (regId == null)
                 return null;
 
-            if (getAppVersion() != ((Integer) Utils.getPrefs(getApplicationContext(), Utils.PREF_APP_VERSION, Integer.class)).intValue())
+            if (getAppVersion() != (Integer) Utils.getPrefs(getApplicationContext(), Utils.PREF_APP_VERSION, Integer.class))
                 return null;
 
             return regId;

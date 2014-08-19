@@ -1,7 +1,7 @@
 package org.enthusia.app.enthusia.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +40,16 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Aditya Bajaj: +919820728353", 6));
         mCommittee.add(new EnthusiaCommittee("Koustubh Bhandari: +919923641510", 7));
         mCommittee.add(new EnthusiaCommittee("Miloni Gada: +919819996361", 8));
+        mCommittee.add(new EnthusiaCommittee("Pankhil Mistry: +919167140406", 8));
         mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 8));
         mCommittee.add(new EnthusiaCommittee("Pankaj Palwe: +919637081559", 9));
         mCommittee.add(new EnthusiaCommittee("Karan Nair: +919004656479", 10));
         mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 11));
         mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 11));
         mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
-        // TODO Add Diploma Representative
-        mCommittee.add(new EnthusiaCommittee("Adithya Swami: ", 12));
-        mCommittee.add(new EnthusiaCommittee("", 12));
+        mCommittee.add(new EnthusiaCommittee("Tushar Jadhav: +919967366742", 12));
+        // Todo Add Diploma Girl Representative
+        mCommittee.add(new EnthusiaCommittee(" : ", 12));
 
         ((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)).setAdapter(new EnthusiaStickyHeaderAdapter(
                 getActivity(), mCommittee, getResources().getStringArray(R.array.enthusia_committe_posts)));

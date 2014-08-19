@@ -3,8 +3,7 @@ package org.enthusia.app.enthusia;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.app.Fragment;
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -45,7 +46,7 @@ import org.enthusia.app.enthusia.model.EnthusiaNavDrawerItem;
 import java.util.ArrayList;
 
 @SuppressWarnings("ConstantConditions")
-public class EnthusiaStartActivity extends Activity {
+public class EnthusiaStartActivity extends FragmentActivity {
 
     private final static int[] SOCIAL_MEDIA_DRAWABLES = {
             R.drawable.ic_fab_facebook,
@@ -90,6 +91,7 @@ public class EnthusiaStartActivity extends Activity {
         getActionBar().setCustomView(R.layout.actionbar_custom);
         getActionBar().setDisplayShowCustomEnabled(true);
         getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RtlHardcoded")
             @Override
             public void onClick(View v) {
 
@@ -167,7 +169,7 @@ public class EnthusiaStartActivity extends Activity {
                 help();
             }
         }
-     }
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -225,6 +227,7 @@ public class EnthusiaStartActivity extends Activity {
     }
 
 
+    @SuppressLint("RtlHardcoded")
     private void setupSocialMedia() {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.enthusia_start_fab);
@@ -481,12 +484,15 @@ public class EnthusiaStartActivity extends Activity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getFragmentManager().beginTransaction()
-                                .setCustomAnimations(R.animator.fragment_enter, R.animator.fragment_exit)
-                                .replace(R.id.enthusia_start_fragment_container, currentFragment)
-                                .commit();
+                        try {
+                            getSupportFragmentManager().beginTransaction()
+                                    .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit,
+                                                         R.anim.fragment_enter, R.anim.fragment_exit)
+                                    .replace(R.id.enthusia_start_fragment_container, currentFragment)
+                                    .commit();
+                        } catch (Exception ignore) {}
                     }
-                }, 240);
+                }, 250);
             } catch (Exception ignore) {}
         }
     }
@@ -524,7 +530,7 @@ public class EnthusiaStartActivity extends Activity {
     }
 
     private void help() {
-       findViewById(R.id.enthusia_start_fab).performClick();
+        findViewById(R.id.enthusia_start_fab).performClick();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
