@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="8dp"
     android:paddingLeft="8dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp" >
+    android:paddingRight="8dp">
 
     <ImageView
         android:id="@+id/enthusia_list_item_nav_drawer_icon"
@@ -14,9 +13,9 @@
         android:src="@drawable/ic_launcher"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="12dp" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/enthusia_list_item_nav_drawer_title"
@@ -24,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
         android:layout_centerVertical="true"
-        android:gravity="left"
+        android:layout_marginLeft="32dp"
+        android:gravity="left|center_vertical"
         android:textColor="@color/black"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp"
         android:text="@string/enthusia_fest_name" />
 
 </RelativeLayout>

@@ -49,7 +49,10 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
         }
 
         holder.imageView.setImageResource(EnthusiaEvents.drawables[i]);
-        holder.textView.setText(EnthusiaEvents.events[i]);
+        if (i == 18 || i == 20)
+            holder.textView.setText("");
+        else
+            holder.textView.setText(EnthusiaEvents.events[i]);
         return view;
     }
 

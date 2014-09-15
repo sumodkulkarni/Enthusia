@@ -38,7 +38,7 @@
 
     </RelativeLayout>
 
-    <com.nhaarman.listviewanimations.widget.DynamicListView
+    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:id="@+id/enthusia_framgent_news_listnews"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

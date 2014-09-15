@@ -1,4 +1,4 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
@@ -23,8 +23,6 @@ android {
 
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
     }
@@ -35,15 +33,16 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.melnykov:floatingactionbutton:+'
-    compile 'de.keyboardsurfer.android.widget:crouton:+'
-    compile 'com.alexvasilkov:foldable-layout:+'
+    compile 'com.melnykov:floatingactionbutton:1.0.2'
+    compile 'de.keyboardsurfer.android.widget:crouton:1.8.5'
+    compile 'com.alexvasilkov:foldable-layout:1.0.1'
     compile 'com.android.support:support-v4:19.0.0'
-    compile 'se.emilsjolander:stickylistheaders:+'
-    compile 'com.nhaarman.listviewanimations:library:+'
-    compile 'com.google.android.gms:play-services:+'
-    compile 'com.etsy.android.grid:library:+'
-    compile 'com.nineoldandroids:library:+'
+    compile 'se.emilsjolander:stickylistheaders:2.5.0'
+    compile 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
+    compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'com.etsy.android.grid:library:1.0.5'
+    compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.easing:library:+@aar'
     compile 'com.daimajia.androidanimations:library:+@aar'
     compile 'com.commonsware.cwac:anddown:+'

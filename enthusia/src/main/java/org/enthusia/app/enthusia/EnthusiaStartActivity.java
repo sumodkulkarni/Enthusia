@@ -227,6 +227,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
     }
 
 
+    @SuppressWarnings("ResourceType")
     @SuppressLint("RtlHardcoded")
     private void setupSocialMedia() {
 

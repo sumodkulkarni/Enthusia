@@ -1,20 +1,18 @@
 package org.enthusia.app.enthusia.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.nhaarman.listviewanimations.itemmanipulation.AnimateDismissAdapter;
-import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
-import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
-import com.nhaarman.listviewanimations.widget.DynamicListView;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+
 import org.enthusia.app.R;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNewsAdapter;
@@ -28,7 +26,6 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 public class EnthusiaNewsFragment extends Fragment {
 
     private EnthusiaNewsAdapter enthusiaNewsAdapter;
-    private AnimateDismissAdapter dismissAdapter;
     private PushNotificationManager manager;
     private ArrayList<PushMessage> messages;
     private int unreadCount = 0;
@@ -37,10 +34,10 @@ public class EnthusiaNewsFragment extends Fragment {
     OnDismissCallback mCallback = new OnDismissCallback() {
         @SuppressWarnings("ResultOfMethodCallIgnored")
         @Override
-        public void onDismiss(AbsListView absListView, int[] ints) {
+        public void onDismiss(@NonNull ViewGroup absListView, @NonNull int[] ints) {
             for (int i : ints) {
                 try {
-                    manager.deleteMessage(enthusiaNewsAdapter.get(i));
+                    manager.deleteMessage(enthusiaNewsAdapter.getItem(i));
                     enthusiaNewsAdapter.remove(i);
                 } catch (IndexOutOfBoundsException ignore) {}
             }
@@ -85,34 +82,12 @@ public class EnthusiaNewsFragment extends Fragment {
         }
 
         enthusiaNewsAdapter = new EnthusiaNewsAdapter(getActivity(), messages);
-        SwipeDismissAdapter adapter = new SwipeDismissAdapter(enthusiaNewsAdapter, new OnDismissCallback() {
-            @Override
-            public void onDismiss(AbsListView absListView, int[] ints) {
-                for (Integer position : ints) {
-                    if (messages.get(position).isRead())
-                        unreadCount++;
-                    else
-                        unreadCount--;
-                    messages.get(position).setRead(!messages.get(position).isRead());
-                    manager.updateContact(messages.get(position));
-                    enthusiaNewsAdapter.notifyDataSetChanged();
-                    updateUnread();
-                }
-            }
-        });
-        SwingBottomInAnimationAdapter animation = new SwingBottomInAnimationAdapter(enthusiaNewsAdapter);
-        animation.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
-        adapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
 
-        dismissAdapter = new AnimateDismissAdapter(adapter, mCallback);
-        dismissAdapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(dismissAdapter);
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return true;
-            }
-        });
+        AlphaInAnimationAdapter adapter = new AlphaInAnimationAdapter(enthusiaNewsAdapter);
+        adapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(adapter);
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).disableDragAndDrop();
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).enableSwipeToDismiss(mCallback);
         getActivity().findViewById(R.id.enthusia_fragment_news_details_clear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,8 +121,7 @@ public class EnthusiaNewsFragment extends Fragment {
 
         customAdded = true;
         ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
-        for (int i=0; i < messages.size(); i++)
-            dismissAdapter.animateDismiss(i);
+        enthusiaNewsAdapter.clear();
 
     }
 }

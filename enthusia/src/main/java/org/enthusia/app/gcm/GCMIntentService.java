@@ -8,9 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.text.Html;
 
-import com.commonsware.cwac.anddown.AndDown;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.enthusia.app.R;
@@ -30,6 +28,7 @@ public class GCMIntentService extends IntentService {
         super("GcmIntentService");
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
@@ -42,10 +41,15 @@ public class GCMIntentService extends IntentService {
                 Utils.log(extras.toString());
                 if (extras.getString("price").startsWith("POINTSTABLE,")) {
                     updatePointsTable(extras.getString("price").split(","));
-                } else if (extras.getString("price").equals("successful")) {}
+                } else if (extras.getString("price").equals("successful"));
                 else {
                     new PushNotificationManager(this).addMessage(new PushMessage(new SimpleDateFormat("ddMMyyyy hhmmss").format(new Date()),extras.getString("price"), false));
-                    sendNotification(Html.fromHtml(new AndDown().markdownToHtml(extras.getString("price"))).toString(), false);
+                    int count = 0;
+                    for (PushMessage message : new PushNotificationManager(this).getAllMessages())
+                        if (!message.isRead())
+                            count++;
+                    sendNotification("You have " + count + " unread messages!", false);
+
                 }
             }
 
