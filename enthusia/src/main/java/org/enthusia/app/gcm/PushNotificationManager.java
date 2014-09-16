@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import org.enthusia.app.model.PushMessage;
@@ -108,5 +109,11 @@ public class PushNotificationManager extends SQLiteOpenHelper {
 
     public void deleteMessage(PushMessage message) {
         this.getWritableDatabase().delete(TABLE_NAME, COL_ID + QUERY_STRING, new String[] { message.getId() });
+    }
+
+    public void deleteAll() {
+        try {
+            this.getWritableDatabase().rawQuery("DELETE FROM " + TABLE_NAME, null);
+        } catch (SQLiteException ignore) {}
     }
 }

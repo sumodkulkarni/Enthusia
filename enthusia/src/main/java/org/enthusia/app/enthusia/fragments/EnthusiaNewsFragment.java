@@ -26,7 +26,6 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 public class EnthusiaNewsFragment extends Fragment {
 
     private EnthusiaNewsAdapter enthusiaNewsAdapter;
-    private PushNotificationManager manager;
     private ArrayList<PushMessage> messages;
     private int unreadCount = 0;
     private static boolean customAdded = false;
@@ -36,15 +35,15 @@ public class EnthusiaNewsFragment extends Fragment {
         @Override
         public void onDismiss(@NonNull ViewGroup absListView, @NonNull int[] ints) {
             for (int i : ints) {
-                try {
-                    manager.deleteMessage(enthusiaNewsAdapter.getItem(i));
-                    enthusiaNewsAdapter.remove(i);
-                } catch (IndexOutOfBoundsException ignore) {}
-            }
-            if (messages.size() == 0) {
-                messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)), false));
+                messages.get(i).setRead(!messages.get(i).isRead());
                 enthusiaNewsAdapter.notifyDataSetChanged();
+                if (messages.get(i).isRead())
+                    unreadCount--;
+                else
+                    unreadCount++;
             }
+            updateUnread();
+            enthusiaNewsAdapter.notifyDataSetChanged();
         }
     };
 
@@ -57,7 +56,7 @@ public class EnthusiaNewsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        manager = new PushNotificationManager(getActivity().getApplicationContext());
+        PushNotificationManager manager = new PushNotificationManager(getActivity().getApplicationContext());
         messages = manager.getAllMessages();
 
         if (messages.size() == 0)
@@ -121,7 +120,10 @@ public class EnthusiaNewsFragment extends Fragment {
 
         customAdded = true;
         ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
+        new PushNotificationManager(getActivity()).deleteAll();
         enthusiaNewsAdapter.clear();
+        messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)), false));
+        enthusiaNewsAdapter.notifyDataSetChanged();
 
     }
 }

@@ -115,10 +115,11 @@ public final class EnthusiaEvents {
             case 17: // Swimming
                 return new String[] { "Abhijit Gupta: +918879433235", "Abraham George: +919619823690", "Ashwini Bhosle: +919029391087" };
             case 18: // Marathon
-                return new String[] { "Dhruv Turkhia: +919664016227", "Siddhant Shah: +919930851934", "Manan Doshi: +919167143210", "Harshil Shroff: +919819802193", "Prajeet Thakare: +919769422608" };
+                return new String[] { "Dhruv Turkhia: +919664016227", "Siddhant Shah: +919930851934", "Harshil Shroff: +919819802193", "Prajeet Thakare: +919769422608" };
             case 19: // Handball
                 return new String[] { "Rishikesh: +919987722085" };
-            // TODO Add Cyclothon event heads
+            case 20: // Cyclothon
+                return new String[] { "Manan Doshi: +919167143210", "Harshil Shroff: +919819802193" };
 
         }
         return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };

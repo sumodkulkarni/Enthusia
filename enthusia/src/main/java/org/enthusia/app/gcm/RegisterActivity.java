@@ -46,6 +46,8 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                final String EMAIL_PATTERN = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
+
                 if (!isNetworkConnected()) {
                     Utils.showAlert(RegisterActivity.this, Html.fromHtml(getString(R.string.alert_register_no_network)).toString());
                 } else if ( ((EditText) findViewById(R.id.register_et_username)).getText().toString().equals("") ) {
@@ -58,7 +60,7 @@ public class RegisterActivity extends Activity {
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .playOn(findViewById(R.id.register_et_email));
-                } else if ( !((EditText) findViewById(R.id.register_et_email)).getText().toString().contains("@")) {
+                } else if ( !((EditText) findViewById(R.id.register_et_email)).getText().toString().matches(EMAIL_PATTERN)) {
                     Utils.showAlert(RegisterActivity.this, R.string.alert_register_enter_valid_email);
                     YoYo.with(Techniques.Shake)
                             .duration(700)
