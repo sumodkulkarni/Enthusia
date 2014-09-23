@@ -121,7 +121,14 @@ public class EnthusiaNewsFragment extends Fragment {
 
         customAdded = true;
         ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
-        new PushNotificationManager(getActivity()).deleteAll();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new PushNotificationManager(getActivity()).deleteAll();
+                } catch (Exception ignore) {}
+            }
+        }).start();
         enthusiaNewsAdapter.clear();
         messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)), false));
         enthusiaNewsAdapter.notifyDataSetChanged();

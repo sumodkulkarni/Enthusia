@@ -112,9 +112,8 @@ public class PushNotificationManager extends SQLiteOpenHelper {
     }
 
     public void deleteAll() {
-        try {
-            this.getWritableDatabase().rawQuery("DELETE FROM " + TABLE_NAME, null);
-        } catch (SQLiteException ignore) {}
+        for (PushMessage message : getAllMessages())
+            deleteMessage(message);
         teslaUnread();
     }
 
