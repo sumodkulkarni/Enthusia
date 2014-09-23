@@ -33,6 +33,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
+import org.enthusia.app.enthusia.fragments.EnthusiaDepartmentHeadsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaEventsFragment;
 import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
@@ -59,7 +60,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
-    private Fragment currentFragment;
+    public Fragment currentFragment;
     private String title;
 
     private ArrayList<FloatingActionButton> socialMediaIcons;
@@ -96,7 +97,9 @@ public class EnthusiaStartActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                if (currentFragment instanceof EnthusiaEventsFragment && ((EnthusiaEventsFragment) currentFragment).mUnfoldableView.isUnfolded()) {
+                if (currentFragment != null && currentFragment instanceof EnthusiaEventsFragment && ((EnthusiaEventsFragment) currentFragment).mUnfoldableView.isUnfolded()) {
+                    onBackPressed();
+                } else if (currentFragment != null && currentFragment instanceof EnthusiaDepartmentHeadsFragment) {
                     onBackPressed();
                 } else if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
                     enthusiaSlider.openDrawer(Gravity.LEFT);

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.enthusia.app.R;
-import org.enthusia.app.enthusia.fragments.dialog.EnthusiaDepartmentHeadsDialog;
 import org.enthusia.app.enthusia.fragments.dialog.EnthusiaPointsTableDialog;
 
 public class EnthusiaIntraFragment extends Fragment {
@@ -46,7 +45,13 @@ public class EnthusiaIntraFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new EnthusiaDepartmentHeadsDialog().show(getActivity().getSupportFragmentManager(), "departmentheads");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit,
+                                            R.anim.fragment_enter, R.anim.fragment_exit)
+                        .replace(R.id.enthusia_start_fragment_container, new EnthusiaDepartmentHeadsFragment())
+                        .addToBackStack("departmentHead")
+                        .commit();
             }
         });
     }

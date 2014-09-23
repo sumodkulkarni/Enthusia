@@ -1,13 +1,15 @@
-package org.enthusia.app.enthusia.fragments.dialog;
+package org.enthusia.app.enthusia.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import org.enthusia.app.R;
+import org.enthusia.app.enthusia.EnthusiaStartActivity;
 import org.enthusia.app.enthusia.adapters.EnthusiaStickyHeaderAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaCommittee;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class EnthusiaDepartmentHeadsDialog extends DialogFragment {
+public class EnthusiaDepartmentHeadsFragment extends Fragment {
 
     private StickyListHeadersListView listView;
     private ArrayList<EnthusiaCommittee> mItems;
@@ -23,19 +25,33 @@ public class EnthusiaDepartmentHeadsDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setCancelable(false);
-        getDialog().setCanceledOnTouchOutside(false);
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog().getWindow().getAttributes().windowAnimations = R.style.AppTheme_Dialog;
         View v = inflater.inflate(R.layout.enthusia_dialog_deaprtment_heads, container, false);
         listView = (StickyListHeadersListView) v.findViewById(R.id.enthusia_dialog_department_heads_list);
         return v;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    @SuppressWarnings("unchecked")
+    public void onDestroyView() {
+        super.onDestroyView();
+        try {
+            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
+            ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Intra");
+            ((EnthusiaStartActivity) getActivity()).currentFragment = new EnthusiaIntraFragment();
+        } catch (Exception ignore) {}
+    }
+
+    @Override
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Setup ActionBar
+        try {
+            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
+            ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Department Heads");
+            ((EnthusiaStartActivity) getActivity()).currentFragment = this;
+        } catch (Exception ignore) {}
 
         if (savedInstanceState == null)
             mItems = new ArrayList<EnthusiaCommittee>();
@@ -85,6 +101,7 @@ public class EnthusiaDepartmentHeadsDialog extends DialogFragment {
         // Textile
         mItems.add(new EnthusiaCommittee("Pakshal Jain: +919764040991", 10));
         mItems.add(new EnthusiaCommittee("Swati Dighole: +919768350702", 10));
+        mItems.add(new EnthusiaCommittee(" : ", 10));
 
         listView.setAdapter(new EnthusiaStickyHeaderAdapter(getActivity(), mItems, getActivity().getResources().getStringArray(R.array.enthusia_departments)));
     }
