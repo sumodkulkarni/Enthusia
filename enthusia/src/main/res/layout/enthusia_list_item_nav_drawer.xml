@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.enthusia.app.ui.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp">
+    android:padding="8dp"
+    app:rippleOverlay="false"
+    app:rippleColor="@color/app_color_light"
+    app:rippleDimension="24dp"
+    app:rippleAlpha="0.65"
+    app:rippleHover="true">
 
-    <ImageView
-        android:id="@+id/enthusia_list_item_nav_drawer_icon"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_launcher"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
-
-    <TextView
-        android:id="@+id/enthusia_list_item_nav_drawer_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="32dp"
-        android:gravity="left|center_vertical"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="@string/enthusia_fest_name" />
+        android:layout_height="match_parent" >
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/enthusia_list_item_nav_drawer_icon"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/enthusia_list_item_nav_drawer_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/enthusia_list_item_nav_drawer_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@string/enthusia_fest_name" />
+
+    </RelativeLayout>
+
+</org.enthusia.app.ui.MaterialRippleLayout>

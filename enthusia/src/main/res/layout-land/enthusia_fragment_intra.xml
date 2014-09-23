@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <org.enthusia.app.ui.SquareImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:contentDescription="@null"
+            android:background="@drawable/img_enthusia_intrapic"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp" />
+
+        <Button
+            android:id="@+id/enthusia_fragment_intra_button_points_table"
+            android:background="@drawable/selector_button_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enthusia_points_table"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp" />
+
+        <Button
+            android:id="@+id/enthusia_fragment_intra_button_department_heads"
+            android:background="@drawable/selector_button_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enthusia_department_heads"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp" />
+
+    </LinearLayout>
+
+</ScrollView>

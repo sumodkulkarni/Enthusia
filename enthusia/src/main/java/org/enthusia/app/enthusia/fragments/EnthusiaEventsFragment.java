@@ -22,9 +22,11 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
+import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
+import org.enthusia.app.ui.MaterialRippleLayout;
 
 public class EnthusiaEventsFragment extends Fragment implements View.OnClickListener {
 
@@ -77,12 +79,18 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
             }
         });
 
-        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter());
-        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, final View view, final int position, long id) {
                 setupEvent(view.findViewById(R.id.enthusia_events_list_item_event_image),
                         position);
+            }
+        }));
+        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @SuppressWarnings("ConstantConditions")
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MaterialRippleLayout) view).getChildView().performClick();
             }
         });
 
@@ -94,7 +102,6 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
      */
 
     private void showDetailsView (boolean show) {
-//        getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(show);
         getActivity().findViewById(R.id.enthusia_events_details_layout).setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 

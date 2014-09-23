@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import org.enthusia.app.model.PushMessage;
 
@@ -29,6 +30,8 @@ public class PushNotificationManager extends SQLiteOpenHelper {
     public static final String[] COLS = {COL_ID, COL_MESSAGE, COL_READ};
     private static final String QUERY_STRING = "=?";
 
+    private Context context;
+
     /**
      * TABLE FORMAT
      * ID     MESSAGE READ
@@ -37,6 +40,7 @@ public class PushNotificationManager extends SQLiteOpenHelper {
 
     public PushNotificationManager(Context context) {
         super(context, NAME, null, VERSION);
+        this.context = context;
     }
 
     @Override
@@ -63,6 +67,7 @@ public class PushNotificationManager extends SQLiteOpenHelper {
         values.put(COL_MESSAGE, message.getMessage());
         values.put(COL_READ, message.isRead() ? 1 : 0);
         this.getWritableDatabase().insert(TABLE_NAME, null, values);
+        teslaUnread();
     }
 
     public PushMessage getMessage(String id) {
@@ -72,13 +77,6 @@ public class PushNotificationManager extends SQLiteOpenHelper {
             return new PushMessage(cursor.getString(0), cursor.getString(1), cursor.getInt(2) == 1);
         }
         return null;
-    }
-
-    public int getCount() {
-        Cursor cursor = this.getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        cursor.close();
-
-        return cursor.getCount();
     }
 
     public ArrayList<PushMessage> getAllMessages() {
@@ -105,15 +103,39 @@ public class PushNotificationManager extends SQLiteOpenHelper {
         values.put(COL_READ, message.isRead() ? 1 : 0);
 
         this.getWritableDatabase().update(TABLE_NAME, values, COL_ID + QUERY_STRING, new String[] { message.getId() });
+        teslaUnread();
     }
 
     public void deleteMessage(PushMessage message) {
         this.getWritableDatabase().delete(TABLE_NAME, COL_ID + QUERY_STRING, new String[] { message.getId() });
+        teslaUnread();
     }
 
     public void deleteAll() {
         try {
             this.getWritableDatabase().rawQuery("DELETE FROM " + TABLE_NAME, null);
         } catch (SQLiteException ignore) {}
+        teslaUnread();
+    }
+
+    private int getUnreadCount() {
+        try {
+            Cursor cursor = this.getWritableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_READ + " = 0", null);
+            return cursor.getCount();
+        } catch (SQLiteException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    private void teslaUnread() {
+        ContentValues values = new ContentValues();
+        values.put("tag", "org.enthusia.app/org.enthusia.app.enthusia.EnthusiaStartActivity");
+        values.put("count", getUnreadCount());
+
+        try {
+            context.getContentResolver()
+                    .insert(Uri.parse("content://com.teslacoilsw.notifier/unread_count"), values);
+        } catch (IllegalArgumentException ignore) {}
     }
 }

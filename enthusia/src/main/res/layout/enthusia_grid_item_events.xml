@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.enthusia.app.ui.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/grid_item_events_parent"
+    android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background">
+    android:background="@color/gray_background"
+    app:rippleOverlay="true"
+    app:rippleHover="true"
+    app:rippleColor="@color/gray_divider"
+    app:rippleDimension="24dp"
+    app:rippleAlpha="0.45">
 
-    <com.etsy.android.grid.util.DynamicHeightImageView
-        android:id="@+id/enthusia_events_list_item_event_image"
+    <FrameLayout
+        android:id="@+id/grid_item_events_child"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/ic_launcher" />
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        android:alpha="0.15"/>
+        <com.etsy.android.grid.util.DynamicHeightImageView
+            android:id="@+id/enthusia_events_list_item_event_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/enthusia_events_list_item_event_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:textColor="@color/white"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="10"
-        android:padding="10dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:alpha="0.15"/>
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/enthusia_events_list_item_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="10"
+            android:padding="10dp" />
+
+    </FrameLayout>
+
+</org.enthusia.app.ui.MaterialRippleLayout>

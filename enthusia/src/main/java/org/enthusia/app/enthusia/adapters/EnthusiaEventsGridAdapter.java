@@ -3,6 +3,7 @@ package org.enthusia.app.enthusia.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -10,10 +11,15 @@ import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
+import org.enthusia.app.ui.MaterialRippleLayout;
 
 public class EnthusiaEventsGridAdapter extends BaseAdapter {
 
-    public EnthusiaEventsGridAdapter() {}
+    private AdapterView.OnItemClickListener listener;
+
+    public EnthusiaEventsGridAdapter(AdapterView.OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public int getCount() {
@@ -36,7 +42,7 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, final ViewGroup viewGroup) {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
@@ -53,6 +59,14 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
             holder.textView.setText("");
         else
             holder.textView.setText(EnthusiaEvents.events[i]);
+
+        ((MaterialRippleLayout) view).getChildView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick((AdapterView) viewGroup, v, i, getItemId(i));
+            }
+        });
+
         return view;
     }
 

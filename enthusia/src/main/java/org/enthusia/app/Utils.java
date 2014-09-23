@@ -5,29 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.enthusia.app.model.PushMessage;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
@@ -38,19 +15,19 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class Utils {
 
-    public static final String SHARED_PREFS = "org.enthusia.app";
+    public static String SHARED_PREFS = "org.enthusia.app";
 
     /**
      * Preferences
      * Add your preferences here
      */
 
-    public static final String PREF_USER_NAME = "pref_username";
-    public static final String PREF_EMAIL = "pref_email";
-    public static final String PREF_REGISTRATION_DONE = "pref_registration_done";
-    public static final String PREF_FIRST_RUN = "pref_first_run";
-    public static final String PREF_REGISTRATION_ID = "pref_reg_id";
-    public static final String PREF_APP_VERSION = "pref_app_version";
+    public static String PREF_USER_NAME = "pref_username";
+    public static String PREF_EMAIL = "pref_email";
+    public static String PREF_REGISTRATION_DONE = "pref_registration_done";
+    public static String PREF_FIRST_RUN = "pref_first_run";
+    public static String PREF_REGISTRATION_ID = "pref_reg_id";
+    public static String PREF_APP_VERSION = "pref_app_version";
 
     /**
      * This function returns the Shared_Prefs for particular key
@@ -60,7 +37,7 @@ public class Utils {
      * @return Object of the type of preference
      */
 
-    public static final Object getPrefs(Context context, String key, Class object) {
+    public static Object getPrefs(Context context, String key, Class object) {
         if (object.equals(String.class)) {
             return context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).getString(key, null);
         } else if (object.equals(Integer.class)) {
@@ -80,7 +57,7 @@ public class Utils {
      * @param value The value of the desired preference
      */
 
-    public static final void putPrefs(Context context, String key, Object value) {
+    public static void putPrefs(Context context, String key, Object value) {
         if (value.getClass().equals(String.class)) {
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putString(key, (String) value).commit();
         } else if (value.getClass().equals(Boolean.class)) {
@@ -99,7 +76,7 @@ public class Utils {
      * @param id the id of the string resource to be displayed
      */
 
-    public static final void showInfo (Activity activity, int id) {
+    public static void showInfo (Activity activity, int id) {
         showInfo(activity, activity.getString(id));
     }
 
@@ -109,7 +86,7 @@ public class Utils {
      * @param message the string message to be displayed
      */
 
-    public static final void showInfo (Activity activity, String message) {
+    public static void showInfo (Activity activity, String message) {
         crouton(activity, message, Style.INFO);
     }
 
@@ -119,7 +96,7 @@ public class Utils {
      * @param id the the id of the string resource to be displayed
      */
 
-    public static final void showConfirm (Activity activity, int id) {
+    public static void showConfirm (Activity activity, int id) {
         showConfirm(activity, activity.getString(id));
     }
 
@@ -129,7 +106,7 @@ public class Utils {
      * @param message the string message to be displayed
      */
 
-    public static final void showConfirm (Activity activity, String message) {
+    public static void showConfirm (Activity activity, String message) {
         crouton(activity, message, Style.CONFIRM);
     }
 
@@ -139,7 +116,7 @@ public class Utils {
      * @param id the id of the string resource to be displayed
      */
 
-    public static final void showAlert (Activity activity, int id) {
+    public static void showAlert (Activity activity, int id) {
         showAlert(activity, activity.getString(id));
     }
 
@@ -149,24 +126,24 @@ public class Utils {
      * @param message the string message to be displayed
      */
 
-    public static final void showAlert (Activity activity, String message) {
+    public static void showAlert (Activity activity, String message) {
         crouton(activity, message, Style.ALERT);
     }
 
-    private static final void crouton (Activity activity, String message, Style style) {
+    private static void crouton (Activity activity, String message, Style style) {
         Crouton.makeText(activity, message, style).show();
     }
 
-    public static final void makeToast (Context context, String message) {
+    public static void makeToast (Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static final void makeToast (Context context, int message) {
+    public static void makeToast (Context context, int message) {
         makeToast(context, context.getString(message));
     }
 
     public static void log (Object log) {
-        Log.v(SHARED_PREFS, log.toString());
+        Log.d(SHARED_PREFS, log.toString());
     }
 
 }

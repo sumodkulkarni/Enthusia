@@ -36,6 +36,7 @@ public class EnthusiaNewsFragment extends Fragment {
         public void onDismiss(@NonNull ViewGroup absListView, @NonNull int[] ints) {
             for (int i : ints) {
                 messages.get(i).setRead(!messages.get(i).isRead());
+                new PushNotificationManager(getActivity()).updateContact(messages.get(i));
                 enthusiaNewsAdapter.notifyDataSetChanged();
                 if (messages.get(i).isRead())
                     unreadCount--;

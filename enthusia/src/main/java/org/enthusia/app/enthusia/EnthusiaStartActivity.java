@@ -45,6 +45,8 @@ import org.enthusia.app.enthusia.model.EnthusiaNavDrawerItem;
 
 import java.util.ArrayList;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+
 @SuppressWarnings("ConstantConditions")
 public class EnthusiaStartActivity extends FragmentActivity {
 
@@ -69,7 +71,6 @@ public class EnthusiaStartActivity extends FragmentActivity {
         setContentView(R.layout.activity_enthusia_start);
 
         enthusiaSlider = (DrawerLayout) findViewById(R.id.enthusia_start_drawer);
-        enthusiaSlider.setFocusableInTouchMode(false);
         ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<EnthusiaNavDrawerItem>();
 
         for (int i=0; i < getResources().getStringArray(R.array.enthusia_nav_drawer_items).length; i++) {
@@ -196,18 +197,14 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        if (enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
-            finish();
-        } else if (currentFragment != null && currentFragment instanceof EnthusiaEventsFragment) {
+        if (currentFragment != null && currentFragment instanceof EnthusiaEventsFragment) {
             EnthusiaEventsFragment fragment = (EnthusiaEventsFragment) currentFragment;
-            if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding())) {
+            if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding()))
                 fragment.reset();
-            } else {
-                enthusiaSlider.openDrawer(Gravity.LEFT);
-            }
-        } else {
-            enthusiaSlider.openDrawer(Gravity.LEFT);
-        }
+            else
+                super.onBackPressed();
+        } else
+            super.onBackPressed();
     }
 
     @Override
@@ -290,46 +287,15 @@ public class EnthusiaStartActivity extends FragmentActivity {
     }
 
     private Animator getFABAnimation() {
-        AnimatorSet set = new AnimatorSet();
-        set.play(getFABAnimationPhase1()).before(getFABAnimationPhase2());
-        return set;
-    }
-
-    private Animator getFABAnimationPhase1() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(findViewById(R.id.enthusia_start_fab), View.ROTATION_Y, 0, 90);
+        Animator animator = ObjectAnimator.ofFloat(findViewById(R.id.enthusia_start_fab), View.ROTATION, 0, 360);
         animator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
                 findViewById(R.id.enthusia_start_fab).setOnClickListener(null);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
                 if (socialMediaShown)
-                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
+                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
                 else
-                    ((FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        return animator;
-    }
-
-    private Animator getFABAnimationPhase2() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(findViewById(R.id.enthusia_start_fab), View.ROTATION_Y, 90, 0);
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
+                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             }
 
             @Override
@@ -347,6 +313,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
             }
         });
+        animator.setDuration(500);
         return animator;
     }
 
@@ -449,6 +416,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
     };
 
     private void displayView (int position) {
+        Crouton.cancelAllCroutons();
         currentFragment = null;
         switch (position) {
             case 0:
