@@ -1,5 +1,6 @@
 package org.enthusia.app.enthusia.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,9 @@ public class EnthusiaNewsFragment extends Fragment {
                 else
                     unreadCount++;
             }
-            updateUnread();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("print", true);
+            updateUnread(bundle);
             enthusiaNewsAdapter.notifyDataSetChanged();
         }
     };
@@ -72,7 +75,7 @@ public class EnthusiaNewsFragment extends Fragment {
                 }
             }
 
-            updateUnread();
+            updateUnread(savedInstanceState);
             customAdded = false;
         } else {
             customAdded = true;
@@ -98,17 +101,34 @@ public class EnthusiaNewsFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        Crouton.clearCroutonsForActivity(getActivity());
         Crouton.cancelAllCroutons();
         super.onDestroy();
     }
 
-    private void updateUnread() {
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Crouton.clearCroutonsForActivity(getActivity());
+        Crouton.cancelAllCroutons();
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("print", false);
+    }
+
+    private void updateUnread(Bundle savedInstanceState) {
 
         if (customAdded)
             return;
 
         if (unreadCount == 0) {
-            Utils.showConfirm(getActivity(), R.string.enthusia_all_read);
+            try {
+                if (savedInstanceState != null && savedInstanceState.getBoolean("print"))
+                    Utils.showConfirm(getActivity(), R.string.enthusia_all_read);
+            } catch (Exception ignore) {}
             ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml(getString(R.string.enthusia_all_messages_read)).toString());
         } else {
             ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml(String.format(getString(R.string.enthusia_unread_count), unreadCount, (unreadCount > 1 ? "s" : "") )).toString());

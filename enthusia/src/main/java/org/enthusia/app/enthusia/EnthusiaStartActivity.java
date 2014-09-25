@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
@@ -166,6 +167,8 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
         if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class))) {
             startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
+        } else if (getAppVersion() > (Integer) Utils.getPrefs(this, Utils.PREF_APP_VERSION, Integer.class)) {
+            startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
         } else {
             if (savedInstanceState == null)
                 Utils.showInfo(EnthusiaStartActivity.this, "Welcome back, " + Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_USER_NAME, String.class));
@@ -173,6 +176,15 @@ public class EnthusiaStartActivity extends FragmentActivity {
                 help();
             }
         }
+    }
+
+    private int getAppVersion() {
+        try {
+            return getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     @Override
@@ -187,15 +199,18 @@ public class EnthusiaStartActivity extends FragmentActivity {
         if (requestCode == 47) {
             if (resultCode == RESULT_OK) {
                 ( (TextView) findViewById(R.id.enthusia_start_user)).setText("Welcome, " + Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class));
-                help();
+                if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_FIRST_RUN, Boolean.class)))
+                    help();
             }
         }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         enthusiaToggle.onConfigurationChanged(newConfig);
+        Crouton.clearCroutonsForActivity(this);
+        Crouton.cancelAllCroutons();
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

@@ -143,7 +143,7 @@ public class Utils {
     }
 
     public static void log (Object log) {
-        Log.d(SHARED_PREFS, log.toString());
+        Log.d("org.enthusia.app.debug", log.toString());
     }
 
 }
