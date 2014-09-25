@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.adapters.EnthusiaSponsorsAdapter;
@@ -27,6 +28,9 @@ public class EnthusiaSponsorsFragment extends Fragment {
         ArrayList<Integer> objects = new ArrayList<Integer>(array.length());
         for (int i=0; i < array.length(); i++)
             objects.add(array.getResourceId(i, -1));
-        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_grid_sponsors)).setAdapter(new EnthusiaSponsorsAdapter(getActivity(), objects));
+
+        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaSponsorsAdapter(getActivity(), objects));
+        animationAdapter.setAbsListView(((StaggeredGridView) getActivity().findViewById(R.id.enthusia_grid_sponsors)));
+        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_grid_sponsors)).setAdapter(animationAdapter);
     }
 }

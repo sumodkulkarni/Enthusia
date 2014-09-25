@@ -1,5 +1,8 @@
 package org.enthusia.app.enthusia.fragments;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.nhaarman.listviewanimations.appearance.StickyListHeadersAdapterDecorator;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
@@ -22,7 +28,6 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
     private StickyListHeadersListView listView;
     private ArrayList<EnthusiaCommittee> mItems;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.enthusia_dialog_deaprtment_heads, container, false);
@@ -35,9 +40,10 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         try {
-            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
+            animateAppear(true);
             ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Intra");
             ((EnthusiaStartActivity) getActivity()).currentFragment = new EnthusiaIntraFragment();
+            ((EnthusiaStartActivity) getActivity()).lockDrawer(false);
         } catch (Exception ignore) {}
     }
 
@@ -48,9 +54,10 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
 
         // Setup ActionBar
         try {
-            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
+            animateAppear(false);
             ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Department Heads");
             ((EnthusiaStartActivity) getActivity()).currentFragment = this;
+            ((EnthusiaStartActivity) getActivity()).lockDrawer(true);
         } catch (Exception ignore) {}
 
         if (savedInstanceState == null)
@@ -83,7 +90,7 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         mItems.add(new EnthusiaCommittee("Aishwarya Shejwal: +919167186391", 5));
 
         // IT
-        mItems.add(new EnthusiaCommittee("Sagar Patil: +919766979737", 6));
+        mItems.add(new EnthusiaCommittee("Sagar Sable: +919766979737", 6));
         mItems.add(new EnthusiaCommittee("Priya Masne: +918806209812", 6));
 
         // Masters
@@ -103,7 +110,10 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         mItems.add(new EnthusiaCommittee("Swati Dighole: +919768350702", 10));
         mItems.add(new EnthusiaCommittee(" : ", 10));
 
-        listView.setAdapter(new EnthusiaStickyHeaderAdapter(getActivity(), mItems, getActivity().getResources().getStringArray(R.array.enthusia_departments)));
+        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaStickyHeaderAdapter(getActivity(), mItems, getActivity().getResources().getStringArray(R.array.enthusia_departments)));
+        StickyListHeadersAdapterDecorator decorator = new StickyListHeadersAdapterDecorator(animationAdapter);
+        decorator.setStickyListHeadersListView(listView);
+        listView.setAdapter(decorator);
     }
 
     @Override
@@ -111,5 +121,53 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         outState.putSerializable("items", mItems);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void animateAppear(final boolean destroying) {
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon), View.ROTATION, 0, 360);
+        animator.setDuration(500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                try {
+                    if ((Float) animation.getAnimatedValue(View.ROTATION.getName()) > 50.0f)
+                        if (destroying)
+                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
+                        else
+                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
+                } catch (Exception ignore) {}
+            }
+
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                try {
+                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(false);
+                } catch (Exception ignore) {}
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                try {
+                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
+                } catch (Exception ignore) {}
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        animator.start();
     }
 }

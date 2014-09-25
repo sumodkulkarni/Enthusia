@@ -3,6 +3,7 @@ package org.enthusia.app.enthusia.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -20,9 +21,10 @@ import android.widget.TextView;
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.etsy.android.grid.StaggeredGridView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 
 import org.enthusia.app.R;
-import org.enthusia.app.Utils;
+import org.enthusia.app.enthusia.EnthusiaStartActivity;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
@@ -59,33 +61,38 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
             @Override
             public void onUnfolding(UnfoldableView unfoldableView) {
                 showDetailsView(true);
+                animateAppear(false);
+                ((EnthusiaStartActivity) getActivity()).lockDrawer(true);
             }
 
-            @SuppressWarnings("ConstantConditions")
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
-                ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_home_as_up));
+
             }
 
             @Override
-            public void onFoldingBack(UnfoldableView unfoldableView) {}
+            public void onFoldingBack(UnfoldableView unfoldableView) {
+                ((EnthusiaStartActivity) getActivity()).lockDrawer(false);
+                animateAppear(true);
+            }
 
             @SuppressWarnings("ConstantConditions")
             @Override
             public void onFoldedBack(UnfoldableView unfoldableView) {
                 showDetailsView(false);
                 ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(getString(R.string.enthusia_events));
-                ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageDrawable(getResources().getDrawable(R.drawable.ic_cab_drawer));
             }
         });
 
-        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter(new AdapterView.OnItemClickListener() {
+        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaEventsGridAdapter(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, final int position, long id) {
                 setupEvent(view.findViewById(R.id.enthusia_events_list_item_event_image),
                         position);
             }
         }));
+        animationAdapter.setAbsListView((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid));
+        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(animationAdapter);
         ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressWarnings("ConstantConditions")
             @Override
@@ -98,7 +105,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
     }
 
     /**
-     * UnFlodable View Events
+     * UnFoldable View Events
      */
 
     private void showDetailsView (boolean show) {
@@ -107,6 +114,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
 
     @SuppressWarnings("ConstantConditions")
     private void setupEvent (View view, final int event) {
+
         ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(EnthusiaEvents.events[event]);
 
         // Event Image
@@ -204,6 +212,54 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void animateAppear(final boolean destroying) {
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon), View.ROTATION, 0, 360);
+        animator.setDuration(500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                try {
+                    if ((Float) animation.getAnimatedValue(View.ROTATION.getName()) > 50.0f)
+                        if (destroying)
+                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
+                        else
+                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
+                } catch (Exception ignore) {}
+            }
+
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                try {
+                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(false);
+                } catch (Exception ignore) {}
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                try {
+                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
+                } catch (Exception ignore) {}
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        animator.start();
     }
 
 }

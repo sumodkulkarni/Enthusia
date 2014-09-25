@@ -45,8 +45,8 @@
             android:layout_centerHorizontal="true"
             android:orientation="vertical">
 
-
-            <com.neopixl.pixlui.components.edittext.EditText
+            <EditText
+                style="@android:style/Widget.Holo.Light.EditText"
                 android:id="@+id/register_et_username"
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
@@ -58,10 +58,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:singleLine="true"
                 android:gravity="center"
-                android:hint="@string/username"
-                android:background="#ededed" />
+                android:hint="@string/username" />
 
-            <com.neopixl.pixlui.components.edittext.EditText
+            <EditText
+                style="@android:style/Widget.Holo.Light.EditText"
                 android:id="@+id/register_et_email"
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
@@ -74,21 +74,31 @@
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="center"
-                android:hint="@string/email"
-                android:background="#ededed" />
+                android:hint="@string/email" />
 
-
-            <Button
+            <org.enthusia.app.ui.MaterialRippleLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/register_btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:background="@drawable/selector_button_default"
-                android:text="@string/register" />
+                android:layout_margin="8dp"
+                app:rippleOverlay="false"
+                app:rippleBackground="@color/app_color"
+                app:rippleColor="@color/app_color_dark"
+                app:rippleDelayClick="true"
+                app:rippleDimension="24dp"
+                app:rippleAlpha="0.65"
+                app:rippleHover="true">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:background="@android:color/transparent"
+                    android:text="@string/register" />
+
+            </org.enthusia.app.ui.MaterialRippleLayout>
 
         </LinearLayout>
 

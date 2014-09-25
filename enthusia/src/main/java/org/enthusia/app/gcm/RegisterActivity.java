@@ -12,6 +12,8 @@ import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -32,10 +34,17 @@ import java.util.Map;
 
 public class RegisterActivity extends Activity {
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
+
+        getActionBar().setCustomView(R.layout.actionbar_custom);
+        getActionBar().setDisplayShowCustomEnabled(true);
+        ((ImageButton) getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_launcher);
+        getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(false);
+        ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("User Registration");
 
         if ((Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)) != null && !(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)).equals("")) {
             ((EditText) findViewById(R.id.register_et_username)).setText(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class).toString());

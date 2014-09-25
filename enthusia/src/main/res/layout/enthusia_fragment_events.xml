@@ -38,12 +38,12 @@
             <com.etsy.android.grid.util.DynamicHeightImageView
                 android:id="@+id/enthusia_events_details_event_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/ic_launcher"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:contentDescription="@null"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
 
             <!-- Event Heads  -->
             <LinearLayout

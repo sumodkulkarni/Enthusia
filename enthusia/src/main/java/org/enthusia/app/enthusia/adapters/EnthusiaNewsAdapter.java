@@ -57,9 +57,10 @@ public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
 
         holder.textView.setPadding(20,20,20,20);
 
-        if (getItem(i).getMessage() != null)
+        if (getItem(i).getMessage() != null) {
             holder.textView.setText(Html.fromHtml(new AndDown().markdownToHtml(getItem(i).getMessage())));
-        else {
+            holder.textView.setText(holder.textView.getText().toString().trim());
+        } else {
             holder.textView.setText(getItem(i).getSpannableString());
         }
 

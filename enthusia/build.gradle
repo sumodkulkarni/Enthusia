@@ -43,6 +43,7 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.5.0'
     compile 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
     compile 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-core-slh:3.1.0@aar'
     //noinspection GradleDependency
     compile 'com.google.android.gms:play-services:5.0.89'
     compile 'com.etsy.android.grid:library:1.0.5'

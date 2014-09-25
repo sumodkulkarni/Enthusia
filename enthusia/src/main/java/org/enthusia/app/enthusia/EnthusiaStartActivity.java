@@ -233,10 +233,12 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
-        if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
-            enthusiaSlider.openDrawer(Gravity.LEFT);
-        } else {
-            enthusiaSlider.closeDrawers();
+        if (enthusiaSlider.getDrawerLockMode(GravityCompat.START) != DrawerLayout.LOCK_MODE_LOCKED_CLOSED || enthusiaSlider.getDrawerLockMode(Gravity.LEFT) != DrawerLayout.LOCK_MODE_LOCKED_CLOSED) {
+            if (!enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+                enthusiaSlider.openDrawer(Gravity.LEFT);
+            } else {
+                enthusiaSlider.closeDrawers();
+            }
         }
         return true;
     }
@@ -482,6 +484,14 @@ public class EnthusiaStartActivity extends FragmentActivity {
                 }, 250);
             } catch (Exception ignore) {}
         }
+    }
+
+    public void lockDrawer(boolean lock) {
+        if (lock)
+            enthusiaSlider.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        else
+            enthusiaSlider.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
     }
 
     private void setSelected(int id) {

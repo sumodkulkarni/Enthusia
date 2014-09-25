@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nhaarman.listviewanimations.appearance.StickyListHeadersAdapterDecorator;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.adapters.EnthusiaStickyHeaderAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaCommittee;
@@ -28,7 +31,7 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Arundhati Karanth: +919920930194", 0));
         mCommittee.add(new EnthusiaCommittee("Ameya Phansalkar: +918082424061", 1));
         mCommittee.add(new EnthusiaCommittee("Krunal Maskai: +919833897888", 2));
-        mCommittee.add(new EnthusiaCommittee("Shubham Thambi: +919860078876", 2));
+        mCommittee.add(new EnthusiaCommittee("Shubham Tambi: +919860078876", 2));
         mCommittee.add(new EnthusiaCommittee("Devika Bhalerao: +919920731384", 3));
         mCommittee.add(new EnthusiaCommittee("Nandini Mazumdar: +919833780021", 3));
         mCommittee.add(new EnthusiaCommittee("Varad Deolankar: +919773162774", 4));
@@ -48,11 +51,13 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 11));
         mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
         mCommittee.add(new EnthusiaCommittee("Tushar Jadhav: +919967366742", 12));
-        // Todo Add Diploma Girl Representative
         mCommittee.add(new EnthusiaCommittee(" : ", 12));
 
-        ((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)).setAdapter(new EnthusiaStickyHeaderAdapter(
+        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaStickyHeaderAdapter(
                 getActivity(), mCommittee, getResources().getStringArray(R.array.enthusia_committe_posts)));
+        StickyListHeadersAdapterDecorator decorator = new StickyListHeadersAdapterDecorator(animationAdapter);
+        decorator.setStickyListHeadersListView(((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)));
+        ((StickyListHeadersListView) getActivity().findViewById(R.id.enthusia_fragment_committee_list)).setAdapter(decorator);
 
     }
 }
