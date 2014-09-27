@@ -26,8 +26,6 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
     public final static String PREF_POINT_TABLE = "org.enthusia.app.enthusia.points";
     public final static String PREF_POINTS = "pref_points_";
 
-
-    @SuppressWarnings("unchecked")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(false);
@@ -36,23 +34,26 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
         getDialog().getWindow().getAttributes().windowAnimations = R.style.AppTheme_Dialog;
         View v = inflater.inflate(R.layout.enthusia_dialog_points_table, container, false);
         pointsTable = (TableLayout) v.findViewById(R.id.enthusia_dialog_points_table_table);
-        if (savedInstanceState == null)
-            tableData = new ArrayList<EnthusiaPointsTable>();
-        else
-            tableData = (ArrayList<EnthusiaPointsTable>) savedInstanceState.getSerializable("points");
         return v;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        for (int i=0; i < getActivity().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
-            this.tableData.add(new EnthusiaPointsTable(
-                    getActivity().getResources().getStringArray(R.array.enthusia_departments)[i],
-                    getPoints(getActivity().getResources().getStringArray(R.array.enthusia_departments)[i])
-            ));
-        }
+        if (savedInstanceState == null)
+            tableData = new ArrayList<EnthusiaPointsTable>();
+        else
+            tableData = (ArrayList<EnthusiaPointsTable>) savedInstanceState.getSerializable("points");
+
+        if (savedInstanceState == null)
+            for (int i=0; i < getActivity().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
+                this.tableData.add(new EnthusiaPointsTable(
+                        getActivity().getResources().getStringArray(R.array.enthusia_departments)[i],
+                        getPoints(getActivity().getResources().getStringArray(R.array.enthusia_departments)[i])
+                ));
+            }
         Collections.sort(this.tableData);
 
         for (int i=0; i < this.tableData.size(); i++) {

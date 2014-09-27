@@ -2,6 +2,7 @@ package org.enthusia.app.enthusia.model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public class EnthusiaPointsTable implements Serializable, Comparable<EnthusiaPointsTable> {
 
     private String department;
@@ -22,4 +23,5 @@ public class EnthusiaPointsTable implements Serializable, Comparable<EnthusiaPoi
     public int compareTo(EnthusiaPointsTable o) {
         return o.points - this.points;
     }
+
 }

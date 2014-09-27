@@ -36,7 +36,7 @@ public class EnthusiaStickyHeaderAdapter extends ArrayAdapter<EnthusiaCommittee>
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.enthusia_list_item_event_head, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.enthusia_list_item_comittee, parent, false);
             holder.name =  (TextView) convertView.findViewById(R.id.enthusia_list_item_event_head_name);
             holder.number = (TextView) convertView.findViewById(R.id.enthusia_list_item_event_head_number);
             convertView.setTag(holder);

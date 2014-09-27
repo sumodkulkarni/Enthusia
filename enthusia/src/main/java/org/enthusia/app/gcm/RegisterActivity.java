@@ -50,10 +50,16 @@ public class RegisterActivity extends Activity {
             ((EditText) findViewById(R.id.register_et_username)).setText(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class).toString());
             ((EditText) findViewById(R.id.register_et_email)).setText(Utils.getPrefs(this, Utils.PREF_EMAIL, String.class).toString());
 
+            findViewById(R.id.register_et_username).setEnabled(false);
+            findViewById(R.id.register_et_email).setEnabled(false);
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    new RegisterUser().execute(null, null, null);
+                    if (!isNetworkConnected())
+                        Utils.showAlert(RegisterActivity.this, Html.fromHtml(getString(R.string.alert_register_no_network)).toString());
+                    else
+                        new RegisterUser().execute(null, null, null);
                 }
             }, 150);
         }

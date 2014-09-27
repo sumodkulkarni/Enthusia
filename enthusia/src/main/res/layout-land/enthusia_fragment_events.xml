@@ -75,11 +75,11 @@
 
             <!-- Rules -->
             <LinearLayout
+                android:id="@+id/enthusia_events_layout_event_rules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="10dp"
-                android:layout_alignParentBottom="true"
                 android:layout_below="@+id/enthusia_events_layout_event_heads">
 
                 <TextView
@@ -135,6 +135,13 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@android:color/transparent"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/enthusia_events_layout_event_rules" />
 
         </RelativeLayout>
 

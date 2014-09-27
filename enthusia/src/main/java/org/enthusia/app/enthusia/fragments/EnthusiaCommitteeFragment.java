@@ -45,13 +45,14 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Miloni Gada: +919819996361", 8));
         mCommittee.add(new EnthusiaCommittee("Pankhil Mistry: +919167140406", 8));
         mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 8));
-        mCommittee.add(new EnthusiaCommittee("Pankaj Palwe: +919637081559", 9));
-        mCommittee.add(new EnthusiaCommittee("Karan Nair: +919004656479", 10));
-        mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 11));
-        mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 11));
-        mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 11));
-        mCommittee.add(new EnthusiaCommittee("Tushar Jadhav: +919967366742", 12));
-        mCommittee.add(new EnthusiaCommittee(" : ", 12));
+        mCommittee.add(new EnthusiaCommittee("Vishal Medida: +917387520081", 9));
+        mCommittee.add(new EnthusiaCommittee("Pankaj Palwe: +919637081559", 10));
+        mCommittee.add(new EnthusiaCommittee("Karan Nair: +919004656479", 11));
+        mCommittee.add(new EnthusiaCommittee("Anish Shah: +919821735835", 12));
+        mCommittee.add(new EnthusiaCommittee("Rahul Iyer: +919967053733", 12));
+        mCommittee.add(new EnthusiaCommittee("Rohit Dawra: +918805212199", 12));
+        mCommittee.add(new EnthusiaCommittee("Tushar Jadhav: +919967366742", 13));
+        mCommittee.add(new EnthusiaCommittee(" : ", 13));
 
         AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaStickyHeaderAdapter(
                 getActivity(), mCommittee, getResources().getStringArray(R.array.enthusia_committe_posts)));

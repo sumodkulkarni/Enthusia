@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ import android.widget.TextView;
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.etsy.android.grid.StaggeredGridView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
-import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
@@ -34,6 +34,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
 
     public UnfoldableView mUnfoldableView;
     public boolean isExpanded = false;
+    private int position;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("isExpanded", isExpanded);
+        outState.putBoolean("isUnfolded", mUnfoldableView.isUnfolded());
+        outState.putInt("position", position);
     }
 
     @Override
@@ -84,15 +87,13 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
             }
         });
 
-        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaEventsGridAdapter(new AdapterView.OnItemClickListener() {
+        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(new EnthusiaEventsGridAdapter(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, final View view, final int position, long id) {
                 setupEvent(view.findViewById(R.id.enthusia_events_list_item_event_image),
                         position);
             }
         }));
-        animationAdapter.setAbsListView((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid));
-        ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setAdapter(animationAdapter);
         ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressWarnings("ConstantConditions")
             @Override
@@ -102,6 +103,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
         });
 
         getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
+
     }
 
     /**
@@ -109,11 +111,15 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
      */
 
     private void showDetailsView (boolean show) {
-        getActivity().findViewById(R.id.enthusia_events_details_layout).setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        try {
+            getActivity().findViewById(R.id.enthusia_events_details_layout).setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        } catch (Exception ignore) {}
     }
 
     @SuppressWarnings("ConstantConditions")
     private void setupEvent (View view, final int event) {
+
+        position = event;
 
         ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(EnthusiaEvents.events[event]);
 
@@ -124,30 +130,39 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
 
         // Event Heads
         ((ListView) getActivity().findViewById(R.id.enthusia_events_details_event_list_event_heads)).setAdapter(new EnthusiaEventsEventHeadAdapter(getActivity(), EnthusiaEvents.getEventHead(event)));
-        setListViewHeightBasedOnChildren((ListView) getActivity().findViewById(R.id.enthusia_events_details_event_list_event_heads));
+
 
         // Rules
         ((TextView) getActivity().findViewById(R.id.enthusia_event_rules)).setText(Html.fromHtml(getString(EnthusiaEvents.rules[event])));
+
+        getActivity().findViewById(R.id.enthusia_event_showmore).setVisibility(getString(EnthusiaEvents.rules[event]).toLowerCase().startsWith("please contact") ? View.GONE : View.VISIBLE);
 
         // Expand Listener
         getActivity().findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(this);
         getActivity().findViewById(R.id.enthusia_event_showmore).setOnClickListener(this);
 
+        setListViewHeightBasedOnChildren((ListView) getActivity().findViewById(R.id.enthusia_events_details_event_list_event_heads));
+
         mUnfoldableView.unfold(view, getActivity().findViewById(R.id.enthusia_events_details_layout));
     }
 
     public void reset() {
-        if (isExpanded)
+        if (isExpanded && getActivity().findViewById(R.id.enthusia_event_showmore).getVisibility() == View.VISIBLE)
             getActivity().findViewById(R.id.enthusia_event_showmore).performClick();
         ((ScrollView) getActivity().findViewById(R.id.enthusia_events_details_layout)).fullScroll(View.FOCUS_UP);
-        mUnfoldableView.foldBack();
-        isExpanded = false;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUnfoldableView.foldBack();
+                isExpanded = false;
+            }
+        }, getActivity().findViewById(R.id.enthusia_event_showmore).getVisibility() == View.VISIBLE ? (isExpanded ?  300 : 100) : 100);
     }
 
     @Override
     public void onClick(View v) {
         AnimatorSet set = new AnimatorSet();
-        set.setDuration(1000);
+        set.setDuration(500);
         set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.play(getTextViewAnimation()).with(getImageViewAnimation());
         set.addListener(new Animator.AnimatorListener() {
@@ -209,7 +224,8 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
             totalHeight += view.getMeasuredHeight();
         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + listView.getDividerHeight() * (listAdapter.getCount() - 1);
+        params.height += listView.getPaddingBottom() + listView.getPaddingTop();
         listView.setLayoutParams(params);
         listView.requestLayout();
     }

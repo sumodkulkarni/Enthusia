@@ -1,69 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitXY"
-        android:contentDescription="@null"
-        android:src="@drawable/img_enthusia_intrapic"
-        android:layout_margin="8dp" />
+        android:layout_height="wrap_content">
 
-    <org.enthusia.app.ui.MaterialRippleLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/enthusia_fragment_intra_button_points_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:rippleOverlay="false"
-        app:rippleBackground="@color/app_color"
-        app:rippleColor="@color/app_color_dark"
-        app:rippleDelayClick="true"
-        app:rippleDimension="24dp"
-        app:rippleAlpha="0.65"
-        app:rippleHover="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/intra_size"
+            android:scaleType="fitXY"
+            android:contentDescription="@null"
+            android:background="@drawable/img_enthusia_intrapic"
+            android:layout_margin="8dp" />
 
-        <Button
-            android:background="@android:color/transparent"
+        <org.enthusia.app.ui.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/enthusia_fragment_intra_button_points_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enthusia_points_table"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_margin="8dp"
+            app:rippleOverlay="false"
+            app:rippleBackground="@color/app_color"
+            app:rippleColor="@color/app_color_dark"
+            app:rippleDelayClick="true"
+            app:rippleDimension="24dp"
+            app:rippleAlpha="0.65"
+            app:rippleHover="true">
 
-    </org.enthusia.app.ui.MaterialRippleLayout>
+            <Button
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enthusia_points_table"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <org.enthusia.app.ui.MaterialRippleLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/enthusia_fragment_intra_button_department_heads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:rippleOverlay="false"
-        app:rippleBackground="@color/app_color"
-        app:rippleColor="@color/app_color_dark"
-        app:rippleDelayClick="true"
-        app:rippleDimension="24dp"
-        app:rippleAlpha="0.65"
-        app:rippleHover="true">
+        </org.enthusia.app.ui.MaterialRippleLayout>
 
-        <Button
-            android:background="@android:color/transparent"
+        <org.enthusia.app.ui.MaterialRippleLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/enthusia_fragment_intra_button_department_heads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enthusia_department_heads"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_margin="8dp"
+            app:rippleOverlay="false"
+            app:rippleBackground="@color/app_color"
+            app:rippleColor="@color/app_color_dark"
+            app:rippleDelayClick="true"
+            app:rippleDimension="24dp"
+            app:rippleAlpha="0.65"
+            app:rippleHover="true">
 
-    </org.enthusia.app.ui.MaterialRippleLayout>
+            <Button
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enthusia_department_heads"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</LinearLayout>
+        </org.enthusia.app.ui.MaterialRippleLayout>
+
+    </LinearLayout>
+
+</ScrollView>

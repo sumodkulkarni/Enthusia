@@ -8,10 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <org.enthusia.app.ui.SquareImageView
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="@dimen/intra_size"
             android:scaleType="fitXY"
             android:contentDescription="@null"
             android:background="@drawable/img_enthusia_intrapic"

@@ -74,6 +74,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>Public Relations Head</item>
         <item>Infrastructure Chief Coordinator</item>
         <item>Design Team</item>
+        <item>Social Media Head</item>
         <item>Security Head</item>
         <item>Half Time Coordinator</item>
         <item>Website Development Team</item>
@@ -95,56 +96,42 @@ Once you receive updates this card will be automatically hidden]]></string>
     </string-array>
 
     <array name="enthusia_spons">
+        <item>@drawable/img_enthusia_spons_youwecan</item>
+        <item>@drawable/img_enthusia_unibic</item>
+        <item>@drawable/img_enthusia_spons_chocon</item>
+        <item>@drawable/img_enthusia_spons_leenamogre</item>
+        <item>@drawable/img_enthusia_spons_ritebite</item>
+        <item>@drawable/img_enthusia_spons_charakhdin</item>
+        <item>@drawable/img_enthusia_spons_sakal</item>
+        <item>@drawable/img_enthusia_spons_jagruktimes</item>
+        <item>@drawable/img_enthusia_spons_buckaroo</item>
+        <item>@drawable/img_enthusia_spons_mgl</item>
         <item>@drawable/img_enthusia_spons_5star</item>
-        <item>@drawable/img_enthusia_spons_adidas</item>
-        <item>@drawable/img_enthusia_spons_appy</item>
+        <item>@drawable/img_enthusia_spons_nutrifit</item>
+        <item>@drawable/img_enthusia_spons_spykar</item>
+        <item>@drawable/img_enthusia_spons_everydaychild</item>
         <item>@drawable/img_enthusia_spons_besttv</item>
         <item>@drawable/img_enthusia_spons_bhashan</item>
-        <item>@drawable/img_enthusia_spons_bigfm</item>
-        <item>@drawable/img_enthusia_spons_boi</item>
-        <item>@drawable/img_enthusia_spons_buckaroo</item>
-        <item>@drawable/img_enthusia_spons_castrol</item>
-        <item>@drawable/img_enthusia_spons_cinemax</item>
-        <item>@drawable/img_enthusia_spons_cloud9</item>
         <item>@drawable/img_enthusia_spons_credila</item>
         <item>@drawable/img_enthusia_spons_dtdc</item>
-        <item>@drawable/img_enthusia_spons_ellora</item>
-        <item>@drawable/img_enthusia_spons_everyday</item>
-        <item>@drawable/img_enthusia_spons_fadoo</item>
+        <item>@drawable/img_enthusia_spons_smash</item>
+        <item>@drawable/img_enthusia_spons_adidas</item>
+        <item>@drawable/img_enthusia_spons_bigfm</item>
+        <item>@drawable/img_enthusia_spons_cloud9</item>
         <item>@drawable/img_enthusia_spons_fame</item>
         <item>@drawable/img_enthusia_spons_fever</item>
         <item>@drawable/img_enthusia_spons_fpj</item>
         <item>@drawable/img_enthusia_spons_freecharge</item>
-        <item>@drawable/img_enthusia_spons_hook2</item>
         <item>@drawable/img_enthusia_spons_jam</item>
         <item>@drawable/img_enthusia_spons_knowafest</item>
-        <item>@drawable/img_enthusia_spons_lm</item>
         <item>@drawable/img_enthusia_spons_loksatta</item>
         <item>@drawable/img_enthusia_spons_lovely</item>
-        <item>@drawable/img_enthusia_spons_lucozade_sport</item>
         <item>@drawable/img_enthusia_spons_maharashtra_times</item>
-        <item>@drawable/img_enthusia_spons_mapro</item>
-        <item>@drawable/img_enthusia_spons_mgl</item>
-        <item>@drawable/img_enthusia_spons_mmf</item>
-        <item>@drawable/img_enthusia_spons_mtb</item>
-        <item>@drawable/img_enthusia_spons_nature_valley</item>
-        <item>@drawable/img_enthusia_spons_nescafe</item>
-        <item>@drawable/img_enthusia_spons_nk</item>
-        <item>@drawable/img_enthusia_spons_nutrifit</item>
-        <item>@drawable/img_enthusia_spons_papajohns</item>
-        <item>@drawable/img_enthusia_spons_prahar</item>
         <item>@drawable/img_enthusia_spons_rotaract</item>
         <item>@drawable/img_enthusia_spons_sboi</item>
-        <item>@drawable/img_enthusia_spons_smash</item>
-        <item>@drawable/img_enthusia_spons_smc</item>
-        <item>@drawable/img_enthusia_spons_sparsha</item>
         <item>@drawable/img_enthusia_spons_sportskeeda</item>
         <item>@drawable/img_enthusia_spons_sportssquare</item>
-        <item>@drawable/img_enthusia_spons_spykar</item>
-        <item>@drawable/img_enthusia_spons_the_loot</item>
-        <item>@drawable/img_enthusia_spons_thwack</item>
         <item>@drawable/img_enthusia_spons_twenty19</item>
         <item>@drawable/img_enthusia_spons_vodafone</item>
-        <item>@drawable/img_enthusia_spons_yuvanxt</item>
     </array>
 </resources>

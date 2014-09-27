@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -62,7 +63,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
     private DrawerLayout enthusiaSlider;
     private ActionBarDrawerToggle enthusiaToggle;
     public Fragment currentFragment;
-    private String title;
+    public ArrayList<String> title = new ArrayList<String>();
 
     private ArrayList<FloatingActionButton> socialMediaIcons;
     private boolean socialMediaShown = false;
@@ -114,7 +115,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
             @Override
             public void onDrawerClosed(View drawerView) {
                 invalidateOptionsMenu();
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title);
+                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
             }
 
             @Override
@@ -135,8 +136,6 @@ public class EnthusiaStartActivity extends FragmentActivity {
                 displayView(0);
         } else if (savedInstanceState == null) {
             displayView(0);
-        } else {
-            displayView(savedInstanceState.getInt("fragment"));
         }
 
         setListViewHeightBasedOnChildren((ListView) findViewById(R.id.enthusia_start_slider));
@@ -219,10 +218,14 @@ public class EnthusiaStartActivity extends FragmentActivity {
             EnthusiaEventsFragment fragment = (EnthusiaEventsFragment) currentFragment;
             if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding()))
                 fragment.reset();
+            else if (getSupportFragmentManager().getBackStackEntryCount() == 1)
+                finish();
             else
-                super.onBackPressed();
-        } else
-            super.onBackPressed();
+                popBackStack();
+        } else if (getSupportFragmentManager().getBackStackEntryCount() == 1)
+            finish();
+        else
+            popBackStack();
     }
 
     @Override
@@ -243,6 +246,18 @@ public class EnthusiaStartActivity extends FragmentActivity {
         return true;
     }
 
+    private void popBackStack() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1)
+            finish();
+        else {
+            try {
+                title.remove(title.size() - 1);
+                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
+            } catch (IndexOutOfBoundsException ignore) {}
+            super.onBackPressed();
+        }
+        setSelected(getPosition(title.get(title.size() - 1)));
+    }
 
     @SuppressWarnings("ResourceType")
     @SuppressLint("RtlHardcoded")
@@ -436,6 +451,8 @@ public class EnthusiaStartActivity extends FragmentActivity {
     };
 
     private void displayView (int position) {
+        if (title.size() > 0 && getPosition(title.get(title.size() - 1)) == position)
+            return;
         Crouton.cancelAllCroutons();
         currentFragment = null;
         switch (position) {
@@ -464,7 +481,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
                 currentFragment = new EnthusiaAboutFragment();
                 break;
         }
-        title = ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).getText().toString();
+        title.add(((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).getText().toString());
         setSelected(position);
         enthusiaSlider.closeDrawers();
 
@@ -478,6 +495,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
                                     .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit,
                                                          R.anim.fragment_enter, R.anim.fragment_exit)
                                     .replace(R.id.enthusia_start_fragment_container, currentFragment)
+                                    .addToBackStack(title.get(title.size() - 1))
                                     .commit();
                         } catch (Exception ignore) {}
                     }
@@ -506,6 +524,16 @@ public class EnthusiaStartActivity extends FragmentActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("fragment", getFragment());
+        outState.putSerializable("title", title);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        title = (ArrayList<String>) savedInstanceState.getSerializable("title");
+        setSelected(getPosition(title.get(title.size() - 1)));
+        ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
     }
 
     private int getFragment() {
@@ -563,5 +591,19 @@ public class EnthusiaStartActivity extends FragmentActivity {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+
+    public int getPosition(String title) {
+        if (title.equals("Enthusia"))
+            return 0;
+        if (title.equals("Intra") || title.equals("Department Heads"))
+            return 2;
+        if (title.equals("Sponsors"))
+            return 3;
+        if (title.equals("Committee"))
+            return 4;
+        if (title.equals("About Us"))
+            return 5;
+        return 1;
     }
 }

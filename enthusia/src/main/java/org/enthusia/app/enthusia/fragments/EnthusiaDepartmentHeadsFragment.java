@@ -56,6 +56,7 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         try {
             animateAppear(false);
             ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Department Heads");
+            ((EnthusiaStartActivity) getActivity()).title.add("Department Heads");
             ((EnthusiaStartActivity) getActivity()).currentFragment = this;
             ((EnthusiaStartActivity) getActivity()).lockDrawer(true);
         } catch (Exception ignore) {}
@@ -170,4 +171,5 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
 
         animator.start();
     }
+
 }

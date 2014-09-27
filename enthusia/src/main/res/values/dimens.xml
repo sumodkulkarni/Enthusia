@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="actionbar_height">56dp</dimen>
+    <dimen name="about_size">150dp</dimen>
+    <dimen name="intra_size">250dp</dimen>
 </resources>

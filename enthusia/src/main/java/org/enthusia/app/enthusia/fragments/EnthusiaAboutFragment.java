@@ -43,10 +43,6 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.a_plus).setOnClickListener(developerURLS);
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            ((DynamicHeightImageView) getActivity().findViewById(R.id.enthusia_about_tagline)).setHeightRatio(1.25f);
-
     }
 
     @Override

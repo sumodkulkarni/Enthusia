@@ -44,8 +44,7 @@
         <activity
             android:label="@string/enthusia_fest_name"
             android:name=".enthusia.EnthusiaStartActivity"
-            android:alwaysRetainTaskState="true"
-            android:configChanges="orientation">
+            android:alwaysRetainTaskState="true">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
                     <category android:name="android.intent.category.LAUNCHER" />

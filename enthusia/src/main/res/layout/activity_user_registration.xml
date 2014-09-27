@@ -69,7 +69,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="10dp"
-                android:inputType="textEmailAddress"
+                android:inputType="textEmailAddress|textAutoCorrect|textAutoComplete"
                 android:textColor="@color/black"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"

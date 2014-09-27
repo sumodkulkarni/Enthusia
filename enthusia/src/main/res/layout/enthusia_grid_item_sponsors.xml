@@ -12,6 +12,7 @@
         android:contentDescription="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY" />
+        android:src="@drawable/img_enthusia_spons_fever"
+        android:scaleType="center" />
 
 </FrameLayout>
