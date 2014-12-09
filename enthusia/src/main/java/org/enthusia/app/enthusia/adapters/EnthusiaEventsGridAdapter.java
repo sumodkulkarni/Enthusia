@@ -7,11 +7,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
-import org.enthusia.app.ui.MaterialRippleLayout;
 
 public class EnthusiaEventsGridAdapter extends BaseAdapter {
 

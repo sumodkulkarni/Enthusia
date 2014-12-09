@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<org.enthusia.app.ui.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_item_events_parent"
     android:descendantFocusability="blocksDescendants"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background"
     app:rippleOverlay="true"
-    app:rippleHover="true"
-    app:rippleColor="@color/gray_divider"
-    app:rippleDimension="24dp"
-    app:rippleAlpha="0.45">
+    app:rippleInAdapter="true">
 
     <FrameLayout
         android:id="@+id/grid_item_events_child"
@@ -47,4 +43,4 @@
 
     </FrameLayout>
 
-</org.enthusia.app.ui.MaterialRippleLayout>
+</com.balysv.materialripple.MaterialRippleLayout>

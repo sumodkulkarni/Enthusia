@@ -3,23 +3,25 @@ package org.enthusia.app.enthusia.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.etsy.android.grid.StaggeredGridView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
 
@@ -28,7 +30,6 @@ import org.enthusia.app.enthusia.EnthusiaStartActivity;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
-import org.enthusia.app.ui.MaterialRippleLayout;
 
 public class EnthusiaEventsFragment extends Fragment implements View.OnClickListener {
 
@@ -83,7 +84,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
             @Override
             public void onFoldedBack(UnfoldableView unfoldableView) {
                 showDetailsView(false);
-                ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(getString(R.string.enthusia_events));
+                ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.enthusia_events));
             }
         });
 
@@ -121,7 +122,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
 
         position = event;
 
-        ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(EnthusiaEvents.events[event]);
+        ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle(EnthusiaEvents.events[event]);
 
         // Event Image
         DynamicHeightImageView imageView = (DynamicHeightImageView) getActivity().findViewById(R.id.enthusia_events_details_event_image);
@@ -230,52 +231,19 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
         listView.requestLayout();
     }
 
+    Drawable oldDrawable;
+
     @SuppressWarnings("ConstantConditions")
     public void animateAppear(final boolean destroying) {
-
-        ObjectAnimator animator = ObjectAnimator.ofFloat(getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon), View.ROTATION, 0, 360);
-        animator.setDuration(500);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                try {
-                    if ((Float) animation.getAnimatedValue(View.ROTATION.getName()) > 50.0f)
-                        if (destroying)
-                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
-                        else
-                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
-                } catch (Exception ignore) {}
-            }
-
-        });
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                try {
-                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(false);
-                } catch (Exception ignore) {}
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                try {
-                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
-                } catch (Exception ignore) {}
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-
-        animator.start();
+        if (destroying) {
+            ((Toolbar) (getActivity()).findViewById(R.id.action_bar)).setNavigationIcon(oldDrawable);
+        } else {
+            if (oldDrawable == null)
+                oldDrawable = ((Toolbar) (getActivity()).findViewById(R.id.action_bar)).getNavigationIcon();
+            TypedValue value = new TypedValue();
+            getActivity().getTheme().resolveAttribute(R.attr.homeAsUpIndicator, value, true);
+            ((Toolbar) (getActivity()).findViewById(R.id.action_bar)).setNavigationIcon(value.resourceId);
+        }
     }
 
 }

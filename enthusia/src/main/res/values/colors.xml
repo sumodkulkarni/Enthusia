@@ -6,6 +6,7 @@
     <color name="gray_divider">#e0e0e0</color>
     <color name="blue_selector">#Ff7ecce8</color>
     <color name="app_color">#03a9f4</color>
+    <color name="app_color_accent">#2962FF</color>
     <color name="app_color_highlight">#0288d1</color>
     <color name="app_color_actionbar_highlight">#0288d1</color>
     <color name="app_color_dark">#01579b</color>

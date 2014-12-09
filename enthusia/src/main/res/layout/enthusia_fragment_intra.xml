@@ -16,21 +16,21 @@
             android:background="@drawable/img_enthusia_intrapic"
             android:layout_margin="8dp" />
 
-        <org.enthusia.app.ui.MaterialRippleLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/enthusia_fragment_intra_button_points_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:rippleOverlay="false"
             app:rippleBackground="@color/app_color"
-            app:rippleColor="@color/app_color_dark"
+            app:rippleColor="@color/app_color_accent"
             app:rippleDelayClick="true"
             app:rippleDimension="24dp"
             app:rippleAlpha="0.65"
             app:rippleHover="true">
 
             <Button
+                style="?attr/buttonBarStyle"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,17 +40,17 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        </org.enthusia.app.ui.MaterialRippleLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-        <org.enthusia.app.ui.MaterialRippleLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="?attr/buttonBarStyle"
             android:id="@+id/enthusia_fragment_intra_button_department_heads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:rippleOverlay="false"
             app:rippleBackground="@color/app_color"
-            app:rippleColor="@color/app_color_dark"
+            app:rippleColor="@color/app_color_accent"
             app:rippleDelayClick="true"
             app:rippleDimension="24dp"
             app:rippleAlpha="0.65"
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        </org.enthusia.app.ui.MaterialRippleLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
     </LinearLayout>
 

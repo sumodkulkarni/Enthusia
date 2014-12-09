@@ -13,11 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,8 +51,8 @@ import java.util.ArrayList;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 
-@SuppressWarnings("ConstantConditions")
-public class EnthusiaStartActivity extends FragmentActivity {
+@SuppressWarnings({"ConstantConditions","RTLHardcoded","RTLSymmetry"})
+public class EnthusiaStartActivity extends ActionBarActivity {
 
     private final static int[] SOCIAL_MEDIA_DRAWABLES = {
             R.drawable.ic_fab_facebook,
@@ -61,9 +62,9 @@ public class EnthusiaStartActivity extends FragmentActivity {
     };
 
     private DrawerLayout enthusiaSlider;
-    private ActionBarDrawerToggle enthusiaToggle;
+    public ActionBarDrawerToggle enthusiaToggle;
     public Fragment currentFragment;
-    public ArrayList<String> title = new ArrayList<String>();
+    public ArrayList<String> title = new ArrayList<>();
 
     private ArrayList<FloatingActionButton> socialMediaIcons;
     private boolean socialMediaShown = false;
@@ -72,6 +73,9 @@ public class EnthusiaStartActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enthusia_start);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.action_bar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         enthusiaSlider = (DrawerLayout) findViewById(R.id.enthusia_start_drawer);
         ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<EnthusiaNavDrawerItem>();
@@ -90,12 +94,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
         ((TextView) findViewById(R.id.enthusia_start_user)).setText(getString(R.string.welcome) + ", " + Utils.getPrefs(getApplicationContext(), Utils.PREF_USER_NAME, String.class));
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setCustomView(R.layout.actionbar_custom);
-        getActionBar().setDisplayShowCustomEnabled(true);
-        getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("RtlHardcoded")
+        ((Toolbar) findViewById(R.id.action_bar)).setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -111,17 +110,18 @@ public class EnthusiaStartActivity extends FragmentActivity {
             }
         });
 
-        enthusiaToggle = new ActionBarDrawerToggle(this, enthusiaSlider, android.R.color.transparent, R.string.enthusia_fest_name, R.string.enthusia_events) {
+        enthusiaToggle = new ActionBarDrawerToggle(this, enthusiaSlider,
+                   R.string.enthusia_fest_name, R.string.enthusia_events) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 invalidateOptionsMenu();
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
+                getSupportActionBar().setTitle(title.get(title.size() - 1));
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 invalidateOptionsMenu();
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_fest_name)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_fest_name)));
             }
         };
 
@@ -139,19 +139,6 @@ public class EnthusiaStartActivity extends FragmentActivity {
         }
 
         setListViewHeightBasedOnChildren((ListView) findViewById(R.id.enthusia_start_slider));
-    }
-
-    @SuppressWarnings("NullableProblems")
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                enthusiaToggle.onOptionsItemSelected(item);
-                break;
-        }
-
-        return false;
     }
 
     @Override
@@ -252,7 +239,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
         else {
             try {
                 title.remove(title.size() - 1);
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
+                getSupportActionBar().setTitle(title.get(title.size() - 1));
             } catch (IndexOutOfBoundsException ignore) {}
             super.onBackPressed();
         }
@@ -265,14 +252,14 @@ public class EnthusiaStartActivity extends FragmentActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.enthusia_start_fab);
         fab.setColorNormal(Color.WHITE);
-        fab.setColorPressed(darkenColor(Color.WHITE));
-        fab.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
         fab.setType(FloatingActionButton.TYPE_MINI);
+        fab.setColorPressed(darkenColor(Color.WHITE));
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
         fab.setOnClickListener(fabClick);
 
-        socialMediaIcons = new ArrayList<FloatingActionButton>();
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams( (int) (72 *  getResources().getDisplayMetrics().scaledDensity), (int) (72 * getResources().getDisplayMetrics().scaledDensity));
+        socialMediaIcons = new ArrayList<>();
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams( (int) (72 *  getResources().getDisplayMetrics().scaledDensity),
+                (int) (72 * getResources().getDisplayMetrics().scaledDensity));
         params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
         params.bottomMargin = (int) (16 * getResources().getDisplayMetrics().scaledDensity);
         params.rightMargin = (int) (16 * getResources().getDisplayMetrics().scaledDensity);
@@ -281,7 +268,6 @@ public class EnthusiaStartActivity extends FragmentActivity {
             FloatingActionButton button = new FloatingActionButton(EnthusiaStartActivity.this);
             button.setImageDrawable(getResources().getDrawable(SOCIAL_MEDIA_DRAWABLES[i]));
             button.setType(FloatingActionButton.TYPE_MINI);
-            button.setScaleType(ImageView.ScaleType.FIT_CENTER);
             button.setVisibility(View.GONE);
             button.setColorNormal(Color.WHITE);
             button.setColorPressed(darkenColor(Color.WHITE));
@@ -328,7 +314,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
             public void onAnimationStart(Animator animation) {
                 findViewById(R.id.enthusia_start_fab).setOnClickListener(null);
                 if (socialMediaShown)
-                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_launcher));
                 else
                     ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             }
@@ -457,31 +443,31 @@ public class EnthusiaStartActivity extends FragmentActivity {
         currentFragment = null;
         switch (position) {
             case 0:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_fest_name)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_fest_name)));
                 currentFragment = new EnthusiaNewsFragment();
                 break;
             case 1:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((R.string.enthusia_events));
+                getSupportActionBar().setTitle((R.string.enthusia_events));
                 currentFragment = new EnthusiaEventsFragment();
                 break;
             case 2:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_intra)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_intra)));
                 currentFragment = new EnthusiaIntraFragment();
                 break;
             case 3:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_sponsors)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_sponsors)));
                 currentFragment = new EnthusiaSponsorsFragment();
                 break;
             case 4:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_committee)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_committee)));
                 currentFragment = new EnthusiaCommitteeFragment();
                 break;
             case 5:
-                ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText((getString(R.string.enthusia_about)));
+                getSupportActionBar().setTitle((getString(R.string.enthusia_about)));
                 currentFragment = new EnthusiaAboutFragment();
                 break;
         }
-        title.add(((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).getText().toString());
+        title.add(getSupportActionBar().getTitle().toString());
         setSelected(position);
         enthusiaSlider.closeDrawers();
 
@@ -533,7 +519,7 @@ public class EnthusiaStartActivity extends FragmentActivity {
         super.onRestoreInstanceState(savedInstanceState);
         title = (ArrayList<String>) savedInstanceState.getSerializable("title");
         setSelected(getPosition(title.get(title.size() - 1)));
-        ((TextView) getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText(title.get(title.size() - 1));
+        getSupportActionBar().setTitle(title.get(title.size() - 1));
     }
 
     private int getFragment() {

@@ -19,7 +19,7 @@ public class EnthusiaIntraFragment extends Fragment {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
+//        getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
         getActivity().findViewById(R.id.enthusia_fragment_intra_button_department_heads).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

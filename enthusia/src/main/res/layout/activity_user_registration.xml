@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background">
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <include
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        layout="@layout/action_bar" />
 
-        <ImageView
-            android:id="@+id/register_ic_contact"
-            android:layout_centerHorizontal="true"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitXY"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_contact" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_background">
 
-        <TextView
-            android:id="@+id/register_textview_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_below="@+id/register_ic_contact"
-            android:text="@string/register_detail"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_centerHorizontal="true" />
-
-        <LinearLayout
-            android:background="@drawable/enthusia_news_background_unread"
-            android:layout_below="@+id/register_textview_detail"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <EditText
-                style="@android:style/Widget.Holo.Light.EditText"
-                android:id="@+id/register_et_username"
-                android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp"
+            <ImageView
+                android:id="@+id/register_ic_contact"
+                android:layout_centerHorizontal="true"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitXY"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_contact" />
+
+            <TextView
+                android:id="@+id/register_textview_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_below="@+id/register_ic_contact"
+                android:text="@string/register_detail"
                 android:textColor="@color/black"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:singleLine="true"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
                 android:gravity="center"
-                android:hint="@string/username" />
+                android:layout_centerHorizontal="true" />
 
-            <EditText
-                style="@android:style/Widget.Holo.Light.EditText"
-                android:id="@+id/register_et_email"
-                android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp"
-                android:inputType="textEmailAddress|textAutoCorrect|textAutoComplete"
-                android:textColor="@color/black"
-                android:singleLine="true"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center"
-                android:hint="@string/email" />
-
-            <org.enthusia.app.ui.MaterialRippleLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/register_btn_register"
+            <LinearLayout
+                android:background="@drawable/enthusia_news_background_unread"
+                android:layout_below="@+id/register_textview_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:rippleOverlay="false"
-                app:rippleBackground="@color/app_color"
-                app:rippleColor="@color/app_color_dark"
-                app:rippleDelayClick="true"
-                app:rippleDimension="24dp"
-                app:rippleAlpha="0.65"
-                app:rippleHover="true">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
 
-                <Button
+                <EditText
+                    style="@android:style/Widget.Holo.Light.EditText"
+                    android:id="@+id/register_et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:hint="@string/username" />
+
+                <EditText
+                    style="@android:style/Widget.Holo.Light.EditText"
+                    android:id="@+id/register_et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textEmailAddress|textAutoCorrect|textAutoComplete"
+                    android:textColor="@color/black"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center"
+                    android:hint="@string/email" />
+
+                <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/register_btn_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/white"
-                    android:background="@android:color/transparent"
-                    android:text="@string/register" />
+                    android:layout_margin="8dp"
+                    app:rippleColor="@color/app_color_accent"
+                    app:rippleOverlay="true">
 
-            </org.enthusia.app.ui.MaterialRippleLayout>
+                    <Button
+                        style="?attr/buttonBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
+                        android:background="@color/app_color"
+                        android:text="@string/register" />
 
-        </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
 
-    </RelativeLayout>
+            </LinearLayout>
 
-</ScrollView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,15 +1,13 @@
 package org.enthusia.app.enthusia.fragments;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.nhaarman.listviewanimations.appearance.StickyListHeadersAdapterDecorator;
 import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
@@ -41,7 +39,7 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         super.onDestroyView();
         try {
             animateAppear(true);
-            ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Intra");
+            ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle("Intra");
             ((EnthusiaStartActivity) getActivity()).currentFragment = new EnthusiaIntraFragment();
             ((EnthusiaStartActivity) getActivity()).lockDrawer(false);
         } catch (Exception ignore) {}
@@ -55,14 +53,14 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         // Setup ActionBar
         try {
             animateAppear(false);
-            ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_title_text)).setText("Department Heads");
+            ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle("Department Heads");
             ((EnthusiaStartActivity) getActivity()).title.add("Department Heads");
             ((EnthusiaStartActivity) getActivity()).currentFragment = this;
             ((EnthusiaStartActivity) getActivity()).lockDrawer(true);
         } catch (Exception ignore) {}
 
         if (savedInstanceState == null)
-            mItems = new ArrayList<EnthusiaCommittee>();
+            mItems = new ArrayList<>();
         else
             mItems = (ArrayList<EnthusiaCommittee>) savedInstanceState.getSerializable("items");
 
@@ -124,52 +122,21 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         outState.putSerializable("items", mItems);
     }
 
+    Drawable hamburger;
+
     @SuppressWarnings("ConstantConditions")
     public void animateAppear(final boolean destroying) {
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon), View.ROTATION, 0, 360);
-        animator.setDuration(500);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        if (destroying) {
+            ((Toolbar) getActivity().findViewById(R.id.action_bar)).setNavigationIcon(hamburger);
+        } else {
+            if (hamburger == null)
+                hamburger = ((Toolbar) getActivity().findViewById(R.id.action_bar)).getNavigationIcon();
+            TypedValue value = new TypedValue();
+            getActivity().getTheme().resolveAttribute(R.attr.homeAsUpIndicator, value, true);
+            ((Toolbar) (getActivity()).findViewById(R.id.action_bar)).setNavigationIcon(value.resourceId);
+        }
 
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                try {
-                    if ((Float) animation.getAnimatedValue(View.ROTATION.getName()) > 50.0f)
-                        if (destroying)
-                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_cab_drawer);
-                        else
-                            ((ImageButton) getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon)).setImageResource(R.drawable.ic_action_home_as_up);
-                } catch (Exception ignore) {}
-            }
-
-        });
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                try {
-                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(false);
-                } catch (Exception ignore) {}
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                try {
-                    getActivity().getActionBar().getCustomView().findViewById(R.id.actionbar_icon).setClickable(true);
-                } catch (Exception ignore) {}
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-
-        animator.start();
     }
 
 }

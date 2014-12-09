@@ -96,6 +96,23 @@ Once you receive updates this card will be automatically hidden]]></string>
     </string-array>
 
     <array name="enthusia_spons">
+        <item>@drawable/img_enthusia_spons_spykar</item>
+        <item>@drawable/img_enthusia_spons_firefox</item>
+        <item>@drawable/img_enthusia_spons_trek</item>
+        <item>@drawable/img_enthusia_spons_powerhouse</item>
+        <item>@drawable/img_enthusia_spons_zoot</item>
+        <item>@drawable/img_enthusia_spons_peta</item>
+        <item>@drawable/img_enthusia_spons_ebay</item>
+        <item>@drawable/img_enthusia_spons_kohinoor</item>
+        <item>@drawable/img_enthusia_spons_fadooengineers</item>
+        <item>@drawable/img_enthusia_spons_rio</item>
+        <item>@drawable/img_enthusia_spons_connect_u</item>
+        <item>@drawable/img_enthusia_spons_derby</item>
+        <item>@drawable/img_enthusia_spons_ditto_tv</item>
+        <item>@drawable/img_enthusia_spons_newgenindia</item>
+        <item>@drawable/img_enthusia_spons_enerzal</item>
+        <item>@drawable/img_enthusia_spons_mapro</item>
+        <item>@drawable/img_enthusia_spons_frapp</item>
         <item>@drawable/img_enthusia_spons_youwecan</item>
         <item>@drawable/img_enthusia_unibic</item>
         <item>@drawable/img_enthusia_spons_chocon</item>
@@ -108,7 +125,6 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@drawable/img_enthusia_spons_mgl</item>
         <item>@drawable/img_enthusia_spons_5star</item>
         <item>@drawable/img_enthusia_spons_nutrifit</item>
-        <item>@drawable/img_enthusia_spons_spykar</item>
         <item>@drawable/img_enthusia_spons_everydaychild</item>
         <item>@drawable/img_enthusia_spons_besttv</item>
         <item>@drawable/img_enthusia_spons_bhashan</item>

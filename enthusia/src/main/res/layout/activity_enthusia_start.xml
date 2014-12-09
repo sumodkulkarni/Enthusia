@@ -5,28 +5,42 @@
     android:id="@+id/enthusia_start_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background">
+    android:background="@color/gray_background"
+    tools:ignore="RTLHardcoded,RTLSymmetry">
 
-    <FrameLayout
-        android:id="@+id/enthusia_start_fab_container"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/enthusia_start_fragment_container"
+        <include
+            android:id="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top" />
+            layout="@layout/action_bar" />
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/enthusia_start_fab"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp" />
+        <FrameLayout
+            android:id="@+id/enthusia_start_fab_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/enthusia_start_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/enthusia_start_fab"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="280dp"
