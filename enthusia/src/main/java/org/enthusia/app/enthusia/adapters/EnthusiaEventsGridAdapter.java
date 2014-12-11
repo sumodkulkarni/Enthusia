@@ -60,10 +60,17 @@ public class EnthusiaEventsGridAdapter extends BaseAdapter {
         else
             holder.textView.setText(EnthusiaEvents.events[i]);
 
-        ((MaterialRippleLayout) view).getChildView().setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick((AdapterView) viewGroup, v, i, getItemId(i));
+            }
+        });
+
+        ((MaterialRippleLayout) view).getChildView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
             }
         });
 

@@ -95,6 +95,7 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
                         position);
             }
         }));
+
         ((StaggeredGridView) getActivity().findViewById(R.id.enthusia_events_grid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressWarnings("ConstantConditions")
             @Override
@@ -102,7 +103,6 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
                 ((MaterialRippleLayout) view).getChildView().performClick();
             }
         });
-
         getActivity().findViewById(R.id.enthusia_events_touch_interceptor_view).setClickable(false);
 
     }

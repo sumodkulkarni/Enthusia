@@ -27,7 +27,6 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -78,7 +77,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         enthusiaSlider = (DrawerLayout) findViewById(R.id.enthusia_start_drawer);
-        ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<EnthusiaNavDrawerItem>();
+        ArrayList<EnthusiaNavDrawerItem> mItems = new ArrayList<>();
 
         for (int i=0; i < getResources().getStringArray(R.array.enthusia_nav_drawer_items).length; i++) {
             mItems.add(new EnthusiaNavDrawerItem(getResources().getStringArray(R.array.enthusia_nav_drawer_items)[i], getResources().obtainTypedArray(R.array.enthusia_nav_drawer_icons).getResourceId(i, -1)));
@@ -201,6 +200,12 @@ public class EnthusiaStartActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
+
+        if (enthusiaSlider.isDrawerOpen(GravityCompat.START)) {
+            enthusiaSlider.closeDrawers();
+            return;
+        }
+
         if (currentFragment != null && currentFragment instanceof EnthusiaEventsFragment) {
             EnthusiaEventsFragment fragment = (EnthusiaEventsFragment) currentFragment;
             if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding()))

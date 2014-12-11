@@ -25,7 +25,7 @@ public class EnthusiaSponsorsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         TypedArray array = getResources().obtainTypedArray(R.array.enthusia_spons);
-        ArrayList<Integer> objects = new ArrayList<Integer>(array.length());
+        ArrayList<Integer> objects = new ArrayList<>(array.length());
         for (int i=0; i < array.length(); i++)
             objects.add(array.getResourceId(i, -1));
 

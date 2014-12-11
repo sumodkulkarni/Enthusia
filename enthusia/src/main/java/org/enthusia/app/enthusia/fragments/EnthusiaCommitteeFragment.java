@@ -26,7 +26,7 @@ public class EnthusiaCommitteeFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ArrayList<EnthusiaCommittee> mCommittee = new ArrayList<EnthusiaCommittee>();
+        ArrayList<EnthusiaCommittee> mCommittee = new ArrayList<>();
 
         mCommittee.add(new EnthusiaCommittee("Arundhati Karanth: +919920930194", 0));
         mCommittee.add(new EnthusiaCommittee("Ameya Phansalkar: +918082424061", 1));

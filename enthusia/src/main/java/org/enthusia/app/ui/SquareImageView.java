@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 /**
  * Created by rahuliyer on 17/07/14.
+ * ImageView with width = height
  */
 public class SquareImageView extends ImageView {
 

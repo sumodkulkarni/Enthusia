@@ -1,5 +1,7 @@
 package org.enthusia.app.enthusia.model;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 @SuppressWarnings("unused")
@@ -20,7 +22,7 @@ public class EnthusiaPointsTable implements Serializable, Comparable<EnthusiaPoi
     public void setPoints(int points) { this.points = points; }
 
     @Override
-    public int compareTo(EnthusiaPointsTable o) {
+    public int compareTo(@NonNull EnthusiaPointsTable o) {
         return o.points - this.points;
     }
 

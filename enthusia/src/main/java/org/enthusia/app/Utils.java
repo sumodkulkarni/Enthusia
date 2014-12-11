@@ -61,7 +61,7 @@ public class Utils {
         if (value.getClass().equals(String.class)) {
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putString(key, (String) value).commit();
         } else if (value.getClass().equals(Boolean.class)) {
-            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putBoolean(key, ((Boolean) value).booleanValue()).commit();
+            context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putBoolean(key, (Boolean) value).commit();
         } else if (value.getClass().equals(Integer.class)) {
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit().putInt(key, (Integer) value).commit();
         } else if (value.getClass().equals(Float.class)) {
@@ -136,10 +136,6 @@ public class Utils {
 
     public static void makeToast (Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void makeToast (Context context, int message) {
-        makeToast(context, context.getString(message));
     }
 
     public static void log (Object log) {

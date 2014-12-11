@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:rippleColor="@color/app_color_accent"
-                    app:rippleOverlay="true">
+                    app:rippleBackground="@color/app_color">
 
                     <Button
                         style="?attr/buttonBarStyle"
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white"
-                        android:background="@color/app_color"
+                        android:background="@android:color/transparent"
                         android:text="@string/register" />
 
                 </com.balysv.materialripple.MaterialRippleLayout>

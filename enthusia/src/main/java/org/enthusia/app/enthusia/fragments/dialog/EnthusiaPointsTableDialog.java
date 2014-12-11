@@ -1,5 +1,6 @@
 package org.enthusia.app.enthusia.fragments.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -43,7 +44,7 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (savedInstanceState == null)
-            tableData = new ArrayList<EnthusiaPointsTable>();
+            tableData = new ArrayList<>();
         else
             tableData = (ArrayList<EnthusiaPointsTable>) savedInstanceState.getSerializable("points");
 
@@ -93,6 +94,7 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
         return v;
     }
 
+    @SuppressLint("RtlHardcoded")
     private TextView getPointView(int i) {
         TextView textView = getBasicTextView();
         textView.setText(this.tableData.get(i).getPoints() + "");

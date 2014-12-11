@@ -161,7 +161,7 @@ public class RegisterActivity extends ActionBarActivity {
                         try {
                             register = (HttpURLConnection) new URL(SERVER_URL).openConnection();
 
-                            HashMap<String, String> data = new HashMap<String, String>();
+                            HashMap<String, String> data = new HashMap<>();
                             data.put("regId", regId);
                             data.put("name", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_USER_NAME, String.class));
                             data.put("email", (String) Utils.getPrefs(RegisterActivity.this, Utils.PREF_EMAIL, String.class));
