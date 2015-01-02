@@ -1,4 +1,4 @@
-[Enthusia'14](www.enthusia.org)
+[Enthusia'14](http://www.enthusia.org)
 ===============================
 
 Before continuing you must have the following software installed
