@@ -65,48 +65,51 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
             mItems = (ArrayList<EnthusiaCommittee>) savedInstanceState.getSerializable("items");
 
         // Chemsa
-        mItems.add(new EnthusiaCommittee("Kshiteej Nanaware: +918767485808", 0));
-        mItems.add(new EnthusiaCommittee("Ashwini Bhosle: +919029391087", 0));
+        mItems.add(new EnthusiaCommittee("Akash Gurle: +917045870817", 0));
+        mItems.add(new EnthusiaCommittee("Mandavi Tripathi: +918080848183", 0));
 
         // Civil
-        mItems.add(new EnthusiaCommittee("Viraj Sanghvi: +919819584725", 1));
-        mItems.add(new EnthusiaCommittee("Akshata Hire: +917208307426", 1));
+        mItems.add(new EnthusiaCommittee("Apeksha Khandelwal: +918237448486", 1));
+        mItems.add(new EnthusiaCommittee("Vidit Hirani: +919769193997", 1));
 
         // Comps
-        mItems.add(new EnthusiaCommittee("Siddhant Shah: +919930851934", 2));
-        mItems.add(new EnthusiaCommittee("Richa Deshmukh: +919930539242", 2));
+        mItems.add(new EnthusiaCommittee("Komal Deoda: +9699229666", 2));
+        mItems.add(new EnthusiaCommittee("Raj Chandak: +919664858392", 2));
+        mItems.add(new EnthusiaCommittee("Sagar Hinduja: +919619287347", 2));
+        mItems.add(new EnthusiaCommittee("Nikhita Mirchandani: +919004409222", 2));
+        mItems.add(new EnthusiaCommittee("Sanika Raut: +919920250229", 2));
+        mItems.add(new EnthusiaCommittee("Tejas Hegde: +919619486295", 2));
 
         // Electrical
-        mItems.add(new EnthusiaCommittee("Arvind Nair: +919167112743", 3));
-        mItems.add(new EnthusiaCommittee("Pradnya Shivsharan: +918976442036", 3));
+        mItems.add(new EnthusiaCommittee(" : ", 3));
+        mItems.add(new EnthusiaCommittee(" : ", 3));
 
         // Electronics
-        mItems.add(new EnthusiaCommittee("Amit Lokare: +917350940343", 4));
-        mItems.add(new EnthusiaCommittee("Prashita Pratapan: +919757341789", 4));
+        mItems.add(new EnthusiaCommittee(" : ", 4));
+        mItems.add(new EnthusiaCommittee(" : ", 4));
 
         // EXTC
-        mItems.add(new EnthusiaCommittee("Dhruv Turkhia: +919664016227", 5));
-        mItems.add(new EnthusiaCommittee("Aishwarya Shejwal: +919167186391", 5));
+        mItems.add(new EnthusiaCommittee("Ketaki Kothawade: +919870851092", 5));
+        mItems.add(new EnthusiaCommittee("Joel D'Souza: +919920241397", 5));
 
         // IT
-        mItems.add(new EnthusiaCommittee("Sagar Sable: +919766979737", 6));
-        mItems.add(new EnthusiaCommittee("Priya Masne: +918806209812", 6));
+        mItems.add(new EnthusiaCommittee("Shubham Shah: +918625840845", 6));
+        mItems.add(new EnthusiaCommittee("Pratiksha Dehade: +919699886355", 6));
 
         // Masters
-        mItems.add(new EnthusiaCommittee("Ankit Wankhede: +919561418177", 7));
-        mItems.add(new EnthusiaCommittee("Swapnali Vadar: +919372672000", 7));
+        mItems.add(new EnthusiaCommittee(" : ", 7));
+        mItems.add(new EnthusiaCommittee(" : ", 7));
 
         // Mechanical
-        mItems.add(new EnthusiaCommittee("Sayyad Sirhan: +919730228606", 8));
-        mItems.add(new EnthusiaCommittee("Sakina Tinwala: +919619331995", 8));
+        mItems.add(new EnthusiaCommittee("Swaroop Atnoorkar: +918108282968", 8));
+        mItems.add(new EnthusiaCommittee("Akshay Korpe: +918767077344", 8));
 
         // Production
-        mItems.add(new EnthusiaCommittee("Shivraj Pawar: +919699902679", 9));
-        mItems.add(new EnthusiaCommittee("Rutuja Karampure: +919769951513", 9));
+        mItems.add(new EnthusiaCommittee("Ayesha Passanha: +919167130184", 9));
+        mItems.add(new EnthusiaCommittee("Mayur Marakwad: +919403211077", 9));
 
         // Textile
-        mItems.add(new EnthusiaCommittee("Pakshal Jain: +919764040991", 10));
-        mItems.add(new EnthusiaCommittee("Swati Dighole: +919768350702", 10));
+        mItems.add(new EnthusiaCommittee("Yogesh Pantoji: +918793152342", 10));
         mItems.add(new EnthusiaCommittee(" : ", 10));
 
         AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(new EnthusiaStickyHeaderAdapter(getActivity(), mItems, getActivity().getResources().getStringArray(R.array.enthusia_departments)));

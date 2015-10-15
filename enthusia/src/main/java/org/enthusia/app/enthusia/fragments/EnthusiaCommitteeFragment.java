@@ -55,7 +55,7 @@ public class EnthusiaCommitteeFragment extends Fragment {
         mCommittee.add(new EnthusiaCommittee("Satyam Mali: +919503251469", 10));
         mCommittee.add(new EnthusiaCommittee("Sunil: +919699693231", 10));
         mCommittee.add(new EnthusiaCommittee("Sagar Sable: +919766979737", 10));
-        mCommittee.add(new EnthusiaCommittee("Sirhaan: ", 11));
+        mCommittee.add(new EnthusiaCommittee("Sayyad Sirhan: +919730228606", 11));
         mCommittee.add(new EnthusiaCommittee("Ganesh Chainpure: +917738274310", 11));
         mCommittee.add(new EnthusiaCommittee("Riddhish Shah: +919664541489", 12));
         mCommittee.add(new EnthusiaCommittee("Satyam Mali: +919503251469", 12));
