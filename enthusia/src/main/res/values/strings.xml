@@ -68,17 +68,17 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>General Secretary</item>
         <item>Jt. General Secretary</item>
         <item>Treasurers</item>
+        <item>Executive Director</item>
+        <item>Executive Manager</item>
         <item>Sponsorship Chief Coordinator</item>
-        <item>Publicity Chief Coordinator</item>
         <item>Events Chief Coordinator</item>
-        <item>Public Relations Head</item>
+        <item>Indoor Events CC</item>
+        <item>Publicity Chief Coordinator</item>
+        <item>Hostel Publicity CC</item>
         <item>Infrastructure Chief Coordinator</item>
-        <item>Design Team</item>
-        <item>Social Media Head</item>
-        <item>Security Head</item>
-        <item>Half Time Coordinator</item>
-        <item>Website Development Team</item>
-        <item>Diploma Representative</item>
+        <item>Security Administrator</item>
+        <item>Social Media Strategist</item>
+        <item>Web Developer</item>
     </string-array>
 
     <string-array name="enthusia_departments">
