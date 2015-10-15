@@ -151,4 +151,8 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@drawable/img_enthusia_spons_twenty19</item>
         <item>@drawable/img_enthusia_spons_vodafone</item>
     </array>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
