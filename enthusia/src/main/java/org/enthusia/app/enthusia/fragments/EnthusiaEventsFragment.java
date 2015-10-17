@@ -3,6 +3,7 @@ package org.enthusia.app.enthusia.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,10 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.balysv.materialripple.MaterialRippleLayout;
@@ -27,6 +30,7 @@ import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
+import org.enthusia.app.enthusia.EventRegistrationActivity;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
@@ -34,6 +38,7 @@ import org.enthusia.app.enthusia.model.EnthusiaEvents;
 public class EnthusiaEventsFragment extends Fragment implements View.OnClickListener {
 
     public UnfoldableView mUnfoldableView;
+    Button newButton;
     public boolean isExpanded = false;
     private int position;
 
@@ -53,6 +58,8 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //newButton = (Button) getActivity().findViewById(R.id.event_register_button);
 
         if (savedInstanceState != null)
             isExpanded = savedInstanceState.getBoolean("isExpanded");
@@ -137,6 +144,16 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
         ((TextView) getActivity().findViewById(R.id.enthusia_event_rules)).setText(Html.fromHtml(getString(EnthusiaEvents.rules[event])));
 
         getActivity().findViewById(R.id.enthusia_event_showmore).setVisibility(getString(EnthusiaEvents.rules[event]).toLowerCase().startsWith("please contact") ? View.GONE : View.VISIBLE);
+
+        //button
+        getActivity().findViewById(R.id.event_register_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), EventRegistrationActivity.class);
+                i.putExtra("Event", event);
+                startActivity(i);
+            }
+        });
 
         // Expand Listener
         getActivity().findViewById(R.id.enthusia_event_showmore_image).setOnClickListener(this);

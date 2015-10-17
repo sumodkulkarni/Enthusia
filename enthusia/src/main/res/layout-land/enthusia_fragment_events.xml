@@ -14,7 +14,7 @@
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:column_count="3"
+        app:column_count="2"
         app:item_margin="10dp" />
 
     <View
@@ -71,6 +71,7 @@
                     android:layout_height="match_parent"
                     android:divider="@android:color/transparent"
                     android:dividerHeight="5dp" />
+
             </LinearLayout>
 
             <!-- Rules -->
@@ -136,12 +137,41 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/register_button_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/enthusia_events_layout_event_rules">
+
+                <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/event_register_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:rippleColor="@color/app_color_accent"
+                    app:rippleBackground="@color/app_color">
+
+                    <Button
+                        style="?attr/buttonBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:text="@string/register" />
+
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:background="@android:color/transparent"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@+id/enthusia_events_layout_event_rules" />
+                android:layout_below="@+id/register_button_linear_layout" />
 
         </RelativeLayout>
 

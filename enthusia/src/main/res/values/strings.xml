@@ -155,4 +155,5 @@ Once you receive updates this card will be automatically hidden]]></string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_event_registration">Event Registration</string>
 </resources>
