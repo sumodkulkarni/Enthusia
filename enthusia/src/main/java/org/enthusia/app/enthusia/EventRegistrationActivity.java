@@ -1,18 +1,50 @@
 package org.enthusia.app.enthusia;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+
+import com.etsy.android.grid.util.DynamicHeightImageView;
 
 import org.enthusia.app.R;
+import org.enthusia.app.enthusia.model.EnthusiaEvents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventRegistrationActivity extends ActionBarActivity {
+
+    private int event;
+    DynamicHeightImageView event_register_imageView;
+    EditText register_event_et_username, register_event_et_email, register_event_et_phone;
+    Spinner eventSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_registration);
+
+        Intent intent = getIntent();
+        event = intent.getIntExtra("Event", 0);
+
+        event_register_imageView = (DynamicHeightImageView) findViewById(R.id.event_register_imageView);
+        register_event_et_username = (EditText) findViewById(R.id.register_event_et_username);
+        register_event_et_email = (EditText) findViewById(R.id.register_event_et_email);
+        register_event_et_phone = (EditText) findViewById(R.id.register_event_et_phone);
+        eventSpinner = (Spinner) findViewById(R.id.register_event_spinner_select_event);
+
+        event_register_imageView.setImageResource(EnthusiaEvents.drawables[event]);
+
+        populateSpinner();
+
     }
 
     @Override
@@ -35,5 +67,28 @@ public class EventRegistrationActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void populateSpinner(){
+        List<String> events = new ArrayList<>();
+
+        for (int i = 0; i<EnthusiaEvents.events.length; i++){
+            events.add(EnthusiaEvents.events[i]);
+        }
+
+        ArrayAdapter<String> mySpinnerAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, events);
+        eventSpinner.setAdapter(mySpinnerAdapter);
+        eventSpinner.setSelection(event);
+        eventSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                event_register_imageView.setImageResource(EnthusiaEvents.drawables[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
