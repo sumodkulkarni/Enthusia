@@ -73,16 +73,16 @@ public class EnthusiaDepartmentHeadsFragment extends Fragment {
         mItems.add(new EnthusiaCommittee("Vidit Hirani: +919769193997", 1));
 
         // Comps
-        mItems.add(new EnthusiaCommittee("Komal Deoda: +9699229666", 2));
+        mItems.add(new EnthusiaCommittee("Komal Deoda: +919699229666", 2));
         mItems.add(new EnthusiaCommittee("Raj Chandak: +919664858392", 2));
 
         // Electrical
-        mItems.add(new EnthusiaCommittee("Sagar Hinduja: +919619287347", 2));
-        mItems.add(new EnthusiaCommittee("Nikhita Mirchandani: +919004409222", 2));
+        mItems.add(new EnthusiaCommittee("Sagar Hinduja: +919619287347", 3));
+        mItems.add(new EnthusiaCommittee("Nikhita Mirchandani: +919004409222", 3));
 
         // Electronics
-        mItems.add(new EnthusiaCommittee("Sanika Raut: +919920250229", 2));
-        mItems.add(new EnthusiaCommittee("Tejas Hegde: +919619486295", 2));
+        mItems.add(new EnthusiaCommittee("Sanika Raut: +919920250229", 4));
+        mItems.add(new EnthusiaCommittee("Tejas Hegde: +919619486295", 4));
 
         // EXTC
         mItems.add(new EnthusiaCommittee("Ketaki Kothawade: +919870851092", 5));
