@@ -35,6 +35,8 @@ dependencies {
     compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
         exclude group: 'com.google.android', module: 'support-v4'
     }
+    compile 'com.github.ganfra:material-spinner:1.1.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.balysv:material-ripple:0.9.3-SNAPSHOT@aar'
     compile 'com.alexvasilkov:foldable-layout:1.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
