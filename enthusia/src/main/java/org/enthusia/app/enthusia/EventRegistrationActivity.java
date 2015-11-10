@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,9 @@ import java.util.List;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class EventRegistrationActivity extends ActionBarActivity {
+
+    public static final String TAG = "EventRegAvty";
+
     public static final MediaType FORM_DATA_TYPE
             = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
     //URL derived from form URL
@@ -62,6 +66,7 @@ public class EventRegistrationActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         event = intent.getIntExtra("Event", 0);
+        Log.i(TAG, EnthusiaEvents.events[event]);
 
         event_register_imageView = (DynamicHeightImageView) findViewById(R.id.event_register_imageView);
         participant_name = (EditText) findViewById(R.id.participant_name);
@@ -93,6 +98,7 @@ public class EventRegistrationActivity extends ActionBarActivity {
                 }
                 //Check if a valid email is entered
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(participant_email.getText().toString()).matches()) {
+                    participant_email.setError("");
                     Toast.makeText(context, "Please enter a valid email.", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -188,13 +194,16 @@ public class EventRegistrationActivity extends ActionBarActivity {
             events.add(EnthusiaEvents.events[i]);
         }
 
+
+
         ArrayAdapter<String> mySpinnerAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, events);
         eventSpinner.setAdapter(mySpinnerAdapter);
-        eventSpinner.setSelection(event);
+        eventSpinner.setSelection(event+1);
         eventSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 event_register_imageView.setImageResource(EnthusiaEvents.drawables[position]);
+                //Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -202,5 +211,11 @@ public class EventRegistrationActivity extends ActionBarActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        finish();
     }
 }

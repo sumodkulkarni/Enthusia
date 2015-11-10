@@ -39,6 +39,7 @@
     <string name="enthusia_points_table">Points Table</string>
     <string name="enthusia_department_heads">Department Heads</string>
     <string name="enthusia_events">Events</string>
+    <string name="enthusia_register">Register</string>
     <string name="enthusia_rules">Rules</string>
     <string name="enthusia_committee">Committee</string>
     <string name="enthusia_sponsors">Sponsors</string>
@@ -55,6 +56,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>Recent News</item>
         <item>@string/enthusia_events</item>
         <item>@string/enthusia_intra</item>
+        <item>@string/enthusia_register</item>
         <item>@string/enthusia_sponsors</item>
         <item>@string/enthusia_committee</item>
         <item>@string/enthusia_about</item>
@@ -64,6 +66,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@drawable/ic_enthusia_news</item>
         <item>@drawable/ic_enthusia_inter</item>
         <item>@drawable/ic_enthusia_intra</item>
+        <item>@drawable/ic_enthusia_register</item>
         <item>@drawable/ic_enthusia_spons</item>
         <item>@drawable/ic_enthusia_committe</item>
         <item>@drawable/ic_enthusia_about</item>

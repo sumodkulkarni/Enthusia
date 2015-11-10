@@ -460,14 +460,18 @@ public class EnthusiaStartActivity extends ActionBarActivity {
                 currentFragment = new EnthusiaIntraFragment();
                 break;
             case 3:
+                Intent i = new Intent(this, EventRegistrationActivity.class);
+                i.putExtra("Event", 0);
+                startActivity(i);
+            case 4:
                 getSupportActionBar().setTitle((getString(R.string.enthusia_sponsors)));
                 currentFragment = new EnthusiaSponsorsFragment();
                 break;
-            case 4:
+            case 5:
                 getSupportActionBar().setTitle((getString(R.string.enthusia_committee)));
                 currentFragment = new EnthusiaCommitteeFragment();
                 break;
-            case 5:
+            case 6:
                 getSupportActionBar().setTitle((getString(R.string.enthusia_about)));
                 currentFragment = new EnthusiaAboutFragment();
                 break;

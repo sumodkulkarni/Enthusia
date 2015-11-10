@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/app_color_accent</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
     </style>
 
