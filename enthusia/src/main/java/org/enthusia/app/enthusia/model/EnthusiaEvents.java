@@ -15,16 +15,16 @@ public final class EnthusiaEvents {
             R.drawable.img_enthusia_kabaddi,
             R.drawable.img_enthusia_athletics,
             R.drawable.img_enthusia_throwball,
-            R.drawable.img_enthusia_squash,
-            R.drawable.img_enthusia_boxing,
+            //R.drawable.img_enthusia_squash,
+            //R.drawable.img_enthusia_boxing,
             R.drawable.img_enthusia_carrom,
             R.drawable.img_enthusia_chess,
-            R.drawable.img_enthusia_dodgeball,
+            //R.drawable.img_enthusia_dodgeball,
             R.drawable.img_enthusia_badminton,
             R.drawable.img_enthusia_khokho,
             R.drawable.img_enthusia_swimming,
             R.drawable.img_enthusia_marathon,
-            R.drawable.img_enthusia_handball,
+            //R.drawable.img_enthusia_handball,
             R.drawable.img_enthusia_cyclothon
     };
 
@@ -39,16 +39,16 @@ public final class EnthusiaEvents {
             "Kabaddi",
             "Athletics",
             "Throwball",
-            "Squash",
-            "Boxing",
+            //"Squash",
+            //"Boxing",
             "Carrom",
             "Chess",
-            "Dodgeball",
+            //"Dodgeball",
             "Badminton",
             "Kho Kho",
             "Swimming",
             "Marathon",
-            "Handball",
+            //"Handball",
             "Cyclothon"
     };
 
@@ -98,27 +98,38 @@ public final class EnthusiaEvents {
                 return new String[] { "Hem Kothari: +918286037294", "Dharmit Prajapati: +919920445979", "Amit Kharwandikar: +919869056872", "Heramb Mathkar: +919167147950", "Swaroop Atnoorkar: +918108282968","mandavi tripathi: +918080848183" };
             case 9: // Throwball done
                 return new String[] { "Poorvi Nagaria: +919819150640", "Sanika Raut: +919920250229" };
+
+            /*
             case 10: // Squash
                 return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
             case 11: // Boxing
                 return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
-            case 12: // Carrom done
+            */
+
+            case 10: // Carrom done
                 return new String[] { "Akshay Ghodke: +918237526496", "Siddhant Jajoo: +919594388339" };
-            case 13: // Chess done
+            case 11: // Chess done
                 return new String[] { "Sagar Hinduja: +919619287347", "Roshan Dukale: +919604088406", "Ritesh Surve: +919769772422","Richa Nagda: +918828866168" };
+
+            /*
             case 14: // Dodgeball
                 return new String[] { "Sheetal Mhaske: +919665090044", "Swati Dighole: +919768350702" };
-            case 15: // Badminton done
+            */
+
+            case 12: // Badminton done
                 return new String[] { "Sanjay Laungani: +919920276784", "Utsav Gupta: +919967037400", "Nirmal Patil: +919765396987", "Ketaki Kothawade: +919870851092", "Krushangi Chandekar: +919869163390" };
-            case 16: // Kho Kho done
+            case 13: // Kho Kho done
                 return new String[] { "Sachin tayade: +917303276006", "Swaraj shevgan: +919404872671", "Sheetal patole: +917498712317", "Neeta Arote: +918655358122" };
-            case 17: // Swimming done
+            case 14: // Swimming done
                 return new String[] { "Arpit Sharma: +919833442805", "Sohan Ghanchi: +919867373370" };
-            case 18: // Marathon done
+            case 15: // Marathon done
                 return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
+            /*
             case 19: // Handball
                 return new String[] { "Rishikesh: +919987722085" };
-            case 20: // Cyclothon done
+            */
+
+            case 16: // Cyclothon done
                 return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
         }
         return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
