@@ -78,49 +78,48 @@ public final class EnthusiaEvents {
 
     public static String[] getEventHead (int position) {
         switch (position) {
-            case 0: // Cricket
-                return new String[] { "Anklesh Shekoker: +917387438280", "Smitesh Modak: +919769604373", "Devansh Khaitan: +919167426373", "Shubham Gawande: +918698606142", "Moksh Rathod: +918698606142" };
-            case 1: // Football
-                return new String[] { "Rohan Amarapurkar: +919819600663", "Aneesh Bhagwat: +919619680824", "Kunal Gajendragadkar: +919769093433", "Pranav Wasnik: +918793712455", "Aditya Chaudhary: +919619651218" };
-            case 2: // Basketball
-                return new String[] { "Milay Haria: +919029410964", "Mayur Deshmukh: +918408000747", "Viraj Sanghvi: +919819584725", "Dhriti Shetty: +919833418083", "Sakina Tinwala: +919619331995" };
-            case 3: // Volleyball
-                return new String[] { "Prashant Sanap: +917709402238", "Ajinkya Palwe: +919404323538", "Tejas Katkade: +919975513952", "Rutuja Karampure: +919769951513", "Neha Chavan: +918879820967" };
+            case 0: // Cricket done
+                return new String[] { "Shubham Shah: +918625840845", "Rohit Laddhad: +919730303015"};
+            case 1: // Football done
+                return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507","Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
+            case 2: // Basketball done
+                return new String[] { "Rhishabh Deshpande: +919833839981", "Tirth Doshi: +919869690406", "Sayyed Fahim: +919920096802", "Abhishek Singh: +919004118181", "Ayesha Passanha: +919167130184","Nikhita Mirchandani: +919004409222" };
+            case 3: // Volleyball done
+                return new String[] { "Shubham kamble: +918898917665", "omprakash kale: +919930596003", "Ravi Majkuri: +918600275048", "Madhuri Patil: +917718041260", "Pratiksha Dehade: +919699886355" };
             case 4: // Rink Football
-                return new String[] { "Aayush Awasthi: +919821710930", "Yash Beri: +919833128502", "Riddhish Shah: +919664541489", "Sagar Supe: +919833906926", "Meghana Parab: +918097583693", "Richa Deshmukh: +919930539242" };
-            case 5: // Tennis
-                return new String[] { "Raghav Agrawal: +919321331848", "Sherin Parmar: +9196192480070", "Prashita Pratapan: +919757341789", "Sharvika Khochare: +919821025567" };
-            case 6: // Table Tennis
-                return new String[] { "Tejas Sankpal: +918976420889", "Akhil Wasnik: +918087883632", "Arvind Nair: +919167112743", "Omkar Shirtode: +919527270717", "Rajeshri Kalaskar: +919892953520", "Aishwarya Shejwal: +919167186391" };
-            case 7: // Kabaddi
-                return new String[] { "Sunil Mali: +919699693231", "Mahesh Walde: +919665052253", "Ketan Mhetre: +917758011991" };
-            case 8: // Athletics
-                return new String[] { "Kshitij Agrawal: +919405470077", "Chinmay Karmalkar: +919820855892", "Deep Gala: +918097157686", "Priya Masne: +918806209812", "Ankita Borhade: +918286334264" };
-            case 9: // Throwball
-                return new String[] { "Sheetal Kamthewad: +918451869772", "Vritti Rohira: +919821594514" };
+                return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507","Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
+            case 5: // Tennis done
+                return new String[] { "Joel D'souza: +919920241397", "Raj chandak: +919664858392", "Neha Gosula: +919920227755"};
+            case 6: // Table Tennis done
+                return new String[] { "Ayush Lokhande: +918390133669", "Hemant Wadekar: +918108040003", "Archit Joshi: +917208907328", "komal deoda: +919699229666", };
+            case 7: // Kabaddi done
+                return new String[] { "Pravin Mane: +919890186399", "Mahesh Pentewad: +918976307617", };
+            case 8: // Athletics done
+                return new String[] { "Hem Kothari: +918286037294", "Dharmit Prajapati: +919920445979", "Amit Kharwandikar: +919869056872", "Heramb Mathkar: +919167147950", "Swaroop Atnoorkar: +918108282968","mandavi tripathi: +918080848183" };
+            case 9: // Throwball done
+                return new String[] { "Poorvi Nagaria: +919819150640", "Sanika Raut: +919920250229" };
             case 10: // Squash
                 return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
             case 11: // Boxing
                 return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
-            case 12: // Carrom
-                return new String[] { "Mohit Jaju: +919665036175", "Satyam Mali: +919503251469", "Ram Paryani: +917385966389", "Vishaka Mundhe: +919404358678" };
-            case 13: // Chess
-                return new String[] { "Ekansh Mishra: +918652762018", "Satyam Avad: +917588535069", "Pranali Mahajan: +919730110055" };
+            case 12: // Carrom done
+                return new String[] { "Akshay Ghodke: +918237526496", "Siddhant Jajoo: +919594388339" };
+            case 13: // Chess done
+                return new String[] { "Sagar Hinduja: +919619287347", "Roshan Dukale: +919604088406", "Ritesh Surve: +919769772422","Richa Nagda: +918828866168" };
             case 14: // Dodgeball
                 return new String[] { "Sheetal Mhaske: +919665090044", "Swati Dighole: +919768350702" };
-            case 15: // Badminton
-                return new String[] { "Neeraj Kulkarni: +919702216911", "Jay Doshi: +919619432999", "Shama Kamat: +919930799011", "Bhavna Verma: +919920559575" };
-            case 16: // Kho Kho
-                return new String[] { "Sanket Giri: +918446977134", "Praful Khobragade: +919892602353", "Kailash Puri: +917776067234", "Akshata Hire: +917208307426", "Pradnya Shivsharan: +918976442036" };
-            case 17: // Swimming
-                return new String[] { "Abhijit Gupta: +918879433235", "Abraham George: +919619823690", "Ashwini Bhosle: +919029391087" };
-            case 18: // Marathon
-                return new String[] { "Dhruv Turakhia: +919664016227", "Siddhant Shah: +919930851934", "Harshil Shroff: +919819802193", "Prajeet Thakare: +919769422608", "Manan Doshi: +919167143210" };
+            case 15: // Badminton done
+                return new String[] { "Sanjay Laungani: +919920276784", "Utsav Gupta: +919967037400", "Nirmal Patil: +919765396987", "Ketaki Kothawade: +919870851092", "Krushangi Chandekar: +919869163390" };
+            case 16: // Kho Kho done
+                return new String[] { "Sachin tayade: +917303276006", "Swaraj shevgan: +919404872671", "Sheetal patole: +917498712317", "Neeta Arote: +918655358122" };
+            case 17: // Swimming done
+                return new String[] { "Arpit Sharma: +919833442805", "Sohan Ghanchi: +919867373370" };
+            case 18: // Marathon done
+                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
             case 19: // Handball
                 return new String[] { "Rishikesh: +919987722085" };
-            case 20: // Cyclothon
-                return new String[] { "Dhruv Turakhia: +919664016227", "Siddhant Shah: +919930851934", "Harshil Shroff: +919819802193", "Prajeet Thakare: +919769422608", "Manan Doshi: +919167143210" };
-
+            case 20: // Cyclothon done
+                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
         }
         return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
     }
