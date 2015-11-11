@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -52,6 +54,8 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 @SuppressWarnings({"ConstantConditions","RTLHardcoded","RTLSymmetry"})
 public class EnthusiaStartActivity extends ActionBarActivity {
+
+    private int backPressedCount = 0;
 
     private final static int[] SOCIAL_MEDIA_DRAWABLES = {
             R.drawable.ic_fab_facebook,
@@ -210,12 +214,61 @@ public class EnthusiaStartActivity extends ActionBarActivity {
             EnthusiaEventsFragment fragment = (EnthusiaEventsFragment) currentFragment;
             if (fragment.mUnfoldableView != null && (fragment.mUnfoldableView.isUnfolded() || fragment.mUnfoldableView.isUnfolding()))
                 fragment.reset();
-            else if (getSupportFragmentManager().getBackStackEntryCount() == 1)
-                finish();
+            else if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+                if(backPressedCount == 1)
+                {
+                    backPressedCount=0;
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Press Back again to quit.", Toast.LENGTH_SHORT).show();
+                    backPressedCount++;
+
+
+                    new CountDownTimer(3000, 1000) {
+                        public void onFinish() {
+                            backPressedCount = 0;
+                            // When timer is finished
+                            // Execute your code here
+                        }
+
+                        public void onTick(long millisUntilFinished) {
+                            // millisUntilFinished    The amount of time until finished.
+                        }
+                    }.start();
+
+
+                }
+
+            }
             else
                 popBackStack();
-        } else if (getSupportFragmentManager().getBackStackEntryCount() == 1)
-            finish();
+        } else if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+            if(backPressedCount == 1)
+            {
+                backPressedCount=0;
+                finish();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Press Back again to quit.", Toast.LENGTH_SHORT).show();
+                backPressedCount++;
+
+                new CountDownTimer(3000, 1000) {
+                    public void onFinish() {
+                        backPressedCount = 0;
+                        // When timer is finished
+                        // Execute your code here
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                        // millisUntilFinished    The amount of time until finished.
+                    }
+                }.start();
+
+            }
+        }
         else
             popBackStack();
     }
