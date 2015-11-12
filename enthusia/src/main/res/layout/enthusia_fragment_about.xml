@@ -155,15 +155,15 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
 
-            <ImageButton
-                android:id="@+id/a_fb"
-                android:layout_width="64dp"
+            <Space
+                android:id="@+id/a_space"
+                android:layout_width="78dp"
                 android:layout_height="32dp"
                 android:scaleType="fitXY"
                 android:contentDescription="@null"
-                android:src="@drawable/img_facebook"
                 android:background="?android:attr/selectableItemBackground"/>
 
+            <!--
             <ImageButton
                 android:id="@+id/a_twit"
                 android:layout_width="32dp"
@@ -173,6 +173,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/img_twitter"
                 android:background="?android:attr/selectableItemBackground"/>
+                -->
 
             <ImageButton
                 android:id="@+id/a_plus"

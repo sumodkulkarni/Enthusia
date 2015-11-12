@@ -13,7 +13,7 @@
             android:layout_height="@dimen/intra_size"
             android:scaleType="fitXY"
             android:contentDescription="@null"
-            android:background="@drawable/img_enthusia_intrapic"
+            android:background="@drawable/img_enthu_intra"
             android:layout_margin="8dp" />
 
         <com.balysv.materialripple.MaterialRippleLayout xmlns:app="http://schemas.android.com/apk/res-auto"

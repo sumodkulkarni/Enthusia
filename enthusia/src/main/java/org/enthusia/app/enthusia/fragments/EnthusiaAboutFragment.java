@@ -40,8 +40,8 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         getActivity().findViewById(R.id.s_plus).setOnClickListener(developerURLS);
 
         //Abhijit Gupta
-        getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
-        getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
+        //getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
+        //getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.a_plus).setOnClickListener(developerURLS);
 
         //Rahul Iyer
@@ -147,6 +147,7 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
                     intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLUS_URL));
                     break;
 
+                /*
                 case R.id.a_fb :
                     try {
                         getActivity().getPackageManager().getPackageInfo("com.facebook.katana", 0);
@@ -164,6 +165,7 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
                         intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TWIT_A_URL));
                     }
                     break;
+                 */
 
                 case R.id.a_plus:
                     intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLUS_A_URL));
