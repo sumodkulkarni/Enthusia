@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:scaleType="fitXY"
-            android:src="@drawable/img_enthusia_tagline"/>
+            android:src="@drawable/img_enthu_logo_tag"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +29,6 @@
             android:paddingLeft="6dp"
             android:paddingTop="10dp"
             android:paddingBottom="3dp"
-            android:fontFamily="sans-serif-light"
             android:text="@string/enthusia_about"
             android:textSize="25sp"
             android:textAllCaps="true"
@@ -76,7 +75,7 @@
 
         </LinearLayout>
 
-        <!-- Rahul Iyer -->
+        <!-- Developed By -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,12 +83,124 @@
             android:paddingLeft="6dp"
             android:paddingTop="10dp"
             android:paddingBottom="3dp"
-            android:fontFamily="sans-serif-light"
             android:text="@string/enthusia_developed_by"
             android:textSize="25sp"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 
+        <!-- Sumod Kulkarni -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@drawable/enthusia_news_background_unread">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:text="Sumod Kulkarni"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+
+            <ImageButton
+                android:id="@+id/s_fb"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:scaleType="fitXY"
+                android:contentDescription="@null"
+                android:src="@drawable/img_facebook"
+                android:background="?android:attr/selectableItemBackground"/>
+
+            <ImageButton
+                android:id="@+id/s_twit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_twitter"
+                android:background="?android:attr/selectableItemBackground"/>
+
+            <ImageButton
+                android:id="@+id/s_plus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_plus"
+                android:background="?android:attr/selectableItemBackground"/>
+
+        </LinearLayout>
+
+        <!-- Abhijit Gupta -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@drawable/enthusia_news_background_unread">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:text="Abhijit Gupta"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+
+            <ImageButton
+                android:id="@+id/a_fb"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:scaleType="fitXY"
+                android:contentDescription="@null"
+                android:src="@drawable/img_facebook"
+                android:background="?android:attr/selectableItemBackground"/>
+
+            <ImageButton
+                android:id="@+id/a_twit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_twitter"
+                android:background="?android:attr/selectableItemBackground"/>
+
+            <ImageButton
+                android:id="@+id/a_plus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_plus"
+                android:background="?android:attr/selectableItemBackground"/>
+
+        </LinearLayout>
+
+
+        <!-- Thanks To -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="6dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="3dp"
+            android:text="THANKS TO"
+            android:textSize="25sp"
+            android:textAllCaps="true"
+            android:textColor="@color/black" />
+
+        <!-- Rahul Iyer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,68 +247,6 @@
                 android:src="@drawable/ic_plus"
                 android:background="?android:attr/selectableItemBackground"/>
 
-        </LinearLayout>
-
-        <!-- Akshat Shenoy -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingLeft="6dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="3dp"
-            android:fontFamily="sans-serif-light"
-            android:text="THANKS TO"
-            android:textSize="25sp"
-            android:textAllCaps="true"
-            android:textColor="@color/black" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            android:background="@drawable/enthusia_news_background_unread">
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:text="Akshat Shenoy"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
-
-            <ImageButton
-                android:id="@+id/a_fb"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:scaleType="fitXY"
-                android:contentDescription="@null"
-                android:src="@drawable/img_facebook"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <ImageButton
-                android:id="@+id/a_twit"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="14dp"
-                android:contentDescription="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_twitter"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <ImageButton
-                android:id="@+id/a_plus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="14dp"
-                android:contentDescription="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_plus"
-                android:background="?android:attr/selectableItemBackground" />
-            
         </LinearLayout>
 
         <View

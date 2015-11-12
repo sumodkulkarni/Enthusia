@@ -34,13 +34,22 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
         getActivity().findViewById(R.id.enthusia_fragment_about_showmore_image).setOnClickListener(this);
         getActivity().findViewById(R.id.enthusia_fragment_about_showmore).setOnClickListener(this);
 
+        //Sumod Kulkarni
+        getActivity().findViewById(R.id.s_fb).setOnClickListener(developerURLS);
+        getActivity().findViewById(R.id.s_twit).setOnClickListener(developerURLS);
+        getActivity().findViewById(R.id.s_plus).setOnClickListener(developerURLS);
+
+        //Abhijit Gupta
+        getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
+        getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
+        getActivity().findViewById(R.id.a_plus).setOnClickListener(developerURLS);
+
+        //Rahul Iyer
         getActivity().findViewById(R.id.r_fb).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.r_twit).setOnClickListener(developerURLS);
         getActivity().findViewById(R.id.r_plus).setOnClickListener(developerURLS);
 
-        getActivity().findViewById(R.id.a_fb).setOnClickListener(developerURLS);
-        getActivity().findViewById(R.id.a_twit).setOnClickListener(developerURLS);
-        getActivity().findViewById(R.id.a_plus).setOnClickListener(developerURLS);
+
     }
 
     @Override
@@ -91,16 +100,26 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
 
     private View.OnClickListener developerURLS = new View.OnClickListener() {
 
+        //Rahul Iyer
         private String FB_ID = "100001708505410";
         private String FB_URL = "https://www.facebook.com/TheAdirah47";
         private String TWIT_ID = "2258055728";
         private String TWIT_URL = "https://twitter.com/RahulSIyer";
         private String PLUS_URL = "https://plus.google.com/u/0/+RahulIyer95";
-        private String FB_A_ID = "1060623600";
-        private String FB_A_URL = "https://www.facebook.com/akshat.shenoy";
-        private String TWIT_A_ID = "187177832";
-        private String TWIT_A_URL = "https://twitter.com/akshatshenoy";
-        private String PLUS_A_URL = "https://plus.google.com/u/0/+AkshatShenoy";
+
+        //Sumod Kulkarni
+        private String FB_S_ID = "1150451894";
+        private String FB_S_URL = "https://www.facebook.com/sumodkulkarni";
+        private String TWIT_S_ID = "132925112";
+        private String TWIT_S_URL = "https://twitter.com/sumodkulkarni";
+        private String PLUS_S_URL = "https://plus.google.com/u/0/+SumodKulkarni";
+
+        //Abhijit Gupta
+        private String FB_A_ID = "";
+        private String FB_A_URL = "";
+        private String TWIT_A_ID = "";
+        private String TWIT_A_URL = "";
+        private String PLUS_A_URL = "https://plus.google.com/115074411376027062893/about";
 
         @Override
         public void onClick(View v) {
@@ -148,6 +167,28 @@ public class EnthusiaAboutFragment extends Fragment implements View.OnClickListe
 
                 case R.id.a_plus:
                     intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLUS_A_URL));
+                    break;
+
+                case R.id.s_fb:
+                    try {
+                        getActivity().getPackageManager().getPackageInfo("com.facebook.katana", 0);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/" + FB_S_ID));
+                    } catch (Exception ex) {
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(FB_S_URL));
+                    }
+                    break;
+
+                case R.id.s_twit:
+                    try {
+                        getActivity().getPackageManager().getPackageInfo("com.twitter.android", 0);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=" + TWIT_S_ID));
+                    } catch (Exception ex) {
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(TWIT_S_URL));
+                    }
+                    break;
+
+                case R.id.s_plus:
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLUS_S_URL));
                     break;
             }
 
