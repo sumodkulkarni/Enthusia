@@ -7,11 +7,11 @@ public final class EnthusiaEvents {
     public final static int[] drawables = {
             R.drawable.img_enthu_cricket,
             R.drawable.img_enthu_football,
-            R.drawable.img_enthusia_basketball,
+            R.drawable.img_enthu_basketball,
             R.drawable.img_enthu_volleyball,
             R.drawable.img_enthu_rink,
             R.drawable.img_enthu_tennis,
-            R.drawable.img_enthusia_tt,
+            R.drawable.img_enthu_tt,
             R.drawable.img_enthu_kabaddi,
             R.drawable.img_enthu_athletics,
             R.drawable.img_enthusia_throwball,
