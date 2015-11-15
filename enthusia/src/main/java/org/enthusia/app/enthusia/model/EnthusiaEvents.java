@@ -5,27 +5,27 @@ import org.enthusia.app.R;
 public final class EnthusiaEvents {
 
     public final static int[] drawables = {
-            R.drawable.img_enthusia_cricket,
-            R.drawable.img_enthusia_football,
+            R.drawable.img_enthu_cricket,
+            R.drawable.img_enthu_football,
             R.drawable.img_enthusia_basketball,
-            R.drawable.img_enthusia_volleyball,
-            R.drawable.img_enthusia_rink,
-            R.drawable.img_enthusia_tennis,
+            R.drawable.img_enthu_volleyball,
+            R.drawable.img_enthu_rink,
+            R.drawable.img_enthu_tennis,
             R.drawable.img_enthusia_tt,
-            R.drawable.img_enthusia_kabaddi,
-            R.drawable.img_enthusia_athletics,
+            R.drawable.img_enthu_kabaddi,
+            R.drawable.img_enthu_athletics,
             R.drawable.img_enthusia_throwball,
             //R.drawable.img_enthusia_squash,
             //R.drawable.img_enthusia_boxing,
-            R.drawable.img_enthusia_carrom,
-            R.drawable.img_enthusia_chess,
+            R.drawable.img_enthu_carrom,
+            R.drawable.img_enthu_chess,
             //R.drawable.img_enthusia_dodgeball,
             R.drawable.img_enthusia_badminton,
-            R.drawable.img_enthusia_khokho,
-            R.drawable.img_enthusia_swimming,
-            R.drawable.img_enthusia_marathon,
+            R.drawable.img_enthu_khokho,
+            R.drawable.img_enthu_swimming,
+            R.drawable.img_enthu_marathon,
             //R.drawable.img_enthusia_handball,
-            R.drawable.img_enthusia_cyclothon
+            R.drawable.img_enthu_cyclothon
     };
 
     public final static String[] events = {
@@ -79,7 +79,7 @@ public final class EnthusiaEvents {
     public static String[] getEventHead (int position) {
         switch (position) {
             case 0: // Cricket done
-                return new String[] { "Shubham Shah: +918625840845", "Rohit Laddhad: +919730303015"};
+                return new String[] { "Shubham Shah: +918625840845", "Rohit Laddhad: +919730303015", "Chinmay Navrange: +919619190906", "Shreyas Kolhe: +919623061058"};
             case 1: // Football done
                 return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507","Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
             case 2: // Basketball done
@@ -123,14 +123,14 @@ public final class EnthusiaEvents {
             case 14: // Swimming done
                 return new String[] { "Arpit Sharma: +919833442805", "Sohan Ghanchi: +919867373370" };
             case 15: // Marathon done
-                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
+                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569", "Siddhesh Nair: +919920581474", "Neha Gosula: +919920227755" };
             /*
             case 19: // Handball
                 return new String[] { "Rishikesh: +919987722085" };
             */
 
             case 16: // Cyclothon done
-                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569" };
+                return new String[] { "Rushabh Kapadia: +919833863639", "Harsh Mehta: +919167266569", "Siddhesh Nair: +919920581474", "Neha Gosula: +919920227755" };
         }
         return new String[] { "Nikhil Shetty: +918097875058", "Akshay Pawar: +917588516680" };
     }
