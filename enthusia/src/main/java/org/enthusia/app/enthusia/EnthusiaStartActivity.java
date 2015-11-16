@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
 import org.enthusia.app.enthusia.fragments.EnthusiaCommitteeFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaIntraFragment;
+import org.enthusia.app.enthusia.fragments.EnthusiaRegisterFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaNewsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaSponsorsFragment;
 import org.enthusia.app.enthusia.model.EnthusiaNavDrawerItem;
@@ -119,6 +121,8 @@ public class EnthusiaStartActivity extends ActionBarActivity {
             public void onDrawerClosed(View drawerView) {
                 invalidateOptionsMenu();
                 getSupportActionBar().setTitle(title.get(title.size() - 1));
+                for (int i=0; i<title.size(); i++)
+                    Log.i("Beri: ", title.get(i));
             }
 
             @Override
@@ -495,8 +499,14 @@ public class EnthusiaStartActivity extends ActionBarActivity {
     };
 
     private void displayView (int position) {
-        if (title.size() > 0 && getPosition(title.get(title.size() - 1)) == position)
+        if (title.size() > 0 && getPosition(title.get(title.size() - 1)) == position) {
+            Log.i("Test: ", "returning");
+            Log.i("getPosition", String.valueOf(getPosition(title.get(title.size() - 1))));
+            Log.i("position: ", String.valueOf(position));
+            Log.i("Test: ", "returned");
             return;
+        }
+        Log.i("Test: ", "not returned");
         Crouton.cancelAllCroutons();
         currentFragment = null;
         switch (position) {
@@ -513,9 +523,15 @@ public class EnthusiaStartActivity extends ActionBarActivity {
                 currentFragment = new EnthusiaIntraFragment();
                 break;
             case 3:
+                getSupportActionBar().setTitle((getString(R.string.enthusia_register)));
+                currentFragment = new EnthusiaRegisterFragment();
+                break;
+
+                /*
                 Intent i = new Intent(this, EventRegistrationActivity.class);
                 i.putExtra("Event", 0);
                 startActivity(i);
+                */
             case 4:
                 getSupportActionBar().setTitle((getString(R.string.enthusia_sponsors)));
                 currentFragment = new EnthusiaSponsorsFragment();
@@ -646,12 +662,14 @@ public class EnthusiaStartActivity extends ActionBarActivity {
             return 0;
         if (title.equals("Intra") || title.equals("Department Heads"))
             return 2;
-        if (title.equals("Sponsors"))
+        if (title.equals("Register"))
             return 3;
-        if (title.equals("Committee"))
+        if (title.equals("Sponsors"))
             return 4;
-        if (title.equals("About Us"))
+        if (title.equals("Committee"))
             return 5;
+        if (title.equals("About Us"))
+            return 6;
         return 1;
     }
 }

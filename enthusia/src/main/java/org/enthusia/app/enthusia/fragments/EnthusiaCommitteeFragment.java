@@ -29,7 +29,7 @@ public class EnthusiaCommitteeFragment extends Fragment {
         ArrayList<EnthusiaCommittee> mCommittee = new ArrayList<>();
 
         mCommittee.add(new EnthusiaCommittee("Milay Haria: +919029410964", 0));
-        mCommittee.add(new EnthusiaCommittee("Shubham Gavande: +918698606142", 1));
+        mCommittee.add(new EnthusiaCommittee("Shubham Gawande: +918698606142", 1));
         mCommittee.add(new EnthusiaCommittee("Mayur Deshmukh: +918408000747", 2));
         mCommittee.add(new EnthusiaCommittee("Swastik Mohapatra: +919029272054", 2));
         mCommittee.add(new EnthusiaCommittee("Dhruv Turakhia: +919664016227", 3));
