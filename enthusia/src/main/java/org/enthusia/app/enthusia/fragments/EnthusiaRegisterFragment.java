@@ -76,6 +76,7 @@ public class EnthusiaRegisterFragment extends Fragment {
 
 
         event_register_imageView = (DynamicHeightImageView) getActivity().findViewById(R.id.event_register_imageView);
+        event_register_imageView.setHeightRatio(1.0);
         participant_name = (EditText) getActivity().findViewById(R.id.participant_name);
         participant_email = (EditText) getActivity().findViewById(R.id.participant_email);
         participant_phone = (EditText) getActivity().findViewById(R.id.participant_phone);

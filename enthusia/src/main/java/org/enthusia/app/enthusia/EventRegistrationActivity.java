@@ -69,6 +69,7 @@ public class EventRegistrationActivity extends ActionBarActivity {
         Log.i(TAG, EnthusiaEvents.events[event]);
 
         event_register_imageView = (DynamicHeightImageView) findViewById(R.id.event_register_imageView);
+        event_register_imageView.setHeightRatio(1.0);
         participant_name = (EditText) findViewById(R.id.participant_name);
         participant_email = (EditText) findViewById(R.id.participant_email);
         participant_phone = (EditText) findViewById(R.id.participant_phone);
