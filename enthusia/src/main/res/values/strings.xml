@@ -69,7 +69,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>@drawable/ic_enthusia_register</item>
         <item>@drawable/ic_enthusia_spons</item>
         <item>@drawable/ic_enthusia_committe</item>
-        <item>@drawable/ic_enthusia_about</item>
+        <item>@drawable/ic_enthu_about</item>
     </array>
 
     <string-array name="enthusia_committe_posts">
@@ -81,6 +81,7 @@ Once you receive updates this card will be automatically hidden]]></string>
         <item>Sponsorship Chief Coordinator</item>
         <item>Events Chief Coordinator</item>
         <item>Indoor Events CC</item>
+        <item>Public Relations Coordinator</item>
         <item>Publicity Chief Coordinator</item>
         <item>Hostel Publicity CC</item>
         <item>Infrastructure Chief Coordinator</item>

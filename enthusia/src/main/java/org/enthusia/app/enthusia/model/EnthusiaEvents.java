@@ -14,13 +14,13 @@ public final class EnthusiaEvents {
             R.drawable.img_enthu_tt,
             R.drawable.img_enthu_kabaddi,
             R.drawable.img_enthu_athletics,
-            R.drawable.img_enthusia_throwball,
+            R.drawable.img_enthu_throwball,
             //R.drawable.img_enthusia_squash,
             //R.drawable.img_enthusia_boxing,
             R.drawable.img_enthu_carrom,
             R.drawable.img_enthu_chess,
             //R.drawable.img_enthusia_dodgeball,
-            R.drawable.img_enthusia_badminton,
+            R.drawable.img_enthu_badminton,
             R.drawable.img_enthu_khokho,
             R.drawable.img_enthu_swimming,
             R.drawable.img_enthu_marathon,
@@ -81,13 +81,13 @@ public final class EnthusiaEvents {
             case 0: // Cricket done
                 return new String[] { "Shubham Shah: +918625840845", "Rohit Laddhad: +919730303015", "Chinmay Navrange: +919619190906", "Shreyas Kolhe: +919623061058"};
             case 1: // Football done
-                return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507","Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
+                return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507" };
             case 2: // Basketball done
                 return new String[] { "Rhishabh Deshpande: +919833839981", "Tirth Doshi: +919869690406", "Sayyed Fahim: +919920096802", "Abhishek Singh: +919004118181", "Ayesha Passanha: +919167130184","Nikhita Mirchandani: +919004409222" };
             case 3: // Volleyball done
                 return new String[] { "Shubham kamble: +918898917665", "omprakash kale: +919930596003", "Ravi Majkuri: +918600275048", "Madhuri Patil: +917718041260", "Pratiksha Dehade: +919699886355" };
             case 4: // Rink Football
-                return new String[] { "Aditya Shah: +919594196106", "Gaurav Shetty: +919769633153", "Harsh Sanjay: +919619699237", "Kaushal Suvarna: +918082888028", "Kevin Daftary: +919022641507","Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
+                return new String[] { "Kevin Jain: +918108478609","Aditya Jain: +919167206686","Rushit Shah: +919819725464","Zubiya Reshmwala: +919969949110","Kalyani Kamble: +918080449469" };
             case 5: // Tennis done
                 return new String[] { "Joel D'souza: +919920241397", "Raj chandak: +919664858392", "Neha Gosula: +919920227755"};
             case 6: // Table Tennis done
