@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -40,6 +41,7 @@ import org.enthusia.app.R;
 import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaDepartmentHeadsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaEventsFragment;
+import org.enthusia.app.gcm.GCMIntentService;
 import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
@@ -157,7 +159,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
-
+        /*
         if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class))) {
             startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
         } else if (getAppVersion() > (Integer) Utils.getPrefs(this, Utils.PREF_APP_VERSION, Integer.class)) {
@@ -169,6 +171,8 @@ public class EnthusiaStartActivity extends ActionBarActivity {
                 help();
             }
         }
+
+        */
     }
 
     private int getAppVersion() {
@@ -182,9 +186,16 @@ public class EnthusiaStartActivity extends ActionBarActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        /*
         setIntent(intent);
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
+        */
         super.onNewIntent(intent);
+
+        String message = intent.getStringExtra("message");
+        ShowAlert("Push!", message);
+        Toast.makeText(EnthusiaStartActivity.this, message, Toast.LENGTH_LONG).show();
+        GCMIntentService gcmIntentService = new GCMIntentService();
     }
 
     @Override
@@ -671,5 +682,20 @@ public class EnthusiaStartActivity extends ActionBarActivity {
         if (title.equals("About Us"))
             return 6;
         return 1;
+    }
+
+
+
+    public void ShowAlert(String title, String message) {
+        android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // here you can add functions
+            }
+        });
+        alertDialog.setIcon(R.drawable.abc_dialog_material_background_dark);
+        alertDialog.show();
     }
 }

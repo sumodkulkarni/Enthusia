@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.enthusia.app">
+    package="org.enthusia.app" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -20,36 +20,12 @@
     <uses-permission android:name="org.enthusia.app.permission.C2D_MESSAGE" />
 
     <application
-        tools:replace="android:icon"
+        android:name=".parse.app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".gcm.RegisterActivity"
-            android:label="@string/register_user" />
-
-        <receiver
-            android:name=".gcm.PushNotificationReciever"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="org.enthusia.app" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".gcm.GCMIntentService" />
-
-        <activity
-            android:name=".enthusia.EnthusiaStartActivity"
-            android:alwaysRetainTaskState="true"
-            android:label="@string/enthusia_fest_name" >
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon" >
 
         <activity
             android:name=".SplashScreen"
@@ -62,10 +38,53 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".parse.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+
+        <activity
+            android:name=".enthusia.EnthusiaStartActivity"
+            android:alwaysRetainTaskState="true"
+            android:label="@string/enthusia_fest_name" >
+        </activity>
+
         <activity
             android:name=".enthusia.EventRegistrationActivity"
             android:label="@string/title_activity_event_registration" >
         </activity>
+
+        <!-- Added for Parse push notifications -->
+
+        <service android:name="com.parse.PushService" />
+
+        <receiver
+            android:name=".parse.receiver.CustomPushReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!-- IMPORTANT: Change "info.androidhive.parsenotifications" to match your app's package name. -->
+                <category android:name="org.enthusia.app" />
+            </intent-filter>
+        </receiver>
+
+        <!-- /Added for Parse push notifications -->
+
     </application>
 
 </manifest>
