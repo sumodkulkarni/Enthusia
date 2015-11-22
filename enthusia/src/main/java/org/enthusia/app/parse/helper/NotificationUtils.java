@@ -44,7 +44,7 @@ public class NotificationUtils {
             // notification icon
             int icon = R.mipmap.ic_launcher;
 
-            int smallIcon = R.mipmap.ic_launcher;
+            int smallIcon = R.drawable.push_icon;
 
             int mNotificationId = AppConfig.NOTIFICATION_ID;
 

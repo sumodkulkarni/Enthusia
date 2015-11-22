@@ -166,6 +166,8 @@ public class EnthusiaStartActivity extends ActionBarActivity {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
 
+        /*
+
         if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class))) {
             startActivityForResult(new Intent(EnthusiaStartActivity.this, LoginActivity.class), 47);
         } else if (getAppVersion() > (Integer) Utils.getPrefs(this, Utils.PREF_APP_VERSION, Integer.class)) {
@@ -177,6 +179,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
                 help();
             }
         }
+        */
 
 
     }

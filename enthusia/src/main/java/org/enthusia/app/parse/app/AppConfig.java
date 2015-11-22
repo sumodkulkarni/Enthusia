@@ -6,8 +6,8 @@ package org.enthusia.app.parse.app;
 public class AppConfig {
 
         public static final String PARSE_CHANNEL = "Enthusia";
-        public static final String PARSE_APPLICATION_ID = "6pL1NpHysWKljNjHCzZqblTyscDWZgFUYrpTYZDN";
-        public static final String PARSE_CLIENT_KEY = "YNTQ3XYbUUUxCcE6MsQglMOZSSZkyhNLWDBNiWhh";
+        public static final String PARSE_APPLICATION_ID = "afondDDXI8uPdNgdifkVJKZFgDpNwFbjt9oa2TDS";
+        public static final String PARSE_CLIENT_KEY = "AsVKMN5X2kdzuM2tSCiLacjkWJqNUoxLsXUuTAIl";
         public static final int NOTIFICATION_ID = 100;
 
 }
