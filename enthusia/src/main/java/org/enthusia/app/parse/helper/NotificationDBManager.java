@@ -65,10 +65,18 @@ public class NotificationDBManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
         onCreate(db);
     }
+
+    public void resetDatabase(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+
+        onCreate(db);
+    }
+
 
     /** CRUD Operations
      */
@@ -183,7 +191,7 @@ public class NotificationDBManager extends SQLiteOpenHelper {
         ArrayList<Message> unreadMessages = new ArrayList<>();
         try {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMNS}, KEY_READ + QUERY_STRING, new String[]{"FALSE"}, null, null, null);
+            Cursor cursor = db.rawQuery("SELECT ID, TITLE, MESSAGE, READ, TIMESTAMP FROM NOTIFICATIONS WHERE READ =?", new String[]{"0"});
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
                 Message message = new Message();
@@ -196,6 +204,7 @@ public class NotificationDBManager extends SQLiteOpenHelper {
                 cursor.moveToNext();
                 i++;
             }
+            cursor.close();
         }catch (SQLException e){
             Log.e(TAG, e.getMessage());
         }
