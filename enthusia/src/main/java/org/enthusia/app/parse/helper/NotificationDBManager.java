@@ -124,9 +124,10 @@ public class NotificationDBManager extends SQLiteOpenHelper {
         ArrayList<Message> messages = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMNS}, null, null, null, null, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         cursor.moveToFirst();
         Log.i(TAG, String.valueOf(cursor.getCount()));
+
         for(int i = 0; i<cursor.getCount(); i++){
             Message message = new Message();
             message.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
@@ -134,9 +135,9 @@ public class NotificationDBManager extends SQLiteOpenHelper {
             message.setMessage(cursor.getString(cursor.getColumnIndex(KEY_MESSAGE)));
             message.setIsRead(cursor.getInt(cursor.getColumnIndex(KEY_READ)));
             message.setTimestamp(cursor.getString(cursor.getColumnIndex(KEY_TIMESTAMP)));
+
             messages.add(message);
             cursor.moveToNext();
-            i++;
         }
 
         cursor.close();
@@ -202,7 +203,6 @@ public class NotificationDBManager extends SQLiteOpenHelper {
                 message.setTimestamp(cursor.getString(cursor.getColumnIndex(KEY_TIMESTAMP)));
                 unreadMessages.add(message);
                 cursor.moveToNext();
-                i++;
             }
             cursor.close();
         }catch (SQLException e){

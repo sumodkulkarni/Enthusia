@@ -41,17 +41,18 @@ public class EnthusiaNewsFragment extends Fragment {
         @Override
         public void onDismiss(@NonNull ViewGroup absListView, @NonNull int[] ints) {
             for (int i : ints) {
-                messages.get(i).setIsRead(false);
+                messages.get(i).setIsRead(true);
+
                 Log.i(TAG, messages.get(i).getMessage());
                 Log.i(TAG, String.valueOf(messages.get(i).isRead()));
                 Log.i(TAG, "db.update: " + String.valueOf(db.updateMessage(messages.get(i))));
+
                 enthusiaNewsAdapter.notifyDataSetChanged();
-                unreadCount--;
+                if (unreadCount>0)
+                    unreadCount--;
             }
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("print", true);
-            updateUnread(bundle);
-            enthusiaNewsAdapter.notifyDataSetChanged();
+            updateUnread();
+            populateNews();
         }
     };
 
@@ -66,42 +67,19 @@ public class EnthusiaNewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //PushNotificationManager manager = new PushNotificationManager(getActivity().getApplicationContext());
-        messages = db.getAllMessages();
+        messages = db.getUnreadMessages();
+        unreadCount = messages.size();
 
-        if (messages.size() == 0)
-            messages = null;
-
-
-        if (messages != null) {
-
-            for (Message message: messages) {
-                if (!message.isRead()) {
-                    unreadCount++;
-                }
-            }
-
-            updateUnread(savedInstanceState);
-            customAdded = false;
-        } else {
-            customAdded = true;
-            ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
-            messages = new ArrayList<Message>();
-            messages.add(new Message(getString(R.string.enthusia_sample_news_2), false));
+        ArrayList<Message> allMessages = db.getAllMessages();
+        Log.i("Total messages: ", String.valueOf(allMessages.size()));
+        for (int i = 0; i<allMessages.size(); i++){
+            Log.i("All messages: ", allMessages.get(i).getMessage());
+            Log.i("isRead? : ", String.valueOf(allMessages.get(i).isRead()));
         }
+        Log.i("CountofUnread messages:", String.valueOf(messages.size()));
 
-        enthusiaNewsAdapter = new EnthusiaNewsAdapter(getActivity(), messages);
-
-        AlphaInAnimationAdapter adapter = new AlphaInAnimationAdapter(enthusiaNewsAdapter);
-        adapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(adapter);
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).disableDragAndDrop();
-        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).enableSwipeToDismiss(mCallback);
-        getActivity().findViewById(R.id.enthusia_fragment_news_details_clear).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearAll();
-            }
-        });
+        updateUnread();
+        populateNews();
     }
 
     @Override
@@ -124,15 +102,11 @@ public class EnthusiaNewsFragment extends Fragment {
         outState.putBoolean("print", false);
     }
 
-    private void updateUnread(Bundle savedInstanceState) {
-
-        if (customAdded)
-            return;
+    private void updateUnread() {
 
         if (unreadCount == 0) {
             try {
-                if (savedInstanceState != null && savedInstanceState.getBoolean("print"))
-                    Utils.showConfirm(getActivity(), R.string.enthusia_all_read);
+                Utils.showInfo(getActivity(), R.string.enthusia_all_read);
             } catch (Exception ignore) {}
             ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml(getString(R.string.enthusia_all_messages_read)).toString());
         } else {
@@ -160,5 +134,28 @@ public class EnthusiaNewsFragment extends Fragment {
         messages.add(new Message(getString(R.string.enthusia_sample_news_2), false));
         enthusiaNewsAdapter.notifyDataSetChanged();
 
+    }
+
+    public void populateNews(){
+        messages = db.getUnreadMessages();
+
+        if (messages.size() == 0) {
+            ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
+            messages.add(new Message(getString(R.string.enthusia_sample_news_2), false));
+        }
+
+        enthusiaNewsAdapter = new EnthusiaNewsAdapter(getActivity(), messages);
+
+        AlphaInAnimationAdapter adapter = new AlphaInAnimationAdapter(enthusiaNewsAdapter);
+        adapter.setAbsListView((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews));
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).setAdapter(adapter);
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).disableDragAndDrop();
+        ((DynamicListView) getActivity().findViewById(R.id.enthusia_framgent_news_listnews)).enableSwipeToDismiss(mCallback);
+        getActivity().findViewById(R.id.enthusia_fragment_news_details_clear).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAll();
+            }
+        });
     }
 }

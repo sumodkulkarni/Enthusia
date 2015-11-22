@@ -75,6 +75,7 @@ public class NotificationUtils {
         } else {
             intent.putExtra("title", title);
             intent.putExtra("message", message);
+            intent.putExtra("from_push", true);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mContext.startActivity(intent);
         }

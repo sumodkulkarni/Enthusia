@@ -42,7 +42,6 @@ import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaDepartmentHeadsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaEventsFragment;
 import org.enthusia.app.gcm.GCMIntentService;
-import org.enthusia.app.gcm.RegisterActivity;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
 import org.enthusia.app.enthusia.fragments.EnthusiaCommitteeFragment;
@@ -51,6 +50,7 @@ import org.enthusia.app.enthusia.fragments.EnthusiaRegisterFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaNewsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaSponsorsFragment;
 import org.enthusia.app.enthusia.model.EnthusiaNavDrawerItem;
+import org.enthusia.app.parse.LoginActivity;
 import org.enthusia.app.parse.helper.NotificationDBManager;
 
 import java.util.ArrayList;
@@ -165,11 +165,11 @@ public class EnthusiaStartActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         enthusiaToggle.syncState();
-        /*
+
         if (!((Boolean) Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_REGISTRATION_DONE, Boolean.class))) {
-            startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
+            startActivityForResult(new Intent(EnthusiaStartActivity.this, LoginActivity.class), 47);
         } else if (getAppVersion() > (Integer) Utils.getPrefs(this, Utils.PREF_APP_VERSION, Integer.class)) {
-            startActivityForResult(new Intent(EnthusiaStartActivity.this, RegisterActivity.class), 47);
+            startActivityForResult(new Intent(EnthusiaStartActivity.this, LoginActivity.class), 47);
         } else {
             if (savedInstanceState == null)
                 Utils.showInfo(EnthusiaStartActivity.this, "Welcome back, " + Utils.getPrefs(EnthusiaStartActivity.this, Utils.PREF_USER_NAME, String.class));
@@ -178,7 +178,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
             }
         }
 
-        */
+
     }
 
     private int getAppVersion() {
@@ -192,15 +192,18 @@ public class EnthusiaStartActivity extends ActionBarActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        /*
+
         setIntent(intent);
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
-        */
+
         super.onNewIntent(intent);
 
-        String message = intent.getStringExtra("message");
-        ShowAlert("Push!", message);
-        Toast.makeText(EnthusiaStartActivity.this, message, Toast.LENGTH_LONG).show();
+        if (intent.getBooleanExtra("from_push", false)) {
+            String message = intent.getStringExtra("message");
+
+            if (currentFragment instanceof EnthusiaNewsFragment){
+            }
+        }
         GCMIntentService gcmIntentService = new GCMIntentService();
     }
 
