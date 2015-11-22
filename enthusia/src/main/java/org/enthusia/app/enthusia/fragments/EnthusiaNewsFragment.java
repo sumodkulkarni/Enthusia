@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNewsAdapter;
 import org.enthusia.app.gcm.PushNotificationManager;
 import org.enthusia.app.model.PushMessage;
+import org.enthusia.app.parse.helper.NotificationDBManager;
+import org.enthusia.app.parse.model.Message;
 
 import java.util.ArrayList;
 
@@ -26,23 +29,24 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 public class EnthusiaNewsFragment extends Fragment {
 
+    private static final String TAG = "EnthusiaNewsAdapter";
     private EnthusiaNewsAdapter enthusiaNewsAdapter;
-    private ArrayList<PushMessage> messages;
+    private ArrayList<Message> messages;
     private int unreadCount = 0;
     private static boolean customAdded = false;
+    NotificationDBManager db;
 
     OnDismissCallback mCallback = new OnDismissCallback() {
         @SuppressWarnings("ResultOfMethodCallIgnored")
         @Override
         public void onDismiss(@NonNull ViewGroup absListView, @NonNull int[] ints) {
             for (int i : ints) {
-                messages.get(i).setRead(!messages.get(i).isRead());
-                new PushNotificationManager(getActivity()).updateContact(messages.get(i));
+                messages.get(i).setIsRead(false);
+                Log.i(TAG, messages.get(i).getMessage());
+                Log.i(TAG, String.valueOf(messages.get(i).isRead()));
+                Log.i(TAG, "db.update: " + String.valueOf(db.updateMessage(messages.get(i))));
                 enthusiaNewsAdapter.notifyDataSetChanged();
-                if (messages.get(i).isRead())
-                    unreadCount--;
-                else
-                    unreadCount++;
+                unreadCount--;
             }
             Bundle bundle = new Bundle();
             bundle.putBoolean("print", true);
@@ -53,6 +57,7 @@ public class EnthusiaNewsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        db = new NotificationDBManager(getActivity().getApplicationContext(), null, null, 1);
         return inflater.inflate(R.layout.enthusia_fragment_news, container, false);
     }
 
@@ -60,8 +65,8 @@ public class EnthusiaNewsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        PushNotificationManager manager = new PushNotificationManager(getActivity().getApplicationContext());
-        messages = manager.getAllMessages();
+        //PushNotificationManager manager = new PushNotificationManager(getActivity().getApplicationContext());
+        messages = db.getAllMessages();
 
         if (messages.size() == 0)
             messages = null;
@@ -69,7 +74,7 @@ public class EnthusiaNewsFragment extends Fragment {
 
         if (messages != null) {
 
-            for (PushMessage message: messages) {
+            for (Message message: messages) {
                 if (!message.isRead()) {
                     unreadCount++;
                 }
@@ -80,8 +85,8 @@ public class EnthusiaNewsFragment extends Fragment {
         } else {
             customAdded = true;
             ((TextView) getActivity().findViewById(R.id.enthusia_fragments_news_details_unread_count)).setText(Html.fromHtml("No Messages Received"));
-            messages = new ArrayList<PushMessage>();
-            messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)), false));
+            messages = new ArrayList<Message>();
+            messages.add(new Message(getString(R.string.enthusia_sample_news_2), false));
         }
 
         enthusiaNewsAdapter = new EnthusiaNewsAdapter(getActivity(), messages);
@@ -145,12 +150,14 @@ public class EnthusiaNewsFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    new PushNotificationManager(getActivity()).deleteAll();
+                    for (Message message : messages){
+                        message.setIsRead(true);
+                    }
                 } catch (Exception ignore) {}
             }
         }).start();
         enthusiaNewsAdapter.clear();
-        messages.add(new PushMessage(Html.fromHtml(getString(R.string.enthusia_sample_news)), false));
+        messages.add(new Message(getString(R.string.enthusia_sample_news_2), false));
         enthusiaNewsAdapter.notifyDataSetChanged();
 
     }

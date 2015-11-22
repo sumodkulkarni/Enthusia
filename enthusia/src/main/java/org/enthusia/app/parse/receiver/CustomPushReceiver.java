@@ -25,6 +25,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     private NotificationUtils notificationUtils;
 
     private Intent parseIntent;
+    private Message new_message;
 
     public CustomPushReceiver() {
         super();
@@ -79,11 +80,11 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             String title = data.getString("title");
             String message = data.getString("message");
 
-            NotificationDBManager db = new NotificationDBManager(context);
-
-            Message new_message = new Message();
+            NotificationDBManager db = new NotificationDBManager(context, null, null, 1);
+            new_message = new Message();
             new_message.setTitle(title); new_message.setMessage(message); new_message.setIsRead(false);
-            db.addMessage(new_message);
+            long value = db.addMessage(new_message);
+            Log.i(TAG, "db.addMessage = " + value);
 
             if (!isBackground) {
                 Intent resultIntent = new Intent(context, EnthusiaStartActivity.class);

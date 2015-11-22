@@ -12,14 +12,15 @@ import com.commonsware.cwac.anddown.AndDown;
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import org.enthusia.app.R;
 import org.enthusia.app.model.PushMessage;
+import org.enthusia.app.parse.model.Message;
 
 import java.util.ArrayList;
 
-public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
+public class EnthusiaNewsAdapter extends ArrayAdapter<Message> {
 
     private Context context;
 
-    public EnthusiaNewsAdapter (Context context, ArrayList<PushMessage> mItems) {
+    public EnthusiaNewsAdapter (Context context, ArrayList<Message> mItems) {
         super(mItems);
         this.context = context;
     }
@@ -61,7 +62,7 @@ public class EnthusiaNewsAdapter extends ArrayAdapter<PushMessage> {
             holder.textView.setText(Html.fromHtml(new AndDown().markdownToHtml(getItem(i).getMessage())));
             holder.textView.setText(holder.textView.getText().toString().trim());
         } else {
-            holder.textView.setText(getItem(i).getSpannableString());
+            holder.textView.setText(getItem(i).getMessage());
         }
 
         if (getItem(i).isRead())

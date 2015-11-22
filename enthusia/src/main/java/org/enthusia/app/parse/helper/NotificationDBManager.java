@@ -21,8 +21,8 @@ import java.util.Collections;
  */
 public class NotificationDBManager extends SQLiteOpenHelper {
 
-    public static final int VERSION = 1;
-    public static final String NAME = "push_notification";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "Notifications.db";
     public static final String TABLE_NAME = "Notifications";
     public static final String KEY_ID = "id";
     public static final String KEY_READ = "read";
@@ -33,18 +33,22 @@ public class NotificationDBManager extends SQLiteOpenHelper {
     private static final String QUERY_STRING = "=?";
     private static final String TAG = "NotificationDBManager";
 
-    private Context context;
+    public NotificationDBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    }
 
     /**
      * TABLE FORMAT
      * ID  TITLE   MESSAGE READ TIMESTAMP
      * INT VARCHAR VARCHAR INT  VARCHAR
      */
-
+/*
     public NotificationDBManager(Context context) {
         super(context, NAME, null, VERSION);
         this.context = context;
     }
+*/
+
 
 
     @Override
@@ -69,7 +73,8 @@ public class NotificationDBManager extends SQLiteOpenHelper {
     /** CRUD Operations
      */
 
-    public void addMessage(Message message){
+    public long addMessage(Message message){
+        long returnValue = -2;
         try{
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -78,11 +83,12 @@ public class NotificationDBManager extends SQLiteOpenHelper {
             values.put(KEY_MESSAGE, message.getMessage());
             values.put(KEY_READ, message.isRead() ? 1 : 0);
             values.put(KEY_TIMESTAMP, message.getTimestamp());
-            db.insert(TABLE_NAME, null, values);
+            returnValue = db.insert(TABLE_NAME, null, values);
             db.close();
         }catch(SQLException e){
             Log.e(TAG, e.getMessage());
         }
+        return returnValue;
     }
 
     public Message getMessage(int _id){
@@ -112,18 +118,37 @@ public class NotificationDBManager extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMNS}, null, null, null, null, null);
         cursor.moveToFirst();
-        if (cursor == null)
-            return null;
-        int i = 0;
-        do{
-            messages.add(i, new Message(cursor.getInt(cursor.getColumnIndex(KEY_ID)), cursor.getString(cursor.getColumnIndex(KEY_TITLE)),cursor.getString(cursor.getColumnIndex(KEY_MESSAGE)),
-                    cursor.getInt(cursor.getColumnIndex(KEY_READ)), cursor.getString(cursor.getColumnIndex(KEY_TIMESTAMP))));
+        Log.i(TAG, String.valueOf(cursor.getCount()));
+        for(int i = 0; i<cursor.getCount(); i++){
+            Message message = new Message();
+            message.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+            message.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
+            message.setMessage(cursor.getString(cursor.getColumnIndex(KEY_MESSAGE)));
+            message.setIsRead(cursor.getInt(cursor.getColumnIndex(KEY_READ)));
+            message.setTimestamp(cursor.getString(cursor.getColumnIndex(KEY_TIMESTAMP)));
+            messages.add(message);
+            cursor.moveToNext();
             i++;
-        }while (cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
         return messages;
+    }
+
+    public int updateMessage(Message message) {
+        int returnValue;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, message.getId());
+        values.put(KEY_TITLE, message.getTitle());
+        values.put(KEY_MESSAGE, message.getMessage());
+        values.put(KEY_READ, message.isRead() ? 1 : 0);
+        values.put(KEY_TIMESTAMP, message.getTimestamp());
+
+        returnValue = db.update(TABLE_NAME, values, KEY_ID + QUERY_STRING, new String[]{String.valueOf(message.getId())});
+        db.close();
+        return returnValue;
     }
 
     public void deleteMessage(int _id){
@@ -152,5 +177,29 @@ public class NotificationDBManager extends SQLiteOpenHelper {
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    public ArrayList<Message> getUnreadMessages(){
+        ArrayList<Message> unreadMessages = new ArrayList<>();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMNS}, KEY_READ + QUERY_STRING, new String[]{"FALSE"}, null, null, null);
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                Message message = new Message();
+                message.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                message.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
+                message.setMessage(cursor.getString(cursor.getColumnIndex(KEY_MESSAGE)));
+                message.setIsRead(cursor.getInt(cursor.getColumnIndex(KEY_READ)));
+                message.setTimestamp(cursor.getString(cursor.getColumnIndex(KEY_TIMESTAMP)));
+                unreadMessages.add(message);
+                cursor.moveToNext();
+                i++;
+            }
+        }catch (SQLException e){
+            Log.e(TAG, e.getMessage());
+        }
+
+        return unreadMessages;
     }
 }

@@ -57,6 +57,11 @@ public class Message {
         this.timestamp = Long.parseLong(timestamp);
     }
 
+    public Message(String message, boolean isRead){
+        this.message = message;
+        this.isRead = isRead;
+    }
+
     public String getMessage() {
         return message;
     }

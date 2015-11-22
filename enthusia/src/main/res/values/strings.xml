@@ -49,6 +49,10 @@
     <string name="enthusia_sample_news"><![CDATA[Welcome to Enthusia!!<br />You will receive all the updates here.<br />
 Swipe the card to mark it as read.<br />
 Once you receive updates this card will be automatically hidden]]></string>
+    <string name="enthusia_sample_news_2">Welcome to Enthusia!
+        You will receive all the updates here.
+        Swipe the card to mark it as read.
+        Once you receive updates this card will be automatically hidden</string>
 
     <string name="enthusia_unread_count" formatted="false"><![CDATA[You have <font color=\'#000000\'><strong>%d</strong></font> message%s unread]]></string>
     <string name="enthusia_all_messages_read"><![CDATA[All messages <strong><font color=\'#000000\'>Read</font></strong>]]></string>

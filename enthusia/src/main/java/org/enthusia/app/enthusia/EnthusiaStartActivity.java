@@ -51,6 +51,7 @@ import org.enthusia.app.enthusia.fragments.EnthusiaRegisterFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaNewsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaSponsorsFragment;
 import org.enthusia.app.enthusia.model.EnthusiaNavDrawerItem;
+import org.enthusia.app.parse.helper.NotificationDBManager;
 
 import java.util.ArrayList;
 
@@ -59,7 +60,9 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 @SuppressWarnings({"ConstantConditions","RTLHardcoded","RTLSymmetry"})
 public class EnthusiaStartActivity extends ActionBarActivity {
 
+    private static final String TAG = "EnthusiaStartActivity";
     private int backPressedCount = 0;
+    NotificationDBManager db;
 
     private final static int[] SOCIAL_MEDIA_DRAWABLES = {
             R.drawable.ic_fab_facebook,
@@ -80,6 +83,9 @@ public class EnthusiaStartActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enthusia_start);
+
+        db = new NotificationDBManager(this, null, null, 1);
+        Log.i(TAG, "DB created");
 
         setSupportActionBar((Toolbar) findViewById(R.id.action_bar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
