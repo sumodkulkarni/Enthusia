@@ -54,10 +54,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
 
     @Override
     protected void onPushDismiss(Context context, Intent intent) {
-        Toast.makeText(context, "Push Dismissed!", Toast.LENGTH_LONG).show();
         super.onPushDismiss(context, intent);
-        Toast.makeText(context, "Push Dismissed!", Toast.LENGTH_LONG).show();
-
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.enthusia.app.parse;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -20,11 +21,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.apache.http.client.methods.HttpPost;
 import org.enthusia.app.R;
@@ -34,28 +41,41 @@ import org.enthusia.app.parse.helper.ParseUtils;
 import org.enthusia.app.parse.helper.PrefManager;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class LoginActivity extends ActionBarActivity {
 
+    public static final MediaType FORM_DATA_TYPE
+            = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+    //URL derived from form URL
+    public static final String URL="https://docs.google.com/a/enthusia.org/forms/d/1PCB970d_xK_HFsWUInST9uvNNw3AUAT-_6AHWjfb3ro/formResponse";
+    //input element ids found from the live form page
+    public static final String NAME_KEY = "entry.342053311";
+    public static final String EMAIL_KEY="entry.1782001611";
+
+
+    private EditText user_name;
     private EditText inputEmail;
-    private Button btnLogin;
     private PrefManager pref;
+    private Context context;
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        context = this;
         setSupportActionBar((Toolbar) findViewById(R.id.action_bar));
         getSupportActionBar().setTitle("User Registration");
 
         inputEmail = (EditText) findViewById(R.id.register_et_email);
+        user_name = (EditText) findViewById(R.id.register_et_username);
 
         if ((Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)) != null && !(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class)).equals("")) {
             ((EditText) findViewById(R.id.register_et_username)).setText(Utils.getPrefs(this, Utils.PREF_USER_NAME, String.class).toString());
@@ -112,6 +132,15 @@ public class LoginActivity extends ActionBarActivity {
                     Utils.putPrefs(LoginActivity.this, Utils.PREF_USER_NAME, ((EditText) findViewById(R.id.register_et_username)).getText().toString().trim());
                     Utils.putPrefs(LoginActivity.this, Utils.PREF_EMAIL, ((EditText) findViewById(R.id.register_et_email)).getText().toString().trim());
 
+                    //Create an object for PostDataTask AsyncTask
+                    PostDataTask postDataTask = new PostDataTask();
+
+                    //execute asynctask
+                    postDataTask.execute(URL,
+                            user_name.getText().toString(),
+                            inputEmail.getText().toString());
+
+                    ParseUtils.subscribeWithEmail(inputEmail.getText().toString());
                     login();
                 }
             }
@@ -159,146 +188,64 @@ public class LoginActivity extends ActionBarActivity {
 
     }
 
-    private class RegisterUser extends AsyncTask<Void, Integer, Boolean> {
-
-        private ProgressDialog progressDialog;
-        private final static String GCM_SENDER_ID = "623894493052";
-        private final static String SERVER_URL = "http://enthusia.org/public_html/admin/register.php";
-
+    //AsyncTask to send data as a http POST request
+    private class PostDataTask extends AsyncTask<String, Void, Boolean> {
 
         @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(LoginActivity.this);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            progressDialog.setMessage("Please Wait...");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setCancelable(false);
+        protected Boolean doInBackground(String... contactData) {
+            Boolean result = true;
+            String url = contactData[0];
+            String name = contactData[1];
+            String email = contactData[2];
+            String postBody="";
 
-            int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(LoginActivity.this);
-            if (resultCode != ConnectionResult.SUCCESS) {
-                if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                    GooglePlayServicesUtil.showErrorDialogFragment(resultCode, LoginActivity.this, 9000);
-                }
-                this.cancel(true);
-            }
-
-            progressDialog.show();
-
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            String regId = getRegistrationId();
-
-            if (regId == null) {
-
-                try {
-                    GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(LoginActivity.this);
-                    regId = gcm.register(GCM_SENDER_ID);
-
-                    // Register With Enthusia Server
-
-                    HttpURLConnection register = null;
-
-                    try {
-                        register = (HttpURLConnection) new URL(SERVER_URL).openConnection();
-
-                        HashMap<String, String> data = new HashMap<>();
-                        data.put("regId", regId);
-                        data.put("name", (String) Utils.getPrefs(LoginActivity.this, Utils.PREF_USER_NAME, String.class));
-                        data.put("email", (String) Utils.getPrefs(LoginActivity.this, Utils.PREF_EMAIL, String.class));
-
-                        StringBuilder body = new StringBuilder();
-                        Iterator<Map.Entry<String, String>> iterator = data.entrySet().iterator();
-                        while (iterator.hasNext()) {
-                            Map.Entry<String, String> current = iterator.next();
-                            body.append( current.getKey() )
-                                    .append( '=' )
-                                    .append( current.getValue() );
-
-                            if (iterator.hasNext())
-                                body.append('&');
-                        }
-
-                        register.setDoOutput(true);
-                        register.setUseCaches(false);
-                        register.setFixedLengthStreamingMode(body.toString().getBytes().length);
-                        register.setRequestMethod(HttpPost.METHOD_NAME);
-                        register.getOutputStream().write(body.toString().getBytes());
-                        register.getOutputStream().close();
-                        int status = register.getResponseCode();
-
-                        if (status != 200) {
-                            throw new IOException("Post Failed With Error Code: " + status);
-                        }
-
-                    } catch (IOException ex) {
-                        LoginActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Utils.showAlert(LoginActivity.this, "Registration Failed");
-                            }
-                        });
-                        return false;
-                    } finally {
-                        if (register != null) {
-                            register.disconnect();
-                        }
-                    }
-
-
-                    // Store Registration Values
-
-                    Utils.putPrefs(LoginActivity.this, Utils.PREF_REGISTRATION_ID, regId);
-                    Utils.putPrefs(LoginActivity.this, Utils.PREF_APP_VERSION, getAppVersion());
-
-                } catch (IOException ex) {
-                    LoginActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Utils.showAlert(LoginActivity.this, "Unable to Register");
-                        }
-                    });
-                    return false;
-                }
-
-
-            }
-            return true;
-        }
-
-        private String getRegistrationId() {
-            String regId = (String)  Utils.getPrefs(getApplicationContext(), Utils.PREF_REGISTRATION_ID, String.class);
-
-            if (regId == null)
-                return null;
-
-            if (getAppVersion() != (Integer) Utils.getPrefs(getApplicationContext(), Utils.PREF_APP_VERSION, Integer.class))
-                return null;
-
-            return regId;
-        }
-
-        private int getAppVersion() {
             try {
-                return getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS).versionCode;
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
+                //all values must be URL encoded to make sure that special characters like & | ",etc.
+                //do not cause problems
+                postBody =    NAME_KEY + "=" + URLEncoder.encode(name, "UTF-8") +
+                        "&" + EMAIL_KEY + "=" + URLEncoder.encode(email,"UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                result=false;
             }
-            return 1;
+
+            /*
+            //If you want to use HttpRequest class from http://stackoverflow.com/a/2253280/1261816
+            try {
+			HttpRequest httpRequest = new HttpRequest();
+			httpRequest.sendPost(url, postBody);
+		}catch (Exception exception){
+			result = false;
+		}
+            */
+
+            try{
+                //Create OkHttpClient for sending request
+                OkHttpClient client = new OkHttpClient();
+                //Create the request body with the help of Media Type
+                RequestBody body = RequestBody.create(FORM_DATA_TYPE, postBody);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                //Send the request
+                Response response = client.newCall(request).execute();
+            }catch (IOException exception){
+                result=false;
+            }
+            return result;
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
-            progressDialog = null;
-            if (result) {
-                Utils.putPrefs(LoginActivity.this, Utils.PREF_REGISTRATION_DONE, true);
-                setResult(RESULT_OK);
-                finish();
+        protected void onPostExecute(Boolean result){
+            //Print Success or failure message accordingly
+            if(result){
+                Utils.putPrefs(getApplicationContext(), Utils.PREF_REGISTRATION_DONE, true);
+                findViewById(R.id.register_btn_register).setEnabled(false);
+                findViewById(R.id.register_btn_register).setBackgroundColor(getResources().getColor(R.color.gray_background));
             }
+            else
+                Utils.showAlert(LoginActivity.this, Html.fromHtml(getString(R.string.alert_register_no_network)).toString());
         }
+
     }
 }
