@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.model.EnthusiaPointsTable;
+import org.enthusia.app.parse.helper.NotificationDBManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +28,8 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
 
     public final static String PREF_POINT_TABLE = "org.enthusia.app.enthusia.points";
     public final static String PREF_POINTS = "pref_points_";
+    private int[] myPoints = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1};
+    private NotificationDBManager db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        db = new NotificationDBManager(getActivity().getApplicationContext(), null, null, 1);
 
         if (savedInstanceState == null)
             tableData = new ArrayList<>();
@@ -52,7 +57,7 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
             for (int i=0; i < getActivity().getResources().getStringArray(R.array.enthusia_departments).length; i++) {
                 this.tableData.add(new EnthusiaPointsTable(
                         getActivity().getResources().getStringArray(R.array.enthusia_departments)[i],
-                        getPoints(getActivity().getResources().getStringArray(R.array.enthusia_departments)[i])
+                        db.getDepartmentPoints(getActivity().getResources().getStringArray(R.array.enthusia_departments)[i])
                 ));
             }
         Collections.sort(this.tableData);
@@ -105,7 +110,7 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
     private TextView getDepartmentView(int i) {
         TextView textView = getBasicTextView();
         textView.setText(this.tableData.get(i).getDepartment());
-        textView.setPadding(10,0,0,10);
+        textView.setPadding(10, 0, 0, 10);
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.leftMargin = 10;
         textView.setLayoutParams(params);
@@ -125,7 +130,12 @@ public class EnthusiaPointsTableDialog extends DialogFragment {
 
     @SuppressWarnings("defaultlocale")
     private int getPoints(String department) {
+        Log.i("getPoints[]", String.valueOf(getActivity().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0)));
         return getActivity().getSharedPreferences(PREF_POINT_TABLE, Context.MODE_PRIVATE).getInt(PREF_POINTS + department.toLowerCase(), 0);
+    }
+
+    private int getPoints(int i){
+        return myPoints[i];
     }
 
 }

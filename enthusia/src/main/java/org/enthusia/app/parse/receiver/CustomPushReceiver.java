@@ -1,19 +1,21 @@
 package org.enthusia.app.parse.receiver;
 
+
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.parse.ParseAnalytics;
 import com.parse.ParsePushBroadcastReceiver;
 
+
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
+
 import org.enthusia.app.parse.helper.NotificationDBManager;
 import org.enthusia.app.parse.helper.NotificationUtils;
 import org.enthusia.app.parse.model.Message;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.JSONObject;;
 
 /**
  * Created by Sumod on 20-Nov-15.
@@ -22,10 +24,12 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
 
     private final String TAG = CustomPushReceiver.class.getSimpleName();
 
-    private NotificationUtils notificationUtils;
+    public static final int NOTIFICATION_ID = 47;
 
+    private NotificationUtils notificationUtils;
     private Intent parseIntent;
     private Message new_message;
+    private String[] departments_array = {"CHEMSA","CIVIL","COMPUTERS","ELECTRICAL","ELECTRONICS","EXTC","I.T","MASTERS","MECHANICAL","PRODUCTION","TEXTILE"};
 
     public CustomPushReceiver() {
         super();
@@ -73,9 +77,12 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     private void parsePushJson(Context context, JSONObject json) {
         try {
             boolean isBackground = json.getBoolean("is_background");
+            boolean receiving_points = json.getBoolean("sending_points");
+            JSONObject points_matrix = json.getJSONObject("points_matrix");
             JSONObject data = json.getJSONObject("data");
             String title = data.getString("title");
             String message = data.getString("message");
+
 
             NotificationDBManager db = new NotificationDBManager(context, null, null, 1);
             new_message = new Message();
@@ -83,8 +90,11 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             long value = db.addMessage(new_message);
             Log.i(TAG, "db.addMessage = " + value);
 
+            updatePointsTable(db, points_matrix);
+
             if (!isBackground) {
                 Intent resultIntent = new Intent(context, EnthusiaStartActivity.class);
+                resultIntent.putExtra("receiving_points", receiving_points);
                 showNotificationMessage(context, title, message, resultIntent);
             }
 
@@ -114,7 +124,17 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
         notificationUtils.showNotificationMessage(title, message, intent);
     }
 
-    private void addNotificationToDB(Message message){
+    public void updatePointsTable(NotificationDBManager db, JSONObject points_matrix) {
+        try {
+            for (int i = 0; i < departments_array.length; i++) {
+                if (points_matrix.has(departments_array[i])) {
+                    db.updateDepartmentPoints(departments_array[i], points_matrix.getInt(departments_array[i]));
+                }
+
+            }
+        }catch (JSONException e){
+            Log.e(TAG, e.getMessage());
+        }
 
     }
 }

@@ -31,7 +31,12 @@ public class NotificationDBManager extends SQLiteOpenHelper {
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String COLUMNS = KEY_ID + "," + KEY_TITLE + "," + KEY_MESSAGE + "," + KEY_READ + "," + KEY_TIMESTAMP;
     private static final String QUERY_STRING = "=?";
+
+    private static final String TABLE_POINTS = "POINTS_TABLE";
+    private static final String KEY_DEPARTMENT = "DEPARTMENT";
+    private static final String KEY_POINTS = "POINTS";
     private static final String TAG = "NotificationDBManager";
+    private static final String COLUMNS_POINTS = KEY_DEPARTMENT + "," + KEY_POINTS;
 
     public NotificationDBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -61,11 +66,18 @@ public class NotificationDBManager extends SQLiteOpenHelper {
                 + KEY_TIMESTAMP + " VARCHAR(255) "
                 + ")";
         db.execSQL(CREATE_NOTIFICATION_TABLE);
+
+        String CREATE_POINTS_TABLE = "CREATE TABLE " + TABLE_POINTS + "("
+                + KEY_DEPARTMENT + " VARCHAR(255) PRIMARY KEY, "
+                + KEY_POINTS + " INTEGER "
+                + ")";
+        db.execSQL(CREATE_POINTS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINTS);
 
         onCreate(db);
     }
@@ -73,6 +85,7 @@ public class NotificationDBManager extends SQLiteOpenHelper {
     public void resetDatabase(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINTS);
 
         onCreate(db);
     }
@@ -210,5 +223,43 @@ public class NotificationDBManager extends SQLiteOpenHelper {
         }
 
         return unreadMessages;
+    }
+
+    /**
+     * CRUD OPERATIONS FOR POINTS TABLE
+     */
+
+    public void updateDepartmentPoints(String department, int points){
+        try {
+
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(KEY_DEPARTMENT, department);
+            values.put(KEY_POINTS, points);
+            db.insertWithOnConflict(TABLE_POINTS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            db.close();
+        }catch (SQLException e){
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    public int getDepartmentPoints(String department){
+        int returnValue = 0;
+        try{
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery("SELECT " + COLUMNS_POINTS + " FROM " + TABLE_POINTS + " WHERE " + KEY_DEPARTMENT + "=?", new String[]{department});
+            cursor.moveToFirst();
+            if (cursor.getCount() == 0) {
+                return 0;
+            }
+            returnValue =  cursor.getInt(cursor.getColumnIndex(KEY_POINTS));
+            cursor.close();
+        }catch (SQLException e){
+            Log.e(TAG, e.getMessage());
+        }
+        return returnValue;
     }
 }

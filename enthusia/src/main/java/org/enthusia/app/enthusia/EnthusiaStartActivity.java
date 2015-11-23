@@ -4,7 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +19,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -41,6 +45,7 @@ import org.enthusia.app.R;
 import org.enthusia.app.enthusia.fragments.EnthusiaAboutFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaDepartmentHeadsFragment;
 import org.enthusia.app.enthusia.fragments.EnthusiaEventsFragment;
+import org.enthusia.app.enthusia.fragments.dialog.EnthusiaPointsTableDialog;
 import org.enthusia.app.gcm.GCMIntentService;
 import org.enthusia.app.Utils;
 import org.enthusia.app.enthusia.adapters.EnthusiaNavDrawerAdapter;
@@ -60,6 +65,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 @SuppressWarnings({"ConstantConditions","RTLHardcoded","RTLSymmetry"})
 public class EnthusiaStartActivity extends ActionBarActivity {
 
+    public static final int NOTIFICATION_ID = 47;
     private static final String TAG = "EnthusiaStartActivity";
     private int backPressedCount = 0;
     NotificationDBManager db;
@@ -208,13 +214,15 @@ public class EnthusiaStartActivity extends ActionBarActivity {
         super.onNewIntent(intent);
 
         if (intent.getBooleanExtra("from_push", false)) {
-            String message = intent.getStringExtra("message");
-
-            if (currentFragment instanceof EnthusiaNewsFragment){
+            if (intent.getBooleanExtra("receiving_points", false)){
+                //updatePointsTable(intent.getStringArrayExtra("points"));
             }
+
+
         }
-        GCMIntentService gcmIntentService = new GCMIntentService();
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
