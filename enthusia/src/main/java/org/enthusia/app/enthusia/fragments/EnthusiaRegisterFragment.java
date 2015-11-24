@@ -1,5 +1,6 @@
 package org.enthusia.app.enthusia.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.squareup.okhttp.MediaType;
 
 import org.enthusia.app.R;
+import org.enthusia.app.enthusia.RegistrationWebView;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -215,7 +217,17 @@ public class EnthusiaRegisterFragment extends Fragment {
         eventSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                event_register_imageView.setImageResource(EnthusiaEvents.drawables[position]);
+                if (position >= 0){
+                    event_register_imageView.setImageResource(EnthusiaEvents.drawables[position]);
+                    if (position == 15 || position == 16){
+                        makeViewsInvisible();
+                        Intent i = new Intent(getActivity(), RegistrationWebView.class);
+                        i.putExtra("Event", event);
+                        startActivity(i);
+                    }else {
+                        makeViewsVisible();
+                    }
+                }
                 //Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
             }
 
@@ -225,5 +237,25 @@ public class EnthusiaRegisterFragment extends Fragment {
             }
         });
     }
+
+    public void makeViewsInvisible(){
+        participant_name.setVisibility(View.GONE);
+        participant_email.setVisibility(View.GONE);
+        participant_phone.setVisibility(View.GONE);
+        participant_collegeName.setVisibility(View.GONE);
+        participant_collegeAddress.setVisibility(View.GONE);
+        register_button.setVisibility(View.GONE);
+    }
+
+    public void makeViewsVisible(){
+        participant_name.setVisibility(View.VISIBLE);
+        participant_email.setVisibility(View.VISIBLE);
+        participant_phone.setVisibility(View.VISIBLE);
+        participant_collegeName.setVisibility(View.VISIBLE);
+        participant_collegeAddress.setVisibility(View.VISIBLE);
+        register_button.setVisibility(View.VISIBLE);
+    }
+
+
 
 }

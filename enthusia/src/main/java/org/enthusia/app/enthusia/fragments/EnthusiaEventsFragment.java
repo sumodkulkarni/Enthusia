@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,12 @@ import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.etsy.android.grid.StaggeredGridView;
 import com.etsy.android.grid.util.DynamicHeightImageView;
+import com.google.android.gms.games.GamesMetadata;
 
 import org.enthusia.app.R;
 import org.enthusia.app.enthusia.EnthusiaStartActivity;
 import org.enthusia.app.enthusia.EventRegistrationActivity;
+import org.enthusia.app.enthusia.RegistrationWebView;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsEventHeadAdapter;
 import org.enthusia.app.enthusia.adapters.EnthusiaEventsGridAdapter;
 import org.enthusia.app.enthusia.model.EnthusiaEvents;
@@ -128,8 +131,8 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
     private void setupEvent (View view, final int event) {
 
         position = event;
-
-        ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle(EnthusiaEvents.events[event]);
+        Log.i("EVENT:", String.valueOf(event));
+                ((EnthusiaStartActivity) getActivity()).getSupportActionBar().setTitle(EnthusiaEvents.events[event]);
 
         // Event Image
         DynamicHeightImageView imageView = (DynamicHeightImageView) getActivity().findViewById(R.id.enthusia_events_details_event_image);
@@ -149,9 +152,17 @@ public class EnthusiaEventsFragment extends Fragment implements View.OnClickList
         getActivity().findViewById(R.id.event_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), EventRegistrationActivity.class);
-                i.putExtra("Event", event);
-                startActivity(i);
+                Log.i("EVENT:", String.valueOf(event));
+                if(event == 15 || event == 16){
+                    Intent i = new Intent(getActivity(), RegistrationWebView.class);
+                    i.putExtra("Event", event);
+                    startActivity(i);
+
+                }else{
+                    Intent i = new Intent(getActivity(), EventRegistrationActivity.class);
+                    i.putExtra("Event", event);
+                    startActivity(i);
+                }
             }
         });
 

@@ -73,7 +73,7 @@ public final class EnthusiaEvents {
             R.string.enthusia_swimming,
             R.string.enthusia_handball,
             R.string.enthusia_handball,
-            R.string.enthusia_handball
+            //R.string.enthusia_handball
     };
 
     public static String[] getEventHead (int position) {
