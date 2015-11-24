@@ -353,7 +353,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
         fab.setColorNormal(Color.WHITE);
         fab.setType(FloatingActionButton.TYPE_MINI);
         fab.setColorPressed(darkenColor(Color.WHITE));
-        fab.setImageDrawable(getResources().getDrawable(R.drawable.enthu_fab_ring));
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_final));
         fab.setOnClickListener(fabClick);
 
         socialMediaIcons = new ArrayList<>();
@@ -413,7 +413,7 @@ public class EnthusiaStartActivity extends ActionBarActivity {
             public void onAnimationStart(Animator animation) {
                 findViewById(R.id.enthusia_start_fab).setOnClickListener(null);
                 if (socialMediaShown)
-                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.enthu_fab_ring));
+                    ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_fab_final));
                 else
                     ( (FloatingActionButton) findViewById(R.id.enthusia_start_fab)).setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             }
